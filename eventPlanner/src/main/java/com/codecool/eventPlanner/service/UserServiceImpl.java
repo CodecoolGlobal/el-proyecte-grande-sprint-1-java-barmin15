@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean updateUser(UserDTO userDTO) {
         if(allUsers.contains(userDTO)){
-            UserDTO user = allUsers.stream().filter(u -> u.equals(userDTO)).findFirst().orElseThrow();
+            UserDTO user = allUsers.stream().filter(u -> u.id() == userDTO.id()).findFirst().orElseThrow();
             allUsers.remove(user);
             allUsers.add(userDTO);
         }
