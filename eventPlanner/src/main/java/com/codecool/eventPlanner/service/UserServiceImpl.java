@@ -13,7 +13,6 @@ public class UserServiceImpl implements UserService {
 
     private List<UserDTO> allUsers = new ArrayList<>();
 
-
     @Override
     public boolean updateUser(UserDTO userDTO) {
         if(allUsers.contains(userDTO)){
