@@ -4,10 +4,15 @@ import com.codecool.eventPlanner.model.NewUserDTO;
 import com.codecool.eventPlanner.model.UserDTO;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    List<UserDTO> allUsers = new ArrayList<>();
+
+
     @Override
     public boolean updateUser(UserDTO userDTO) {
         return false;
@@ -30,6 +35,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean createUser(NewUserDTO userDTO) {
-        return false;
+        String name = userDTO.username();
+        String pw = userDTO.password();
+        allUsers.add(new UserDTO(0, name, pw));
+        return true;
     }
+
+
+
 }
