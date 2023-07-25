@@ -19,8 +19,8 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/getById")
-    public UserDTO getUserById(@RequestBody int id){
+    @GetMapping("/{id}")
+    public UserDTO getUserById(@PathVariable int id){
         return userService.getUserById(id);
     }
 
