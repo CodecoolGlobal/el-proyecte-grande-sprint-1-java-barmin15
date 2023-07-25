@@ -7,7 +7,6 @@ import com.codecool.eventPlanner.model.UpdateEventDTO;
 import java.util.List;
 
 public interface EventService {
-    public EventDTO getEvent(int id);
 
     List<EventDTO> getAllEvents();
 
