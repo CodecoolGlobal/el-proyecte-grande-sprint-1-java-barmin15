@@ -16,7 +16,7 @@ public class EventServiceImpl implements EventService {
 
     private static int idCounter = 0;
 
-    List<EventDTO> allEvents = new ArrayList<>();
+    private List<EventDTO> allEvents = new ArrayList<>();
 
     @Override
     public List<EventDTO> getAllEvents() {

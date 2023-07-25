@@ -11,8 +11,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     private int idCounter = 0;
 
-    List<UserDTO> allUsers = new ArrayList<>();
-
+    private List<UserDTO> allUsers = new ArrayList<>();
 
     @Override
     public boolean updateUser(UserDTO userDTO) {
