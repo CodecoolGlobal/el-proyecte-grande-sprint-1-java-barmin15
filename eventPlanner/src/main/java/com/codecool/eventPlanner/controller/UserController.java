@@ -20,26 +20,28 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public UserDTO getUserById(@PathVariable int id){
+    public UserDTO getUserById(@PathVariable int id) {
         return userService.getUserById(id);
     }
 
     @GetMapping("/all")
-    public List<UserDTO> getAllUsers(){
+    public List<UserDTO> getAllUsers() {
         return userService.getAll();
     }
+
+    @DeleteMapping("/delete")
+    public boolean deleteUser(@RequestBody int id) {
+        return userService.delete(id);
+    }
+
     @PostMapping()
-    public boolean createUser(@RequestBody NewUserDTO userDTO){
+    public boolean createUser(@RequestBody NewUserDTO userDTO) {
         return userService.createUser(userDTO);
     }
 
     @PutMapping("/update")
-    public boolean updateUser(@RequestBody UserDTO userDTO){
+    public boolean updateUser(@RequestBody UserDTO userDTO) {
         return userService.updateUser(userDTO);
-    }
-    @DeleteMapping()
-    public boolean deleteUser(@RequestBody int id){
-        return userService.delete(id);
     }
 }
 
