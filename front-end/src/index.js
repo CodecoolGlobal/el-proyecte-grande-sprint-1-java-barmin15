@@ -6,7 +6,7 @@ import reportWebVitals from "./Vitals/reportWebVitals";
 
 import Layout from "./Layout/layout";
 import App from "./App/App";
-
+import EventForm from "./components/EventForm";
 
 const Router = createBrowserRouter([
   {
@@ -15,7 +15,7 @@ const Router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <App />,
+        element: <EventForm />,
       },
       
     ],
