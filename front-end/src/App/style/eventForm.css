@@ -1,0 +1,14 @@
+.eventForm {
+  display: flex;
+  justify-content: center;
+  border: 3px;
+  border-style: solid;
+  width: min-content;
+  margin: 100px;
+  padding: 10px;
+  flex-direction: column;
+}
+
+.eventForm div {
+    padding: 5px;
+}
