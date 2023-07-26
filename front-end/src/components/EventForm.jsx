@@ -5,28 +5,37 @@ import { updateEvent } from "../App/Fetches/updateEvent";
 function EventForm(event) {
 
     const user = {id: 9}
+
+  //   event =  {
+  //     id: 0,
+  //     creatorId: 9,
+  //     name: "lekvar fozes",
+  //     description: "szilva alma barack cserko",
+  //     date: "2026-03-21",
+  //     location: "konyhaba",
+  //     isPrivate: false
+  // }
    
-    const onUpdate = (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        const entries = [...formData.entries()];
+    // const onUpdate = (e) => {
+    //     e.preventDefault();
+    //     const formData = new FormData(e.target);
+    //     const entries = [...formData.entries()];
     
-        const event = entries.reduce((acc, entry) => {
-          const [k, v] = entry;
-          acc[k] = v;
-          return acc;
-        }, {});
+    //     const event = entries.reduce((acc, entry) => {
+    //       const [k, v] = entry;
+    //       acc[k] = v;
+    //       return acc;
+    //     }, {});
         
-        delete(event.isPrivate);
-        delete(event.location);
-        updateEvent(event);
-        console.log(":-)")
-        console.log(event)
+    //     delete(event.isPrivate);
+    //     delete(event.location);
+    //     updateEvent(event);
+    //     console.log(":-)")
+    //     console.log(event)
 
-    }
+    // }
     
-    
-
+  
     const onCreate = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
@@ -40,27 +49,10 @@ function EventForm(event) {
 
         PostNewEvent(event);     
     }
-     
 
 
-// int creatorId,
-// String name,
-// String description,
-// Date date,
-// String location,
-// boolean isPrivate
-
-event =  {
-        id: 0,
-        creatorId: 9,
-        name: "lekvar fozes",
-        description: "szilva alma barack cserko",
-        date: "2026-03-21",
-        location: "konyhaba",
-        isPrivate: false
-    }
   return (
-    <form className="eventForm" onSubmit={onUpdate}>
+    <form className="eventForm" onSubmit={onCreate}>
 
         <div className="creatorId">
         <input type="hidden" name="creatorId" defaultValue={user.id} />
