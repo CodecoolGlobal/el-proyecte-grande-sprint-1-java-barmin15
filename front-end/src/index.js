@@ -6,7 +6,7 @@ import reportWebVitals from "./Vitals/reportWebVitals";
 
 import Layout from "./Layout/layout";
 import App from "./App/App";
-
+import EventForm from "./components/EventForm";
 
 const Router = createBrowserRouter([
   {
@@ -15,7 +15,7 @@ const Router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <App />,
+        element: <EventForm />,
       },
       
     ],
@@ -26,11 +26,7 @@ const Router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-<<<<<<< HEAD
-    <EventForm />
-=======
     <RouterProvider router={Router} />
->>>>>>> 6c16bcd2ff48a01f7861133f57a2259e2b83c4b6
   </React.StrictMode>
 );
 

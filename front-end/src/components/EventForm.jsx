@@ -1,5 +1,6 @@
-import { PostNewEvent } from "../fetches/postNewEvent.js";
-import { updateEvent } from "../fetches/updateEvent.js";
+
+import { PostNewEvent } from "../App/Fetches/postNewEvent";
+import { updateEvent } from "../App/Fetches/updateEvent";
 
 function EventForm(event) {
 
