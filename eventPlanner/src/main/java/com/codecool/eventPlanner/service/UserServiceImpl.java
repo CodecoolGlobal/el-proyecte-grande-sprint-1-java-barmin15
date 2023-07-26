@@ -15,17 +15,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean updateUser(UserDTO userDTO) {
-        if(allUsers.contains(userDTO)){
+
+        boolean isValidUser = allUsers.stream().filter(u -> u.id() == userDTO.id()).findFirst().isPresent();
+
+
+
+        if (isValidUser) {
             UserDTO user = allUsers.stream().filter(u -> u.id() == userDTO.id()).findFirst().get();
             allUsers.remove(user);
             allUsers.add(userDTO);
+            return true;
         }
         return false;
     }
 
     @Override
     public UserDTO getUserById(int id) {
-        return allUsers.stream().filter(user -> user.id() == id).findFirst().orElseGet(()->null);
+        return allUsers.stream().filter(user -> user.id() == id).findFirst().orElseGet(() -> null);
     }
 
     @Override
@@ -35,7 +41,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean delete(int id) {
-        UserDTO user = allUsers.stream().filter(u -> u.id() == id).findFirst().orElseGet(()->null);
+        UserDTO user = allUsers.stream().filter(u -> u.id() == id).findFirst().orElseGet(() -> null);
         return allUsers.remove(user);
     }
 
@@ -47,7 +53,6 @@ public class UserServiceImpl implements UserService {
         idCounter++;
         return true;
     }
-
 
 
 }
