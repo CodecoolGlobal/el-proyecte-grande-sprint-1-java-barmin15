@@ -1,11 +1,9 @@
-
 import { PostNewEvent } from "../App/Fetches/postNewEvent";
 import { updateEvent } from "../App/Fetches/updateEvent";
-import "../App/style/eventForm.css"
+import "../App/style/eventForm.css";
 
 function EventForm(event) {
-
-    const user = {id: 9}
+  const user = { id: 9 };
 
   //   event =  {
   //     id: 0,
@@ -16,51 +14,50 @@ function EventForm(event) {
   //     location: "konyhaba",
   //     isPrivate: false
   // }
-   
-    // const onUpdate = (e) => {
-    //     e.preventDefault();
-    //     const formData = new FormData(e.target);
-    //     const entries = [...formData.entries()];
-    
-    //     const event = entries.reduce((acc, entry) => {
-    //       const [k, v] = entry;
-    //       acc[k] = v;
-    //       return acc;
-    //     }, {});
-        
-    //     delete(event.isPrivate);
-    //     delete(event.location);
-    //     updateEvent(event);
-    //     console.log(":-)")
-    //     console.log(event)
 
-    // }
-    
-  
-    const onCreate = (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        const entries = [...formData.entries()];
-    
-        const event = entries.reduce((acc, entry) => {
-          const [k, v] = entry;
-          acc[k] = v;
-          return acc;
-        }, {});
+  // const onUpdate = (e) => {
+  //     e.preventDefault();
+  //     const formData = new FormData(e.target);
+  //     const entries = [...formData.entries()];
 
-        PostNewEvent(event);     
-    }
+  //     const event = entries.reduce((acc, entry) => {
+  //       const [k, v] = entry;
+  //       acc[k] = v;
+  //       return acc;
+  //     }, {});
 
+  //     delete(event.isPrivate);
+  //     delete(event.location);
+  //     updateEvent(event);
+  //     console.log(":-)")
+  //     console.log(event)
+
+  // }
+
+  const onCreate = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const entries = [...formData.entries()];
+
+    const event = entries.reduce((acc, entry) => {
+      const [k, v] = entry;
+      acc[k] = v;
+      return acc;
+    }, {});
+
+    PostNewEvent(event);
+  };
 
   return (
     <form className="eventForm" onSubmit={onCreate}>
+      <h2>Create a new Event!</h2>
 
-        <div className="creatorId">
+      <div className="creatorId">
         <input type="hidden" name="creatorId" defaultValue={user.id} />
-        </div>
-        <div className="id">
+      </div>
+      <div className="id">
         <input type="hidden" name="id" defaultValue={event ? event.id : null} />
-        </div>
+      </div>
 
       <div className="name">
         <label htmlFor="name">Name your event:</label>
@@ -71,7 +68,7 @@ function EventForm(event) {
           id="name"
         />
       </div>
-      
+
       <div className="description">
         <label htmlFor="description">Describe your event:</label>
         <input
@@ -111,17 +108,17 @@ function EventForm(event) {
           id="isPrivate"
         />
       </div> */}
-        <div className="isPrivate">
-        <input type="hidden" name="isPrivate" defaultValue={event ? event.isPrivate : false} />
-        </div>
+      <div className="isPrivate">
+        <input
+          type="hidden"
+          name="isPrivate"
+          defaultValue={event ? event.isPrivate : false}
+        />
+      </div>
 
       <button type="submit">Save</button>
-
     </form>
   );
 }
 
 export default EventForm;
-
-
-
