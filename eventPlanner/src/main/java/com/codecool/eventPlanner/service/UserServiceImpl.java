@@ -18,6 +18,8 @@ public class UserServiceImpl implements UserService {
 
         boolean isValidUser = allUsers.stream().filter(u -> u.id() == userDTO.id()).findFirst().isPresent();
 
+
+
         if (isValidUser) {
             UserDTO user = allUsers.stream().filter(u -> u.id() == userDTO.id()).findFirst().get();
             allUsers.remove(user);
