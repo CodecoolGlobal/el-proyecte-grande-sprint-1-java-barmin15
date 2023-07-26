@@ -1,6 +1,7 @@
 
 import { PostNewEvent } from "../App/Fetches/postNewEvent";
 import { updateEvent } from "../App/Fetches/updateEvent";
+import "../App/style/eventForm.css"
 
 function EventForm(event) {
 
