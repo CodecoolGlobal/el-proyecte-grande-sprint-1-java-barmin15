@@ -28,6 +28,12 @@ public class UserController {
     public List<UserDTO> getAllUsers(){
         return userService.getAll();
     }
+
+    @DeleteMapping("/delete")
+    public boolean deleteUser(@RequestBody int id) {
+        return userService.delete(id);
+    }
+
     @PostMapping()
     public boolean createUser(@RequestBody NewUserDTO userDTO){
         return userService.createUser(userDTO);
@@ -36,10 +42,6 @@ public class UserController {
     @PutMapping("/update")
     public boolean updateUser(@RequestBody UserDTO userDTO){
         return userService.updateUser(userDTO);
-    }
-    @DeleteMapping()
-    public boolean deleteUser(@RequestBody Integer id){
-        return userService.delete(id);
     }
 }
 
