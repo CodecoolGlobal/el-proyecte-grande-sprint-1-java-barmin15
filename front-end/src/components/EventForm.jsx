@@ -82,7 +82,7 @@ function EventForm(event) {
       <div className="date">
         <label htmlFor="date">When is it?</label>
         <input
-          type="text"
+          type="date"
           defaultValue={event ? event.date : null}
           name="date"
           id="date"
