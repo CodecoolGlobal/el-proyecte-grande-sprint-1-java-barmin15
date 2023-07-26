@@ -5,7 +5,6 @@ import reportWebVitals from "./Vitals/reportWebVitals";
 
 
 import Layout from "./Layout/layout";
-import App from "./App/App";
 import EventForm from "./components/EventForm";
 import AllEvent from "./components/AllEvent.js";
 
