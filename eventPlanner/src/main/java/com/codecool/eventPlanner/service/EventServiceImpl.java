@@ -47,7 +47,7 @@ public class EventServiceImpl implements EventService {
         String location = newEventDTO.location();
         boolean isPrivate = newEventDTO.isPrivate();
 
-        allEvents.add(new EventDTO(id, creatorId, name, description, date, time, location, isPrivate));
+        allEvents.add(new EventDTO(id, creatorId, name, description, date, location, isPrivate, time));
 
         idCounter++;
         return true;
@@ -55,9 +55,9 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public boolean deleteEvent(int id) {
-        EventDTO event = allEvents.stream().filter(e -> e.id() == id).findFirst().get();
+        EventDTO event = allEvents.stream().filter(e -> e.getId() == id).findFirst().get();
 
-      if (allEvents.stream().anyMatch(e -> e.id() == id)) {
+      if (allEvents.stream().anyMatch(e -> e.getId() == id)) {
 
             allEvents.remove(event);
             return true;
