@@ -49,9 +49,15 @@ public class UserServiceImpl implements UserService {
     public boolean createUser(NewUserDTO userDTO) {
         String name = userDTO.username();
         String pw = userDTO.password();
-        allUsers.add(new UserDTO(idCounter, name, pw));
+        String description = userDTO.description();
+        allUsers.add(new UserDTO(idCounter, name, description, pw));
         idCounter++;
         return true;
+    }
+
+    @Override
+    public UserDTO getCurrentUser() {
+        return new UserDTO(100, "user17353", "hi i'm user17353 :-)", "cicamica");
     }
 
 
