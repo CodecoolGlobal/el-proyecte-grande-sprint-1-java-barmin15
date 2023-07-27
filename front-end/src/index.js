@@ -7,6 +7,7 @@ import reportWebVitals from "./Vitals/reportWebVitals";
 import Layout from "./Layout/layout";
 import AllEvent from "./App/Pages/AllEvent";
 import EventForm from "./App/Pages/EventForm";
+import UserProfile from "./App/Pages/UserProfile";
 
 const Router = createBrowserRouter([
   {
@@ -19,8 +20,10 @@ const Router = createBrowserRouter([
       },{
         path: "/create",
         element: <EventForm />,
+      },{
+        path: "/ownprofile",
+        element: <UserProfile />,
       },
-      
     ],
   },
 ]);
