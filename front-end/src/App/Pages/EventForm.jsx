@@ -4,7 +4,6 @@ import "../style/eventForm.css";
 
 function EventForm(event) {
   const user = { id: 9 };
-
   //   event =  {
   //     id: 0,
   //     creatorId: 9,
