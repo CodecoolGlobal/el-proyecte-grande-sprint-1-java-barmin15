@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -57,8 +58,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isAllowed(String username, String password) {
-        return allUsers.stream()
-                .filter(userDTO -> isValidUser(userDTO, username, password)).findFirst().isPresent();
+        return allUsers.stream().anyMatch(userDTO -> isValidUser(userDTO, username, password));
     }
 
     @Override
