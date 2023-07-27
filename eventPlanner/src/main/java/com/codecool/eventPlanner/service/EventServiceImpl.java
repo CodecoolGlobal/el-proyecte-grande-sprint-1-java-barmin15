@@ -6,6 +6,7 @@ import com.codecool.eventPlanner.model.NewUserDTO;
 import com.codecool.eventPlanner.model.UpdateEventDTO;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,7 +27,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public EventDTO getEventById(int id) {
         return allEvents.stream()
-                .filter(event -> event.id() == id).findFirst().get();
+                .filter(event -> event.getId() == id).findFirst().get();
     }
 
     @Override
@@ -42,10 +43,11 @@ public class EventServiceImpl implements EventService {
         String name = newEventDTO.name();
         String description = newEventDTO.description();
         Date date = newEventDTO.date();
+        Time time = newEventDTO.time();
         String location = newEventDTO.location();
         boolean isPrivate = newEventDTO.isPrivate();
 
-        allEvents.add(new EventDTO(id, creatorId, name, description, date, location, isPrivate));
+        allEvents.add(new EventDTO(id, creatorId, name, description, date, location, isPrivate, time));
 
         idCounter++;
         return true;
@@ -53,10 +55,10 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public boolean deleteEvent(int id) {
+        EventDTO event = allEvents.stream().filter(e -> e.getId() == id).findFirst().get();
 
-        Optional<EventDTO> event = allEvents.stream().filter(e -> e.id() == id).findFirst();
+      if (allEvents.stream().anyMatch(e -> e.getId() == id)) {
 
-        if (event.isPresent()) {
             allEvents.remove(event);
             return true;
         }
@@ -65,24 +67,19 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public boolean updateEvent(UpdateEventDTO updateEventDTO) {
-
+        
         Optional<EventDTO> event = allEvents.stream()
-                .filter(eventDTO -> eventDTO.id() == updateEventDTO.id())
+                .filter(eventDTO -> eventDTO.getId() == updateEventDTO.id())
                 .findFirst();
 
-        int id = updateEventDTO.id();
-        String name = updateEventDTO.name();
-        String description = updateEventDTO.description();
-        Date date = updateEventDTO.date();
-        int creatorId = event.get().creatorId();
-        String location = event.get().location();
-        boolean isPrivate = event.get().isPrivate();
+        event.get().setName(updateEventDTO.name());
+        event.get().setDate(updateEventDTO.date());
+        event.get().setDescription(updateEventDTO.description());
+        event.get().setTime(updateEventDTO.time());
 
-        EventDTO updatedEventDTO = new EventDTO(id, creatorId, name, description, date, location, isPrivate);
+        
 
-        allEvents.remove(event);
-        allEvents.add(updatedEventDTO);
-
-        return true;
+ return true;
     }
+
 }

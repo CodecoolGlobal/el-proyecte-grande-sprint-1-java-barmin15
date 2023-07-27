@@ -4,7 +4,7 @@ import "./layout.css"
 function Layout(){
     return <div >
     <div className="topnav">
-    <a className="active" href="#home">Profile</a>
+    <a className="active" href="/ownprofile">Profile</a>
     <div href="" id="logo">EVENET</div>
   </div>
   <div id="mySidenav" className="sidenav">

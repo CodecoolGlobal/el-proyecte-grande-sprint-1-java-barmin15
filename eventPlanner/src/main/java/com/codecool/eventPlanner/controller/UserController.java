@@ -24,6 +24,11 @@ public class UserController {
         return userService.getUserById(id);
     }
 
+    @GetMapping("/current")
+    public UserDTO getCurrentUser(){
+        return userService.getCurrentUser();
+    }
+
     @GetMapping("/all")
     public List<UserDTO> getAllUsers(){
         return userService.getAll();
@@ -37,6 +42,11 @@ public class UserController {
     @PostMapping()
     public boolean createUser(@RequestBody NewUserDTO userDTO){
         return userService.createUser(userDTO);
+    }
+
+    @PostMapping("/login")
+    public boolean loginUser(@RequestBody String username, String password) {
+        return userService.isAllowed(username, password);
     }
 
     @PutMapping("/update")

@@ -1,8 +1,11 @@
-import { PostNewEvent } from "../Fetches/postNewEvent"
+import { PostNewEvent } from "../Fetches/postNewEvent";
 import { updateEvent } from "../Fetches/updateEvent";
+import { useNavigate } from "react-router-dom";
 import "../style/eventForm.css";
 
 function EventForm(event) {
+
+  const navigate = useNavigate();
   const user = { id: 9 };
   //   event =  {
   //     id: 0,
@@ -43,8 +46,10 @@ function EventForm(event) {
       acc[k] = v;
       return acc;
     }, {});
+    event.time += ":00"
 
     PostNewEvent(event);
+    navigate("/events");
   };
 
   return (
@@ -86,6 +91,9 @@ function EventForm(event) {
           name="date"
           id="date"
         />
+        <input type="time" defaultValue={event ? event.time : null}
+          name="time"
+          id="time"/>
       </div>
 
       <div className="location">
