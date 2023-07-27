@@ -53,10 +53,9 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public boolean deleteEvent(int id) {
+        EventDTO event = allEvents.stream().filter(e -> e.id() == id).findFirst().get();
 
-        Optional<EventDTO> event = allEvents.stream().filter(e -> e.id() == id).findFirst();
-
-        if (event.isPresent()) {
+        if (allEvents.stream().anyMatch(e -> e.id() == id)) {
             allEvents.remove(event);
             return true;
         }
@@ -65,7 +64,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public boolean updateEvent(UpdateEventDTO updateEventDTO) {
-
+        
         Optional<EventDTO> event = allEvents.stream()
                 .filter(eventDTO -> eventDTO.id() == updateEventDTO.id())
                 .findFirst();
@@ -85,4 +84,5 @@ public class EventServiceImpl implements EventService {
 
         return true;
     }
+
 }
