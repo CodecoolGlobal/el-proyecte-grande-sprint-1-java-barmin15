@@ -5,8 +5,9 @@ import reportWebVitals from "./Vitals/reportWebVitals";
 
 
 import Layout from "./Layout/layout";
-import EventForm from "./components/EventForm";
-import AllEvent from "./components/AllEvent.js";
+import AllEvent from "./App/Pages/AllEvent";
+import EventForm from "./App/Pages/EventForm";
+import UserProfile from "./App/Pages/UserProfile";
 
 const Router = createBrowserRouter([
   {
@@ -14,13 +15,15 @@ const Router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: "/",
+        path: "/events",
         element: <AllEvent />,
       },{
         path: "/create",
         element: <EventForm />,
+      },{
+        path: "/ownprofile",
+        element: <UserProfile />,
       },
-      
     ],
   },
 ]);

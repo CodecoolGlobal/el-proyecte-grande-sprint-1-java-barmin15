@@ -16,4 +16,6 @@ public interface UserService {
     boolean delete(int id);
 
     boolean createUser(NewUserDTO userDTO);
+
+    UserDTO getCurrentUser();
 }

@@ -1,6 +1,7 @@
 package com.codecool.eventPlanner.model;
 
 
+import java.sql.Time;
 import java.util.Date;
 
 public record NewEventDTO(
@@ -8,6 +9,7 @@ public record NewEventDTO(
         String name,
         String description,
         Date date,
+        Time time,
         String location,
         boolean isPrivate
 ) {
