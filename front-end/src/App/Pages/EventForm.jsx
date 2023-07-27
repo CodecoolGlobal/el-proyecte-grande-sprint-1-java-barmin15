@@ -1,6 +1,6 @@
-import { PostNewEvent } from "../App/Fetches/postNewEvent";
-import { updateEvent } from "../App/Fetches/updateEvent";
-import "../App/style/eventForm.css";
+import { PostNewEvent } from "../Fetches/postNewEvent"
+import { updateEvent } from "../Fetches/updateEvent";
+import "../style/eventForm.css";
 
 function EventForm(event) {
   const user = { id: 9 };
