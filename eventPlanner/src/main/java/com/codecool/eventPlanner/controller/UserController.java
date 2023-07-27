@@ -24,6 +24,11 @@ public class UserController {
         return userService.getUserById(id);
     }
 
+    @GetMapping("/current")
+    public UserDTO getCurrentUser(){
+        return userService.getCurrentUser();
+    }
+
     @GetMapping("/all")
     public List<UserDTO> getAllUsers(){
         return userService.getAll();

@@ -1,6 +1,7 @@
 package com.codecool.eventPlanner.model;
 
 
+import java.sql.Time;
 import java.util.Date;
 
 public class EventDTO{
@@ -12,8 +13,11 @@ public class EventDTO{
         private Date date;
         private String location;
         private boolean isPrivate;
+        private Time time;
+        
+    
 
-    public EventDTO(int id, int creatorId, String name, String description, Date date, String location, boolean isPrivate) {
+    public EventDTO(int id, int creatorId, String name, String description, Date date, String location, boolean isPrivate, Time time) {
         this.id = id;
         this.creatorId = creatorId;
         this.name = name;
@@ -21,6 +25,7 @@ public class EventDTO{
         this.date = date;
         this.location = location;
         this.isPrivate = isPrivate;
+        this.time = time;
     }
 
     public int getId() {
@@ -74,9 +79,18 @@ public class EventDTO{
     public boolean isPrivate() {
         return isPrivate;
     }
+    
+    public Time getTime() {
+      return this.time;
+    }
+    
+    public void setTime(Time time) {
+      this.time = time;
+    }
 
     public void setPrivate(boolean aPrivate) {
         isPrivate = aPrivate;
     }
+
 }
 

@@ -5,27 +5,31 @@ import reportWebVitals from "./Vitals/reportWebVitals";
 
 
 import Layout from "./Layout/layout";
+
 import App from "./App/App";
 import EventForm from "./components/EventForm";
 import AllEvent from "./components/AllEvent";
 import EventPage from "./components/EventPage";
 
+
+
 const Router = createBrowserRouter([
   
-  
-  
+ 
   {
     path: "/",
     element: <Layout />,
     children: [
       {
-        path: "/",
+        path: "/events",
         element: <AllEvent />,
       },{
         path: "/create",
         element: <EventForm />,
-      },
-      {
+      },{
+        path: "/ownprofile",
+        element: <UserProfile />,
+      },{
         path: "/event/:id",
         element: <EventPage />,
       },
