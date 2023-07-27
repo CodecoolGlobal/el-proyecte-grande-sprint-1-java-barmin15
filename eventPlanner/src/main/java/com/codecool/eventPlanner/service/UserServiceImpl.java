@@ -2,6 +2,7 @@ package com.codecool.eventPlanner.service;
 
 import com.codecool.eventPlanner.model.NewUserDTO;
 import com.codecool.eventPlanner.model.UserDTO;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserService {
     private int idCounter = 0;
+    private UserDTO currentUser;
 
     private List<UserDTO> allUsers = new ArrayList<>();
 
@@ -18,7 +20,6 @@ public class UserServiceImpl implements UserService {
     public boolean updateUser(UserDTO userDTO) {
 
         boolean isValidUser = allUsers.stream().filter(u -> u.id() == userDTO.id()).findFirst().isPresent();
-
 
 
         if (isValidUser) {
@@ -51,24 +52,30 @@ public class UserServiceImpl implements UserService {
         String name = userDTO.username();
         String pw = userDTO.password();
         String description = userDTO.description();
-        allUsers.add(new UserDTO(idCounter, name, description, pw));
+        UserDTO user = new UserDTO(idCounter, name, description, pw);
+        currentUser = user;
+        allUsers.add(user);
         idCounter++;
         return true;
     }
 
     @Override
-    public boolean isAllowed(String username, String password) {
+    public boolean logInUser(String username, String password) {
+        currentUser = findUser(username, password);
         return allUsers.stream().anyMatch(userDTO -> isValidUser(userDTO, username, password));
     }
 
     @Override
     public UserDTO getCurrentUser() {
-        return new UserDTO(100, "user17353", "hi i'm user17353 :-)", "cicamica");
+        return currentUser;
     }
-
 
 
     private boolean isValidUser(UserDTO userDTO, String username, String password) {
         return userDTO.username().equals(username) && userDTO.password().equals(password);
+    }
+
+    private UserDTO findUser(String username, String password) {
+        return allUsers.stream().filter(userDTO -> isValidUser(userDTO, username, password)).findFirst().get();
     }
 }
