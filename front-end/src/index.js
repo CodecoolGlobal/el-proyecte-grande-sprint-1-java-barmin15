@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, useParams } from "react-router-dom";
 import reportWebVitals from "./Vitals/reportWebVitals";
 
 
@@ -8,8 +8,12 @@ import Layout from "./Layout/layout";
 import App from "./App/App";
 import EventForm from "./components/EventForm";
 import AllEvent from "./components/AllEvent";
+import EventPage from "./components/EventPage";
 
 const Router = createBrowserRouter([
+  
+  
+  
   {
     path: "/",
     element: <Layout />,
@@ -20,6 +24,10 @@ const Router = createBrowserRouter([
       },{
         path: "/create",
         element: <EventForm />,
+      },
+      {
+        path: "/event/:id",
+        element: <EventPage />,
       },
       
     ],
