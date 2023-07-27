@@ -9,23 +9,24 @@ export default function LogInPage() {
 
 
     function logIn() {
-        const isUser = LogInUser(username, password)
-        if (isUser.typeof === "boolean" && isUser === true) {
+        if (LogInUser(username, password).then(res => res === true)) {
             window.location.replace("http://localhost:3000/event/all")
         }
     }
 
 
 
-    return (<div className="container flex">
-        <form action="#">
-            <input type="" placeholder="Username" required onChange={(e) => setUsername(e.target.value)}></input>
-            <input type="password" placeholder="Password" required onChange={(e) => setPassword(e.target.value)}></input>
-            <div className="link">
-                <button type="submit" className="login" onClick={() => logIn()}>Login</button>
+    return (
+        <div className="container flex">
+            <div className="form">
+                <input placeholder="Username" required onChange={(e) => setUsername(e.target.value)}></input>
+                <input type="password" placeholder="Password" required onChange={(e) => setPassword(e.target.value)}></input>
+                <div className="link">
+                    <button className="login" onClick={() => logIn()}>Login</button>
+                </div>
+                <div className="button">
+                    <a href="/">Create new account</a>
+                </div>
             </div>
-            <hr></hr>
-            <div className="button">
-                <a href="/">Create new account</a>
-            </div></form></div>)
+        </div>)
 }
