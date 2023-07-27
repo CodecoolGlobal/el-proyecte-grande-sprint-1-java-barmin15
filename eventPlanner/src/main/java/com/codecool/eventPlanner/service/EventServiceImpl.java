@@ -6,6 +6,7 @@ import com.codecool.eventPlanner.model.NewUserDTO;
 import com.codecool.eventPlanner.model.UpdateEventDTO;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -42,10 +43,11 @@ public class EventServiceImpl implements EventService {
         String name = newEventDTO.name();
         String description = newEventDTO.description();
         Date date = newEventDTO.date();
+        Time time = newEventDTO.time();
         String location = newEventDTO.location();
         boolean isPrivate = newEventDTO.isPrivate();
 
-        allEvents.add(new EventDTO(id, creatorId, name, description, date, location, isPrivate));
+        allEvents.add(new EventDTO(id, creatorId, name, description, date, time, location, isPrivate));
 
         idCounter++;
         return true;
@@ -74,11 +76,12 @@ public class EventServiceImpl implements EventService {
         String name = updateEventDTO.name();
         String description = updateEventDTO.description();
         Date date = updateEventDTO.date();
+        Time time = updateEventDTO.time();
         int creatorId = event.get().creatorId();
         String location = event.get().location();
         boolean isPrivate = event.get().isPrivate();
 
-        EventDTO updatedEventDTO = new EventDTO(id, creatorId, name, description, date, location, isPrivate);
+        EventDTO updatedEventDTO = new EventDTO(id, creatorId, name, description, date, time, location, isPrivate);
 
         allEvents.remove(event);
         allEvents.add(updatedEventDTO);
