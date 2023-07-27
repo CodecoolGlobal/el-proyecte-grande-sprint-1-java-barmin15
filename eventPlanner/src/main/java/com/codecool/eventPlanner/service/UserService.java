@@ -17,5 +17,9 @@ public interface UserService {
 
     boolean createUser(NewUserDTO userDTO);
 
+
+    boolean isAllowed(String username, String password);
+
     UserDTO getCurrentUser();
+
 }
