@@ -52,7 +52,7 @@ public class UserController {
 
     @PostMapping("/login")
     public boolean loginUser(@RequestBody LoginUserDTO loginUserDTO) {
-        return userService.isAllowed(loginUserDTO.username(), loginUserDTO.password());
+        return userService.logInUser(loginUserDTO.username(), loginUserDTO.password());
     }
 
     @PutMapping("/update")
