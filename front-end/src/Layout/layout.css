@@ -49,11 +49,15 @@
   
   #addEvent {
     top: 90px;
-    background-color: #04AA6D;
+    background-color: #0c7728;
   }
   
   #allEvents {
-    top: 160px;
-    background-color: #2196F3; 
+    top: 155px;
+    background-color: #0c7728;
+  }
+  #logOut {
+    top: 220px;
+    background-color: #0c7728;
   }
   
