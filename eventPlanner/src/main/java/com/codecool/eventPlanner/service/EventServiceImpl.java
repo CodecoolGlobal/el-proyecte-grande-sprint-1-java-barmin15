@@ -54,7 +54,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public boolean deleteEvent(int id) {
 
-        Optional<EventDTO> event = allEvents.stream().filter(e -> e.id() == id).findFirst();
+        Optional<EventDTO> event = allEvents.stream().filter(e -> e.getId() == id).findFirst();
 
         if (event.isPresent()) {
             allEvents.remove(event);
