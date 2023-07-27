@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function AllEvent() {
+export default function AllEvent() {
   const [events, setEvents] = useState(null);
 
   useEffect(() => {
@@ -24,4 +24,3 @@ function AllEvent() {
   );
 }
 
-export default AllEvent;
