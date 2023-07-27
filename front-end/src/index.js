@@ -37,7 +37,7 @@ const Router = createBrowserRouter([
         path: "/event/create",
         element: <EventForm />,
       },{
-        path: "/ownprofile",
+        path: "/event/ownprofile",
         element: <UserProfile />,
       },{
         path: "/event/:id",
