@@ -9,6 +9,8 @@ import AllEvent from "./App/Pages/AllEvent";
 import EventForm from "./App/Pages/EventForm";
 import Register from "./App/Pages/RegisterPage";
 import LogIn from "./App/Pages/LogInPage";
+import UserProfile from "./App/Pages/UserProfile"
+import EventPage from "./App/Pages/EventPage"
 
 
 
