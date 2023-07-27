@@ -1,0 +1,16 @@
+.userProfile {
+    display: flex;
+    justify-content: flex-start;
+    border: 3px;
+    border-style: solid;
+    width: 300px;
+    margin: 100px;
+    padding: 10px;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+.userProfile div {
+  flex-direction: column;
+}
