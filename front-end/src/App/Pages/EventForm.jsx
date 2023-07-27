@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import "../style/eventForm.css";
 
 function EventForm(event) {
-
   const navigate = useNavigate();
   const user = { id: 9 };
   //   event =  {
@@ -46,7 +45,7 @@ function EventForm(event) {
       acc[k] = v;
       return acc;
     }, {});
-    event.time += ":00"
+    event.time += ":00";
 
     PostNewEvent(event);
     navigate("/event/all");
@@ -91,9 +90,12 @@ function EventForm(event) {
           name="date"
           id="date"
         />
-        <input type="time" defaultValue={event ? event.time : null}
+        <input
+          type="time"
+          defaultValue={event ? event.time : null}
           name="time"
-          id="time"/>
+          id="time"
+        />
       </div>
 
       <div className="location">
@@ -122,8 +124,11 @@ function EventForm(event) {
           defaultValue={event ? event.isPrivate : false}
         />
       </div>
-
-      <button type="submit">Save</button>
+      <div className="link">
+        <button style={{height: "60px", fontSize: "larger"}} classname="formButton" type="submit">
+          Save
+        </button>
+      </div>
     </form>
   );
 }
