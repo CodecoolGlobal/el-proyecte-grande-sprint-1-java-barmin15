@@ -9,6 +9,7 @@ function AllEvent() {
       .then((data) => setEvents(data));
   }, []);
 
+
   return (
     <div>
       {events && events.map((e, index) => (
