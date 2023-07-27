@@ -13,11 +13,7 @@ import UserProfile from "./App/Pages/UserProfile"
 import EventPage from "./App/Pages/EventPage"
 
 
-
-
 const Router = createBrowserRouter([
-  
- 
   {
     path: "/",
     element: <Register />

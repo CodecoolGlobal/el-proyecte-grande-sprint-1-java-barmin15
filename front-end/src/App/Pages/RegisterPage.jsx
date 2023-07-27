@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./LogIn.css"
 import { RegisterUser } from "../Fetches/RegisterUser";
 
 export default function RegisterPage() {
+    const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -10,7 +12,7 @@ export default function RegisterPage() {
     function register() {
         if (username.length > 5 && password.length > 5) {
             if (RegisterUser(username, password).then(response => response === true)) {
-                window.location.href = "http://localhost:3000/event/all"
+                navigate("/event/all")
             }
         }
     }
