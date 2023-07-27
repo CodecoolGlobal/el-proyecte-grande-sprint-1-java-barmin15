@@ -49,7 +49,7 @@ function EventForm(event) {
     event.time += ":00"
 
     PostNewEvent(event);
-    navigate("/events");
+    navigate("/event/all");
   };
 
   return (
