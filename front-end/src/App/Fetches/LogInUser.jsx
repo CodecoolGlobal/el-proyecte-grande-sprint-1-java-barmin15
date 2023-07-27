@@ -1,11 +1,17 @@
-export function LogInUser(username, password) {
-         fetch("http://localhost:0420/login", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({username, password}),
-        })
-          .then((res) => res.json())
-          .then((responseData) => {return responseData })
+async function LogInUser(username, password) {
+
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, password })
+};
+ return fetch('http://localhost:420/user/login', requestOptions)
+    .then(response => response.json())
+    .then((responseData) => {
+      return responseData;
+    })
+
 }
+
+
+export { LogInUser };
