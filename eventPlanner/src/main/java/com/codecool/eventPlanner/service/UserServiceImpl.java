@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO getCurrentUser() {
-        return new UserDTO(100, "gyasza", "gyasza vagyok", "cicamica");
+        return new UserDTO(100, "user17353", "hi i'm user17353 :-)", "cicamica");
     }
 
 
