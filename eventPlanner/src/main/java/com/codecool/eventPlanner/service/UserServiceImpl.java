@@ -54,5 +54,13 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
+    @Override
+    public boolean isAllowed(String username, String password) {
+        return allUsers.stream()
+                .filter(userDTO -> isValidUser(userDTO, username, password)).findFirst().isPresent();
+    }
 
+    private boolean isValidUser(UserDTO userDTO, String username, String password) {
+        return userDTO.username().equals(username) && userDTO.password().equals(password);
+    }
 }
