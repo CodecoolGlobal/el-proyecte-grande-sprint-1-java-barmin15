@@ -39,6 +39,11 @@ public class UserController {
         return userService.createUser(userDTO);
     }
 
+    @PostMapping("/login")
+    public boolean loginUser(@RequestBody String username, String password) {
+        return userService.isAllowed(username, password);
+    }
+
     @PutMapping("/update")
     public boolean updateUser(@RequestBody UserDTO userDTO){
         return userService.updateUser(userDTO);
