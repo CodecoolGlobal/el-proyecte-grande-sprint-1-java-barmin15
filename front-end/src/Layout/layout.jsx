@@ -8,8 +8,8 @@ function Layout(){
     <div href="" id="logo">EVENET</div>
   </div>
   <div id="mySidenav" className="sidenav">
-  <a href="/create" id="addEvent">Add</a>
-  <a href="/events" id="allEvents">All</a>
+  <a href="/event/create" id="addEvent">Add</a>
+  <a href="/event/all" id="allEvents">All</a>
 </div>
    <Outlet/>
   </div>

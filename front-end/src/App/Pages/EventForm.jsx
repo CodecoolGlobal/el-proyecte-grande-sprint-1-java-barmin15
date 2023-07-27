@@ -7,7 +7,6 @@ function EventForm(event) {
 
   const navigate = useNavigate();
   const user = { id: 9 };
-
   //   event =  {
   //     id: 0,
   //     creatorId: 9,
