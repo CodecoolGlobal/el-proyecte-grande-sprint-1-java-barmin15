@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean delete(int id) {
-        UserDTO user = allUsers.stream().filter(u -> u.id() == id).findFirst().orElseGet(() -> null);
+        UserDTO user = allUsers.stream().filter(u -> u.id() == id).findFirst().get();
         return allUsers.remove(user);
     }
 
