@@ -26,7 +26,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public EventDTO getEventById(int id) {
         return allEvents.stream()
-                .filter(event -> event.id() == id).findFirst().get();
+                .filter(event -> event.getId() == id).findFirst().get();
     }
 
     @Override
@@ -67,21 +67,12 @@ public class EventServiceImpl implements EventService {
     public boolean updateEvent(UpdateEventDTO updateEventDTO) {
 
         Optional<EventDTO> event = allEvents.stream()
-                .filter(eventDTO -> eventDTO.id() == updateEventDTO.id())
+                .filter(eventDTO -> eventDTO.getId() == updateEventDTO.id())
                 .findFirst();
 
-        int id = updateEventDTO.id();
-        String name = updateEventDTO.name();
-        String description = updateEventDTO.description();
-        Date date = updateEventDTO.date();
-        int creatorId = event.get().creatorId();
-        String location = event.get().location();
-        boolean isPrivate = event.get().isPrivate();
-
-        EventDTO updatedEventDTO = new EventDTO(id, creatorId, name, description, date, location, isPrivate);
-
-        allEvents.remove(event);
-        allEvents.add(updatedEventDTO);
+        event.get().setName(updateEventDTO.name());
+        event.get().setDate(updateEventDTO.date());
+        event.get().setDescription(updateEventDTO.description());
 
         return true;
     }
