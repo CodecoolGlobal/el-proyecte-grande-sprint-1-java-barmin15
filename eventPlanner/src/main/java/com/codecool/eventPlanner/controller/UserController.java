@@ -1,5 +1,6 @@
 package com.codecool.eventPlanner.controller;
 
+import com.codecool.eventPlanner.model.LoginUserDTO;
 import com.codecool.eventPlanner.model.NewUserDTO;
 import com.codecool.eventPlanner.model.UserDTO;
 import com.codecool.eventPlanner.service.UserService;
@@ -24,6 +25,11 @@ public class UserController {
         return userService.getUserById(id);
     }
 
+    @GetMapping("/current")
+    public UserDTO getCurrentUser(){
+        return userService.getCurrentUser();
+    }
+
     @GetMapping("/all")
     public List<UserDTO> getAllUsers(){
         return userService.getAll();
@@ -37,6 +43,16 @@ public class UserController {
     @PostMapping()
     public boolean createUser(@RequestBody NewUserDTO userDTO){
         return userService.createUser(userDTO);
+    }
+
+//    @PostMapping("/login")
+//    public boolean loginUser(@RequestBody String username, String password) {
+//        return userService.isAllowed(username, password);
+//    }
+
+    @PostMapping("/login")
+    public boolean loginUser(@RequestBody LoginUserDTO loginUserDTO) {
+        return userService.logInUser(loginUserDTO.username(), loginUserDTO.password());
     }
 
     @PutMapping("/update")

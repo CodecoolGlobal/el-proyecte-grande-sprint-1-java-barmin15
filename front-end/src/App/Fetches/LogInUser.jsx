@@ -1,4 +1,5 @@
 async function LogInUser(username, password) {
+
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -15,4 +16,3 @@ async function LogInUser(username, password) {
 }
 
 export { LogInUser };
-

@@ -1,0 +1,45 @@
+.eventForm {
+  display: flex;
+  justify-content: center;
+  border: 3px;
+  border-style: solid;
+  width: min-content;
+  margin: 15px;
+  padding: 10px;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.eventForm h2 {
+  text-align: center;
+}
+
+.eventForm div {
+    padding: 5px;
+}
+
+.eventForm label {
+  font-size: larger;
+}
+
+.eventForm {
+  display: flex;
+  flex-direction: column;
+  background: #04AA6D;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),
+    0 8px 16px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+}
+.eventForm input {
+  height: 55px;
+  width: 92%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  padding: 0 14px;
+}

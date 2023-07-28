@@ -1,29 +1,46 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, useParams } from "react-router-dom";
 import reportWebVitals from "./Vitals/reportWebVitals";
 
 
 import Layout from "./Layout/layout";
-import App from "./App/App";
-import EventForm from "./components/EventForm";
-import AllEvent from "./components/AllEvent";
+import AllEvent from "./App/Pages/AllEvent";
+import EventForm from "./App/Pages/EventForm";
+import Register from "./App/Pages/RegisterPage";
+import LogIn from "./App/Pages/LogInPage";
+import UserProfile from "./App/Pages/UserProfile"
+import EventPage from "./App/Pages/EventPage"
+
 
 const Router = createBrowserRouter([
   {
     path: "/",
+    element: <Register />
+  },
+  {
+    path: "/login",
+    element: <LogIn />
+  },
+  {
+    path: "/event",
     element: <Layout />,
     children: [
       {
-        path: "/",
+        path: "/event/all",
         element: <AllEvent />,
-      },{
-        path: "/create",
+      }, {
+        path: "/event/create",
         element: <EventForm />,
+      },{
+        path: "/event/ownprofile",
+        element: <UserProfile />,
+      },{
+        path: "/event/:id",
+        element: <EventPage />,
       },
-      
     ],
-  },
+  }
 ]);
 
 

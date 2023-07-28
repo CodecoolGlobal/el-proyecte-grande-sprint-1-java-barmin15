@@ -1,9 +1,8 @@
 package com.codecool.eventPlanner.model;
 
-public record UserDTO(
-        int id,
+public record LoginUserDTO(
+
         String username,
-        String description,
         String password
 ) {
 }

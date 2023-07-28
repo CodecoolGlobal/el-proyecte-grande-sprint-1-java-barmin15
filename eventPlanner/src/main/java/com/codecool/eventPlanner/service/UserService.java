@@ -16,4 +16,8 @@ public interface UserService {
     boolean delete(int id);
 
     boolean createUser(NewUserDTO userDTO);
+
+    boolean logInUser(String username, String password);
+    UserDTO getCurrentUser();
+
 }

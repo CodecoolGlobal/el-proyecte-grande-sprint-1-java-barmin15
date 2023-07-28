@@ -15,6 +15,7 @@ export default function LogInPage() {
         }
     }
 
+
     return (
         <div className="container flex">
             <div className="form">
@@ -28,5 +29,5 @@ export default function LogInPage() {
                 </div>
             </div>
         </div>)
-}
 
+}

@@ -1,21 +1,20 @@
 import { useState, useEffect } from "react";
-function useUserById() {
-    const [users, setUsers] = useState();
+function useCurrentUser() {
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         const dataFetch = async () => {
             const data = await (
                 await fetch(
-                    "http://localhost:0420/user/getById"
+                    "http://localhost:0420/user/current"
                 )
             ).json();
-            setUsers(data);
+            setUser(data);
         };
 
         dataFetch();
     }, []);
-    return users;
+    return user;
 }
 
-export default useUserById;
-
+export default useCurrentUser;

@@ -1,0 +1,28 @@
+.userProfile {
+  display: flex;
+  justify-content: flex-start;
+  border: 3px;
+  border-style: solid;
+  width: 300px;
+  margin: 100px;
+  padding: 10px;
+  flex-direction: row;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  background: #04aa6d;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+}
+
+#profPic img {
+  border-radius: 15%;
+}
+
+.userProfile div {
+  flex-direction: column;
+}

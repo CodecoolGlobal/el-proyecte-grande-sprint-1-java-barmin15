@@ -3,13 +3,14 @@ import "./layout.css"
 
 function Layout(){
     return <div >
-    <div class="topnav">
-    <a class="active" href="#home">Profile</a>
+    <div className="topnav">
+    <a className="active" href="/event/ownprofile">Profile</a>
     <div href="" id="logo">EVENET</div>
   </div>
-  <div id="mySidenav" class="sidenav">
-  <a href="/" id="addEvent">Add</a>
-  <a href="/" id="allEvents">All</a>
+  <div id="mySidenav" className="sidenav">
+  <a href="/event/create" id="addEvent">Add</a>
+  <a href="/event/all" id="allEvents">All</a>
+  <a href="/" id="logOut">Log Out</a>
 </div>
    <Outlet/>
   </div>

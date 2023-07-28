@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAsyncError, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./LogIn.css"
 import { RegisterUser } from "../Fetches/RegisterUser";
 
@@ -8,17 +8,15 @@ export default function RegisterPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    
+
     async function register() {
         if (username.length > 5 && password.length > 5) {
             if (await RegisterUser(username, password)) {
+
                 navigate("/event/all")
             }
         }
     }
-
-
-    
 
     return (<div className="container flex">
         <div className="form">
