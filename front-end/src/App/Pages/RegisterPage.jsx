@@ -8,10 +8,11 @@ export default function RegisterPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    
-    function register() {
+
+    async function register() {
         if (username.length > 5 && password.length > 5) {
-            if (RegisterUser(username, password).then(response => response === true)) {
+            if (await RegisterUser(username, password)) {
+
                 navigate("/event/all")
             }
         }

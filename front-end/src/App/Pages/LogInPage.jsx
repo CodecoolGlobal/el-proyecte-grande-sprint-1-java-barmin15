@@ -9,13 +9,11 @@ export default function LogInPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-
-    function logIn() {
-        if (LogInUser(username, password).then(res => res === true)) {
+   async function logIn() {
+        if (await LogInUser(username, password)) {
             navigate("/event/all")
         }
     }
-
 
 
     return (
@@ -31,4 +29,5 @@ export default function LogInPage() {
                 </div>
             </div>
         </div>)
+
 }

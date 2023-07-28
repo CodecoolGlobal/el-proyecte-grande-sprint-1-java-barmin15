@@ -8,8 +8,12 @@ async function RegisterUser(username, password) {
  return fetch('http://localhost:0420/user', requestOptions)
     .then(response => response.json())
     .then((responseData) => {
-      return responseData;
-    })
+      if (responseData === true) {
+        return true;
+      }
+      return false;
+    });
+
 
 }
 
