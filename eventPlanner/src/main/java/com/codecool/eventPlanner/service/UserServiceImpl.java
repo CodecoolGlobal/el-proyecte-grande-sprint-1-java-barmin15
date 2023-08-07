@@ -1,13 +1,11 @@
 package com.codecool.eventPlanner.service;
 
-import com.codecool.eventPlanner.model.NewUserDTO;
-import com.codecool.eventPlanner.model.UserDTO;
-import org.apache.catalina.User;
+import com.codecool.eventPlanner.model.dto.NewUserDTO;
+import com.codecool.eventPlanner.model.dto.UserDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {

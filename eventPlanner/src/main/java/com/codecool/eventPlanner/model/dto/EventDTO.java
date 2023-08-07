@@ -1,4 +1,4 @@
-package com.codecool.eventPlanner.model;
+package com.codecool.eventPlanner.model.dto;
 
 
 import java.sql.Time;
