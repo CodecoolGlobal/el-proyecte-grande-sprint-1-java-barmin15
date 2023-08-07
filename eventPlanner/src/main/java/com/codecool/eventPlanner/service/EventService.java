@@ -1,8 +1,8 @@
 package com.codecool.eventPlanner.service;
 
-import com.codecool.eventPlanner.model.EventDTO;
-import com.codecool.eventPlanner.model.NewEventDTO;
-import com.codecool.eventPlanner.model.UpdateEventDTO;
+import com.codecool.eventPlanner.model.dto.EventDTO;
+import com.codecool.eventPlanner.model.dto.NewEventDTO;
+import com.codecool.eventPlanner.model.dto.UpdateEventDTO;
 
 import java.util.List;
 

@@ -1,14 +1,14 @@
 package com.codecool.eventPlanner.controller;
 
-import com.codecool.eventPlanner.model.EventDTO;
-import com.codecool.eventPlanner.model.NewEventDTO;
-import com.codecool.eventPlanner.model.UpdateEventDTO;
+import com.codecool.eventPlanner.model.dto.EventDTO;
+import com.codecool.eventPlanner.model.dto.NewEventDTO;
+import com.codecool.eventPlanner.model.dto.UpdateEventDTO;
 import com.codecool.eventPlanner.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Locale;
+
 @CrossOrigin
 
 @RestController

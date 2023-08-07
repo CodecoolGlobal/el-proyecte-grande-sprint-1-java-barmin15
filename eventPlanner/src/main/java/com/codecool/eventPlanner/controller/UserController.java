@@ -1,8 +1,8 @@
 package com.codecool.eventPlanner.controller;
 
-import com.codecool.eventPlanner.model.LoginUserDTO;
-import com.codecool.eventPlanner.model.NewUserDTO;
-import com.codecool.eventPlanner.model.UserDTO;
+import com.codecool.eventPlanner.model.dto.LoginUserDTO;
+import com.codecool.eventPlanner.model.dto.NewUserDTO;
+import com.codecool.eventPlanner.model.dto.UserDTO;
 import com.codecool.eventPlanner.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
