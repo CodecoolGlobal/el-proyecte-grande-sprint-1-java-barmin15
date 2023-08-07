@@ -1,11 +1,10 @@
 package com.codecool.eventPlanner.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.Set;
 
 @Entity(name = "users")
 @Builder
@@ -18,8 +17,12 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private String password;
-
+    private String lastOnline;
+    private String registrationDate;
+    @ManyToMany
+    private Set<Event> ownEvents;
+    @ManyToMany
+    private Set<Event> interestedEvents;
 }
