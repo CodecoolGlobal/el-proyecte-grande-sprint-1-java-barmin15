@@ -21,8 +21,8 @@ public class User {
     private String password;
     private String lastOnline;
     private String registrationDate;
-    @ManyToMany
-    private Set<Event> ownEvents;
-    @ManyToMany
+    @OneToMany(mappedBy = "creator")
+    private Set<Event> createdEvents;
+    @ManyToMany()
     private Set<Event> interestedEvents;
 }

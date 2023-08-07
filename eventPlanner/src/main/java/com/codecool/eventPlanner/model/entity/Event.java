@@ -17,14 +17,12 @@ public class Event {
     private Long id;
     private String dateTime;
     private String location;
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User admin;
+    @ManyToOne
+    private User creator;
     private String description;
-    @ManyToMany
-    private Set<Category> categorys;
+    @ManyToMany(mappedBy = "interestedEvents")
+    private Set<User> interestedUsers;
+    @ManyToMany()
+    private Set<Category> categories;
     private String title;
-
-
-
 }
