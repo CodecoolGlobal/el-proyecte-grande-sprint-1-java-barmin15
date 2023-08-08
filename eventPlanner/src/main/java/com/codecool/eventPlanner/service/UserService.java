@@ -1,23 +1,14 @@
 package com.codecool.eventPlanner.service;
 
-
-import com.codecool.eventPlanner.model.dto.NewUserDTO;
-import com.codecool.eventPlanner.model.dto.UserDTO;
+import com.codecool.eventPlanner.model.entity.User;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface UserService {
-    boolean updateUser(UserDTO userDTO);
 
-    UserDTO getUserById(int id);
+    List<User> getAllUsers();
 
-    List<UserDTO> getAll();
-
-    boolean delete(int id);
-
-    boolean createUser(NewUserDTO userDTO);
-
-    boolean logInUser(String username, String password);
-    UserDTO getCurrentUser();
-
+    User getUserById(Long id);
 }
