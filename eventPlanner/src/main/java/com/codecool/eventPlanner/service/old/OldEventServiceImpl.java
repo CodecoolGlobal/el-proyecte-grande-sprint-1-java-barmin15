@@ -1,4 +1,4 @@
-package com.codecool.eventPlanner.service;
+package com.codecool.eventPlanner.service.old;
 
 import com.codecool.eventPlanner.model.dto.EventDTO;
 import com.codecool.eventPlanner.model.dto.NewEventDTO;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class OldEventServiceImpl implements EventService {
+public class OldEventServiceImpl implements OldEventService {
 
     private static int idCounter = 0;
 
