@@ -1,13 +1,12 @@
 package com.codecool.eventPlanner.controller;
 
+import com.codecool.eventPlanner.model.dto.UserToEventDTO;
 import com.codecool.eventPlanner.model.entity.Event;
-import com.codecool.eventPlanner.model.entity.User;
 import com.codecool.eventPlanner.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/event")
@@ -26,8 +25,8 @@ public class EventController {
     }
 
     @PutMapping
-    public void addUserForEvent(@RequestBody User user, Event event) {
-        eventService.addUserForEvent(user, event);
+    public void addUserForEvent(@RequestBody UserToEventDTO userToEventDTO) {
+        eventService.addUserForEvent(userToEventDTO.userId(), userToEventDTO.eventId());
     }
 
     @GetMapping("{id}")

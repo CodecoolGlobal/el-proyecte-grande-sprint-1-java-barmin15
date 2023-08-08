@@ -22,7 +22,7 @@ public class Event {
     @JsonBackReference
     private User creator;
     private String description;
-    @ManyToMany(mappedBy = "interestedEvents")
+    @ManyToMany()
     private Set<User> interestedUsers;
     @ManyToMany()
     private Set<Category> categories;
