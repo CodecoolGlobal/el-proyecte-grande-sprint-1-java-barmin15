@@ -1,8 +1,10 @@
 package com.codecool.eventPlanner.service;
 
+
 import com.codecool.eventPlanner.model.dto.CategoryIdsDTO;
 import com.codecool.eventPlanner.model.dto.EventDTO;
 import com.codecool.eventPlanner.model.dto.NewEventDTO;
+
 import com.codecool.eventPlanner.model.entity.Event;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +32,7 @@ public interface EventService {
 
 
     List<Event> getCreatedEventsByUser(Long id);
+
 
 }
 

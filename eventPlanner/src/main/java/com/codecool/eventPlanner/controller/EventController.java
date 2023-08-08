@@ -3,6 +3,8 @@ package com.codecool.eventPlanner.controller;
 import com.codecool.eventPlanner.model.dto.CategoryIdsDTO;
 import com.codecool.eventPlanner.model.dto.EventDTO;
 import com.codecool.eventPlanner.model.dto.NewEventDTO;
+
+
 import com.codecool.eventPlanner.model.dto.UserToEventDTO;
 import com.codecool.eventPlanner.model.entity.Event;
 import com.codecool.eventPlanner.service.EventService;
@@ -15,12 +17,14 @@ import java.util.List;
 @RequestMapping("/event")
 public class EventController {
 
+
     private final EventService eventService;
 
     @Autowired
     public EventController(EventService eventService) {
         this.eventService = eventService;
     }
+
 
     @GetMapping
     public List<Event> getAllEvents() {
@@ -66,7 +70,21 @@ public class EventController {
     @GetMapping("{id}")
     public List<Event> getCreatedEventsByUser(@PathVariable Long id) {
         return eventService.getCreatedEventsByUser(id);
+
+
+    @GetMapping
+    public List<Event> getAllEvents() {
+        return eventService.getAllEvents();
+
     }
 
+    @PutMapping
+    public void addUserForEvent(@RequestBody UserToEventDTO userToEventDTO) {
+        eventService.addUserForEvent(userToEventDTO.userId(), userToEventDTO.eventId());
+    }
 
+    @GetMapping("{id}")
+    public Event getEventById(@PathVariable Long id) {
+        return eventService.getEventById(id);
+    }
 }

@@ -1,5 +1,6 @@
 package com.codecool.eventPlanner.service;
 
+
 import com.codecool.eventPlanner.model.dto.CategoryIdsDTO;
 import com.codecool.eventPlanner.model.dto.EventDTO;
 import com.codecool.eventPlanner.model.dto.NewEventDTO;
@@ -7,25 +8,35 @@ import com.codecool.eventPlanner.model.entity.Category;
 import com.codecool.eventPlanner.model.entity.Event;
 import com.codecool.eventPlanner.model.entity.User;
 import com.codecool.eventPlanner.repository.CategoryRepository;
+
+import com.codecool.eventPlanner.model.entity.Event;
+import com.codecool.eventPlanner.model.entity.User;
+
 import com.codecool.eventPlanner.repository.EventRepository;
 import com.codecool.eventPlanner.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.util.*;
 import java.util.stream.Collectors;
 
+import java.util.List;
+import java.util.Set;
+
 @Service
 public class EventServiceImpl implements EventService {
-    private final CategoryRepository categoryRepository;
+  private final CategoryRepository categoryRepository;
     private final EventRepository eventRepository;
     private final UserRepository userRepository;
 
     @Autowired
+
     public EventServiceImpl(CategoryRepository categoryRepository, EventRepository eventRepository, UserRepository userRepository) {
         this.categoryRepository = categoryRepository;
-        this.eventRepository = eventRepository;
+    this.eventRepository = eventRepository;
         this.userRepository = userRepository;
+        
     }
 
     @Override
@@ -55,6 +66,9 @@ public class EventServiceImpl implements EventService {
                 .map(id -> categoryRepository.findById(id).get()).collect(Collectors.toSet());
         return eventRepository.getEventsByCategories(categories);
     }*/
+
+
+         }
 
 
     @Override

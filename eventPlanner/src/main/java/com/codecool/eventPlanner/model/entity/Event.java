@@ -1,7 +1,9 @@
 package com.codecool.eventPlanner.model.entity;
 
+
 import com.codecool.eventPlanner.model.dto.EventDTO;
 import com.codecool.eventPlanner.model.dto.NewEventDTO;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
