@@ -1,6 +1,7 @@
 package com.codecool.eventPlanner.controller;
 
 import com.codecool.eventPlanner.model.dto.NewUserDTO;
+import com.codecool.eventPlanner.model.dto.UpdateUserDTO;
 import com.codecool.eventPlanner.model.entity.User;
 import com.codecool.eventPlanner.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,10 @@ public class UserController {
         return userService.addUser(newUserDTO);
     }
 
+    @PutMapping
+    public boolean updateUser(@RequestBody UpdateUserDTO updateUserDTO){
+        return userService.updateUser(updateUserDTO);
+    }
 }
 
 
