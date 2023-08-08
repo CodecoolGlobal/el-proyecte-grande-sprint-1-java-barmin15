@@ -1,11 +1,12 @@
 package com.codecool.eventPlanner.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonRawValue;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Set;
 
-@Entity
+@Entity(name="categories")
 @Builder
 @Setter
 @Getter
@@ -18,5 +19,4 @@ public class Category {
     private String name;
     @ManyToMany(mappedBy = "categories")
     Set<Event> events;
-
 }
