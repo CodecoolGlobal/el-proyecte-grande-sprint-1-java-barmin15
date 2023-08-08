@@ -1,70 +1,33 @@
 package com.codecool.eventPlanner.controller;
 
-import com.codecool.eventPlanner.model.dto.LoginUserDTO;
-import com.codecool.eventPlanner.model.dto.NewUserDTO;
-import com.codecool.eventPlanner.model.dto.UserDTO;
+import com.codecool.eventPlanner.model.entity.User;
 import com.codecool.eventPlanner.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-@CrossOrigin
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
-    private final UserService userService;
+    private UserService userService;
 
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
+    @GetMapping
+    public List<User> getAllUser() {
+        return this.userService.getAllUsers();
+    }
+
     @GetMapping("/{id}")
-    public UserDTO getUserById(@PathVariable int id){
-        return userService.getUserById(id);
-    }
-
-    @GetMapping("/current")
-    public UserDTO getCurrentUser(){
-        return userService.getCurrentUser();
-    }
-
-    @GetMapping("/all")
-    public List<UserDTO> getAllUsers(){
-        return userService.getAll();
-    }
-
-    @DeleteMapping("/delete")
-    public boolean deleteUser(@RequestBody int id) {
-        return userService.delete(id);
-    }
-
-    @PostMapping()
-    public boolean createUser(@RequestBody NewUserDTO userDTO){
-        return userService.createUser(userDTO);
-    }
-
-//    @PostMapping("/login")
-//    public boolean loginUser(@RequestBody String username, String password) {
-//        return userService.isAllowed(username, password);
-//    }
-
-    @PostMapping("/login")
-    public boolean loginUser(@RequestBody LoginUserDTO loginUserDTO) {
-        return userService.logInUser(loginUserDTO.username(), loginUserDTO.password());
-    }
-
-    @PutMapping("/update")
-    public boolean updateUser(@RequestBody UserDTO userDTO){
-        return userService.updateUser(userDTO);
-    }
+    public User getUserById(@PathVariable Long id) {
+        System.out.println("minden okes eddig haver");
+        return userService.getUserById(id);}
 }
-
-
-
-
-
-
-
-
