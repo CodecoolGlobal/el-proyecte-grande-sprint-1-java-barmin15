@@ -1,3 +1,4 @@
+/*
 package com.codecool.eventPlanner.service.old;
 
 
@@ -6,7 +7,9 @@ import com.codecool.eventPlanner.model.dto.UserDTO;
 
 import java.util.List;
 
+
 public interface OldUserService {
+
     boolean updateUser(UserDTO userDTO);
 
     UserDTO getUserById(int id);
@@ -20,4 +23,6 @@ public interface OldUserService {
     boolean logInUser(String username, String password);
     UserDTO getCurrentUser();
 
+
 }
+*/

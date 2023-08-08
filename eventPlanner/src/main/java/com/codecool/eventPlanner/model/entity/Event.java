@@ -1,5 +1,6 @@
 package com.codecool.eventPlanner.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,6 +19,7 @@ public class Event {
     private String dateTime;
     private String location;
     @ManyToOne
+    @JsonBackReference
     private User creator;
     private String description;
     @ManyToMany(mappedBy = "interestedEvents")

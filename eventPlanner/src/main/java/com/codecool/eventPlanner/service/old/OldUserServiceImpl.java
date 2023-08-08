@@ -1,3 +1,4 @@
+/*
 package com.codecool.eventPlanner.service.old;
 
 import com.codecool.eventPlanner.model.dto.NewUserDTO;
@@ -77,3 +78,4 @@ public class OldUserServiceImpl implements OldUserService {
         return allUsers.stream().filter(userDTO -> isValidUser(userDTO, username, password)).findFirst().get();
     }
 }
+*/
