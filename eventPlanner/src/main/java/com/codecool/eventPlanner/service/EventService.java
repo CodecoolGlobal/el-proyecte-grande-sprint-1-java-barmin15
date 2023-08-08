@@ -1,5 +1,10 @@
 package com.codecool.eventPlanner.service;
 
+
+import com.codecool.eventPlanner.model.dto.CategoryIdsDTO;
+import com.codecool.eventPlanner.model.dto.EventDTO;
+import com.codecool.eventPlanner.model.dto.NewEventDTO;
+
 import com.codecool.eventPlanner.model.entity.Event;
 import org.springframework.stereotype.Service;
 
@@ -12,5 +17,22 @@ public interface EventService {
 
     void addUserForEvent(Long userId, Long eventId);
 
-    Event getEventById(Long id);
+
+    void deleteEvent(Long id);
+
+   // List<Event> getEventsByCategories(CategoryIdsDTO categoryIdsDTO);
+
+      Event getEventById(Long id);
+
+        Event updateEvent(Long id, EventDTO eventDTO);
+
+        Event createEvent(NewEventDTO newEventDTO);
+
+        List<Event> getEventsByUser(Long id);
+
+
+    List<Event> getCreatedEventsByUser(Long id);
+
+
 }
+
