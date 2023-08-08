@@ -1,3 +1,4 @@
+/*
 package com.codecool.eventPlanner.service.old;
 
 import com.codecool.eventPlanner.model.dto.EventDTO;
@@ -20,3 +21,4 @@ public interface OldEventService {
 
     boolean updateEvent(UpdateEventDTO updateEventDTO);
 }
+*/
