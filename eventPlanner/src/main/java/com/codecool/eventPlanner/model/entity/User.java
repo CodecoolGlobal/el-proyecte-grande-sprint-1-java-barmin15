@@ -1,14 +1,11 @@
 package com.codecool.eventPlanner.model.entity;
 
-import com.codecool.eventPlanner.model.dto.NewUserDTO;
-import com.codecool.eventPlanner.model.dto.UpdateUserDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 @Entity(name = "users")
