@@ -1,6 +1,7 @@
 package com.codecool.eventPlanner.service;
 
 import com.codecool.eventPlanner.model.dto.NewUserDTO;
+import com.codecool.eventPlanner.model.dto.UpdateUserDTO;
 import com.codecool.eventPlanner.model.entity.User;
 import org.springframework.stereotype.Service;
 
@@ -18,4 +19,6 @@ public interface UserService {
     User getCurrentUser();
 
     boolean addUser(NewUserDTO newUserDTO);
+
+    boolean updateUser(UpdateUserDTO updateUserDTO);
 }

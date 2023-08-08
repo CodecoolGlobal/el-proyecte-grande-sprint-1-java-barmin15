@@ -1,6 +1,7 @@
 package com.codecool.eventPlanner.service;
 
 import com.codecool.eventPlanner.model.dto.NewUserDTO;
+import com.codecool.eventPlanner.model.dto.UpdateUserDTO;
 import com.codecool.eventPlanner.model.entity.Event;
 import com.codecool.eventPlanner.model.entity.User;
 import com.codecool.eventPlanner.repository.UserRepository;
@@ -51,13 +52,16 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public boolean addUser(NewUserDTO newUserDTO) {
-//        String userName = newUserDTO.username();
-//        String password = newUserDTO.password();
-//        String registrationDate = newUserDTO.registrationDate();
-//        User newUser = new User(userName, password, registrationDate, registrationDate, new HashSet<>(), new HashSet<>());
         User newUser = new User(newUserDTO);
         userRepository.save(newUser);
-        System.out.println("user saved :-)");
+        return true;
+    }
+
+    @Override
+    public boolean updateUser(UpdateUserDTO updateUserDTO) {
+        User user = userRepository.findById(updateUserDTO.id()).get();
+        user.update(updateUserDTO);
+        userRepository.save(user);
         return true;
     }
 }
