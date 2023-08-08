@@ -1,7 +1,7 @@
 package com.codecool.eventPlanner.model.entity;
 
+import com.codecool.eventPlanner.model.dto.NewUserDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -28,4 +28,11 @@ public class User {
     private Set<Event> createdEvents;
     @ManyToMany()
     private Set<Event> interestedEvents;
+
+    public User(NewUserDTO newUserDTO) {
+        name = newUserDTO.username();
+        password = newUserDTO.password();
+        lastOnline = newUserDTO.registrationDate();
+        registrationDate = newUserDTO.registrationDate();
+    }
 }
