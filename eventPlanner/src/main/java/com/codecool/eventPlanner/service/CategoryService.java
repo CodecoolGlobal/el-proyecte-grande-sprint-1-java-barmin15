@@ -1,10 +1,13 @@
 package com.codecool.eventPlanner.service;
 
 import com.codecool.eventPlanner.model.entity.Category;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
+@Service
 public interface CategoryService {
-    public List<Category> allCategories();
+    public List<Category> getAllCategories();
+
+    Long addNewCategory(Category category);
 }

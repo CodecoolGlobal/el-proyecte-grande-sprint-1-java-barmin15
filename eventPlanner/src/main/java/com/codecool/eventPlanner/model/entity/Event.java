@@ -5,7 +5,7 @@ import lombok.*;
 
 import java.util.Set;
 
-@Entity
+@Entity(name="events")
 @Builder
 @Setter
 @Getter
