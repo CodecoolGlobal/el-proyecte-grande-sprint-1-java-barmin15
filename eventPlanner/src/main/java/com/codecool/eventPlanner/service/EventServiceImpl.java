@@ -21,6 +21,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<Event> getAllEvents() {
+        eventRepository.findAll().forEach(event -> System.out.println(event.getCreator().getName()));
         return eventRepository.findAll();
     }
 
