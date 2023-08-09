@@ -3,6 +3,7 @@ package com.codecool.eventPlanner.service;
 import com.codecool.eventPlanner.model.dto.CategoryIdsDTO;
 import com.codecool.eventPlanner.model.dto.EventDTO;
 import com.codecool.eventPlanner.model.dto.NewEventDTO;
+import com.codecool.eventPlanner.model.entity.Category;
 import com.codecool.eventPlanner.model.entity.Event;
 import com.codecool.eventPlanner.model.entity.User;
 import com.codecool.eventPlanner.repository.CategoryRepository;
@@ -44,6 +45,14 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public void deleteEvent(Long id) {
+        List<Category> categories = categoryRepository.findAll();
+        for (Category category : categories){
+            Set<Event> events = category.getEvents();
+            Event event = events.stream().filter(event1 -> event1.getId().equals(id)).toList().get(0);
+            events.remove(event);
+            category.setEvents(events);
+            categoryRepository.save(category);
+        }
         eventRepository.deleteById(id);
     }
 

@@ -21,7 +21,5 @@ public class EventDTO {
     private Set<User> interestedUsers;
     private Set<Category> categories;
     private String title;
-
-
 }
 
