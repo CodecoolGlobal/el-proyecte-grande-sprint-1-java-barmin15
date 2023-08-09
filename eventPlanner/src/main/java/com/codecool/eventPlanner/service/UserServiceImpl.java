@@ -1,19 +1,14 @@
 package com.codecool.eventPlanner.service;
 
+import com.codecool.eventPlanner.model.dto.LoginUserDTO;
 import com.codecool.eventPlanner.model.dto.NewUserDTO;
 import com.codecool.eventPlanner.model.dto.UpdateUserDTO;
-import com.codecool.eventPlanner.model.entity.Event;
 import com.codecool.eventPlanner.model.entity.User;
 import com.codecool.eventPlanner.repository.UserRepository;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -63,6 +58,20 @@ public class UserServiceImpl implements UserService{
         user.update(updateUserDTO);
         userRepository.save(user);
         return true;
+    }
+
+    @Override
+    public boolean loginUser(LoginUserDTO loginUserDTO) {
+        String username = loginUserDTO.username();
+        String password = loginUserDTO.password();
+        currentUser = findUser(username, password);
+        return getAllUsers().stream().anyMatch(user1 -> isValidUser(user1, username, password));
+    }
+        private boolean isValidUser(User user, String username, String password) {
+        return user.getName().equals(username) && user.getPassword().equals(password);
+    }
+    private User findUser(String username, String password) {
+      return getAllUsers().stream().filter(user -> isValidUser(user, username, password)).findFirst().orElse(null);
     }
 }
 
