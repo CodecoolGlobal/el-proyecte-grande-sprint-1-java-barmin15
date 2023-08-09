@@ -11,14 +11,12 @@ import com.codecool.eventPlanner.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @RestController
 @RequestMapping("/event")
 public class EventController {
-
 
     private final EventService eventService;
 
@@ -27,29 +25,27 @@ public class EventController {
         this.eventService = eventService;
     }
 
-
     @GetMapping
     public List<Event> getAllEvents() {
         return eventService.getAllEvents();
     }
-
 
     @PutMapping
     public void addUserForEvent(@RequestBody UserToEventDTO userToEventDTO) {
         eventService.addUserForEvent(userToEventDTO.userId(), userToEventDTO.eventId());
     }
 
-   @GetMapping("/byCategories")
+    @GetMapping("/byCategories")
     public Set<Event> getEventsByCategories(@RequestBody CategoryIdsDTO categoryIdsDTO) {
         return eventService.getEventsByCategories(categoryIdsDTO);
-   }
+    }
 
     @DeleteMapping("{id}")
     public void deleteEventById(@PathVariable Long id) {
         eventService.deleteEvent(id);
     }
 
-   @GetMapping("{id}")
+    @GetMapping("{id}")
     public Event getEventById(@PathVariable Long id) {
         return eventService.getEventById(id);
     }
@@ -64,7 +60,6 @@ public class EventController {
         return eventService.createEvent(newEventDTO);
     }
 
-
     @GetMapping("/interested/{userId}")
     public Set<Event> getEventsByUserId(@PathVariable Long userId) {
         return eventService.getEventsByUser(userId);
@@ -74,6 +69,4 @@ public class EventController {
     public Set<Event> getCreatedEventsByUser(@PathVariable Long userId) {
         return eventService.getCreatedEventsByUser(userId);
     }
-
-
 }
