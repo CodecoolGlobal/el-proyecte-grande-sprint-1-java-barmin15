@@ -6,7 +6,7 @@ function useAllUsers() {
         const dataFetch = async () => {
             const data = await (
                 await fetch(
-                    "http://localhost:0420/user/all"
+                    "/user"
                 )
             ).json();
             setUsers(data);
