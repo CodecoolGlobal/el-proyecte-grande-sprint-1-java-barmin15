@@ -1,7 +1,9 @@
-package com.codecool.eventPlanner.service;
+package com.codecool.eventPlanner.service.sql_impl;
 
 import com.codecool.eventPlanner.repository.CategoryRepository;
 import com.codecool.eventPlanner.model.entity.Category;
+import com.codecool.eventPlanner.service.CategoryService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,14 +25,20 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Long addNewCategory(Category category) {
-        boolean isExists = categoryRepository.existsByName(category.getName());
-
+    public Long addNewCategory(String categoryName) {
+        boolean isExists = categoryRepository.existsByName(categoryName);
         if (!isExists) {
-            categoryRepository.save(category);
+           Category category =  Category.builder().name(categoryName).build();
+            categoryRepository.save( category);
             return category.getId();
         }
-        Category category1 = categoryRepository.findByName(category.getName());
+        Category category1 = categoryRepository.findByName(categoryName);
         return category1.getId();
+    }
+
+    @Transactional
+    @Override
+    public void deleteCategory(Long id) {
+        categoryRepository.deleteById(id);
     }
 }
