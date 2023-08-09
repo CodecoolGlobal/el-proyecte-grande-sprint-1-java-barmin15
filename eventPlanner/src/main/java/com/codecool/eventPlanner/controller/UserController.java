@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/user")
@@ -53,6 +54,11 @@ public class UserController {
     @PostMapping("/login")
     public boolean loginUser(@RequestBody LoginUserDTO loginUserDTO){
         return userService.loginUser(loginUserDTO);
+    }
+
+    @GetMapping("/interested/{eventId}")
+    public Set<User> getInterestedUsersByEventId(@PathVariable Long eventId){
+        return userService.getInterestedUsersByEventId(eventId);
     }
 }
 

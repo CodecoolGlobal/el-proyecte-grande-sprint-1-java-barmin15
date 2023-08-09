@@ -1,5 +1,6 @@
 package com.codecool.eventPlanner.controller;
 
+import com.codecool.eventPlanner.model.dto.CategoryDTO;
 import com.codecool.eventPlanner.model.entity.Category;
 import com.codecool.eventPlanner.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,15 @@ public class CategoryController {
     }
 
     @PostMapping
-    public Long addNewCategory(@RequestBody Category category) {
-        return categoryService.addNewCategory(category);
+    public Long addNewCategory(@RequestBody CategoryDTO category) {
+         return categoryService.addNewCategory(category.name());
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteCategory(@PathVariable Long id){
+         categoryService.deleteCategory(id);
+    }
+
 
 
 }

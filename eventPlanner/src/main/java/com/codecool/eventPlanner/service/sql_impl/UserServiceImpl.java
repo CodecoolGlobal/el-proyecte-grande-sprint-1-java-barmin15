@@ -1,24 +1,29 @@
-package com.codecool.eventPlanner.service;
+package com.codecool.eventPlanner.service.sql_impl;
 
 import com.codecool.eventPlanner.model.dto.LoginUserDTO;
 import com.codecool.eventPlanner.model.dto.NewUserDTO;
 import com.codecool.eventPlanner.model.dto.UpdateUserDTO;
 import com.codecool.eventPlanner.model.entity.User;
+import com.codecool.eventPlanner.repository.EventRepository;
 import com.codecool.eventPlanner.repository.UserRepository;
+import com.codecool.eventPlanner.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     private User currentUser;
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final EventRepository eventRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, EventRepository eventRepository) {
         this.userRepository = userRepository;
+        this.eventRepository = eventRepository;
     }
 
 
@@ -49,6 +54,7 @@ public class UserServiceImpl implements UserService{
     public boolean addUser(NewUserDTO newUserDTO) {
         User newUser = new User(newUserDTO);
         userRepository.save(newUser);
+        currentUser = newUser;
         return true;
     }
 
@@ -67,7 +73,13 @@ public class UserServiceImpl implements UserService{
         currentUser = findUser(username, password);
         return getAllUsers().stream().anyMatch(user1 -> isValidUser(user1, username, password));
     }
-        private boolean isValidUser(User user, String username, String password) {
+
+    @Override
+    public Set<User> getInterestedUsersByEventId(Long eventId) {
+        return eventRepository.findById(eventId).get().getInterestedUsers();
+    }
+
+    private boolean isValidUser(User user, String username, String password) {
         return user.getName().equals(username) && user.getPassword().equals(password);
     }
     private User findUser(String username, String password) {

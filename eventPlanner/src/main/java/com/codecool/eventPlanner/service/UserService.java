@@ -7,6 +7,7 @@ import com.codecool.eventPlanner.model.entity.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public interface UserService {
@@ -24,4 +25,6 @@ public interface UserService {
     boolean updateUser(UpdateUserDTO updateUserDTO);
 
     boolean loginUser(LoginUserDTO loginUserDTO);
+
+    Set<User> getInterestedUsersByEventId(Long eventId);
 }

@@ -1,4 +1,4 @@
-package com.codecool.eventPlanner.service;
+package com.codecool.eventPlanner.service.sql_impl;
 
 import com.codecool.eventPlanner.model.dto.CategoryIdsDTO;
 import com.codecool.eventPlanner.model.dto.EventDTO;
@@ -9,6 +9,7 @@ import com.codecool.eventPlanner.model.entity.User;
 import com.codecool.eventPlanner.repository.CategoryRepository;
 import com.codecool.eventPlanner.repository.EventRepository;
 import com.codecool.eventPlanner.repository.UserRepository;
+import com.codecool.eventPlanner.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,24 +46,16 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public void deleteEvent(Long id) {
-        List<Category> categories = categoryRepository.findAll();
-        for (Category category : categories){
-            Set<Event> events = category.getEvents();
-            Event event = events.stream().filter(event1 -> event1.getId().equals(id)).toList().get(0);
-            events.remove(event);
-            category.setEvents(events);
-            categoryRepository.save(category);
-        }
         eventRepository.deleteById(id);
     }
 
     @Override
     public Set<Event> getEventsByCategories(CategoryIdsDTO categoryIdsDTO) {
-       Set<Event> result = new HashSet<>();
+        Set<Event> event = new HashSet<>();
         for (Long aLong : categoryIdsDTO.categoryIds()) {
-            result.addAll(categoryRepository.findById(aLong).get().getEvents());
+            event.addAll(categoryRepository.findById(aLong).get().getEvents());
         }
-       return result;
+        return event;
     }
 
     @Override
@@ -72,16 +65,39 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event updateEvent(Long id, EventDTO eventDTO) {
+        Set<User> interestedUsers = new HashSet<>();
+        Set<Category> categories = new HashSet<>();
+        User creator = userRepository.findById(eventDTO.getCreatorId()).get();
+        Arrays.stream(eventDTO.getCategoriesId()).forEach(categoryId -> categories.add(categoryRepository.findById(categoryId).get()));
+        Arrays.stream(eventDTO.getInterestedUsersIds()).forEach(interestedId -> interestedUsers.add(userRepository.findById(interestedId).get()));
+
         Event event = eventRepository.findById(id).get();
-        event.update(eventDTO);
+        event.update(eventDTO, creator, interestedUsers, categories);
         eventRepository.save(event);
         return event;
     }
 
     @Override
     public Event createEvent(NewEventDTO newEventDTO) {
-        Event event = new Event(newEventDTO);
+        Set<Category> categories = new HashSet<>();
+        Arrays.stream(newEventDTO.categoryIds()).forEach(id -> {
+            Category category = categoryRepository.findById(id).get();
+            categories.add(category);
+        });
+
+        User creator = userRepository.findById(newEventDTO.userId()).get();
+
+        Event event = Event.builder()
+                .creator(creator)
+                .title(newEventDTO.title())
+                .description(newEventDTO.description())
+                .dateTime(newEventDTO.dateTime())
+                .location(newEventDTO.location())
+                .categories(categories)
+                .build();
+
         eventRepository.save(event);
+
         return event;
     }
 

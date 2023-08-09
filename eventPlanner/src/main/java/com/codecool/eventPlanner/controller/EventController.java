@@ -55,11 +55,6 @@ public class EventController {
         return eventService.updateEvent(id, eventDTO);
     }
 
-    @PostMapping()
-    public Event createEvent(@RequestBody NewEventDTO newEventDTO) {
-        return eventService.createEvent(newEventDTO);
-    }
-
     @GetMapping("/interested/{userId}")
     public Set<Event> getEventsByUserId(@PathVariable Long userId) {
         return eventService.getEventsByUser(userId);
@@ -69,4 +64,10 @@ public class EventController {
     public Set<Event> getCreatedEventsByUser(@PathVariable Long userId) {
         return eventService.getCreatedEventsByUser(userId);
     }
+
+    @PostMapping()
+    public Event createEvent(@RequestBody NewEventDTO newEventDTO) {
+        return eventService.createEvent(newEventDTO);
+    }
+
 }

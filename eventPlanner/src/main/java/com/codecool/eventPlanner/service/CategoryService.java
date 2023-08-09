@@ -9,5 +9,7 @@ import java.util.List;
 public interface CategoryService {
     public List<Category> getAllCategories();
 
-    Long addNewCategory(Category category);
+    Long addNewCategory(String categoryName);
+
+    void deleteCategory(Long id);
 }
