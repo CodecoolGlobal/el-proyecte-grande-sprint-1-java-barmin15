@@ -11,7 +11,9 @@ import com.codecool.eventPlanner.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/event")
@@ -31,15 +33,16 @@ public class EventController {
         return eventService.getAllEvents();
     }
 
+
     @PutMapping
     public void addUserForEvent(@RequestBody UserToEventDTO userToEventDTO) {
         eventService.addUserForEvent(userToEventDTO.userId(), userToEventDTO.eventId());
     }
 
-   /* @GetMapping()
-    public List<Event> getEventsByCategories(@RequestBody CategoryIdsDTO categoryIdsDTO) {
+   @GetMapping("/byCategories")
+    public Set<Event> getEventsByCategories(@RequestBody CategoryIdsDTO categoryIdsDTO) {
         return eventService.getEventsByCategories(categoryIdsDTO);
-    }*/
+   }
 
     @DeleteMapping("{id}")
     public void deleteEventById(@PathVariable Long id) {
@@ -62,29 +65,15 @@ public class EventController {
     }
 
 
-    @GetMapping("{id}")
-    public List<Event> getEventsByUserId(@PathVariable Long id) {
-        return eventService.getEventsByUser(id);
+    @GetMapping("/interested/{userId}")
+    public Set<Event> getEventsByUserId(@PathVariable Long userId) {
+        return eventService.getEventsByUser(userId);
     }
 
-    @GetMapping("{id}")
-    public List<Event> getCreatedEventsByUser(@PathVariable Long id) {
-        return eventService.getCreatedEventsByUser(id);
-
-
-    @GetMapping
-    public List<Event> getAllEvents() {
-        return eventService.getAllEvents();
-
+    @GetMapping("/creator/{userId}")
+    public Set<Event> getCreatedEventsByUser(@PathVariable Long userId) {
+        return eventService.getCreatedEventsByUser(userId);
     }
 
-    @PutMapping
-    public void addUserForEvent(@RequestBody UserToEventDTO userToEventDTO) {
-        eventService.addUserForEvent(userToEventDTO.userId(), userToEventDTO.eventId());
-    }
 
-    @GetMapping("{id}")
-    public Event getEventById(@PathVariable Long id) {
-        return eventService.getEventById(id);
-    }
 }
