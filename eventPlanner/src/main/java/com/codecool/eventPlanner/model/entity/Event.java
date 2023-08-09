@@ -56,6 +56,5 @@ public class Event {
         this.description = Optional.ofNullable(eventDTO.getDescription()).orElse(this.description);
         this.interestedUsers = Optional.ofNullable(eventDTO.getInterestedUsers()).orElse(this.interestedUsers);
         this.title = Optional.ofNullable(eventDTO.getTitle()).orElse(this.title);
-       // categories.add(new Category());
     }
 }
