@@ -1,5 +1,6 @@
 package com.codecool.eventPlanner.controller;
 
+import com.codecool.eventPlanner.model.dto.LoginUserDTO;
 import com.codecool.eventPlanner.model.dto.NewUserDTO;
 import com.codecool.eventPlanner.model.dto.UpdateUserDTO;
 import com.codecool.eventPlanner.model.entity.User;
@@ -48,6 +49,10 @@ public class UserController {
     @PutMapping
     public boolean updateUser(@RequestBody UpdateUserDTO updateUserDTO){
         return userService.updateUser(updateUserDTO);
+    }
+    @PostMapping("/login")
+    public boolean loginUser(@RequestBody LoginUserDTO loginUserDTO){
+        return userService.loginUser(loginUserDTO);
     }
 }
 
