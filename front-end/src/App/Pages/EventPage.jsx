@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import "../style/eventPage.css";
 
 function EventPage() {
   const [event, setEvent] = useState(null);
@@ -36,12 +37,15 @@ function EventPage() {
   }
 
   return (
-    <div>
+    <div className="eventt">
       {event && (
         <div>
+          <div className="details">
+            
           <h1>{event.title}</h1>
           <h2>{event.dateTime}</h2>
           <h2>{event.location}</h2>
+          </div>
           <p>{event.description}</p>
           
             <button onClick={handleClick}>Apply</button>
