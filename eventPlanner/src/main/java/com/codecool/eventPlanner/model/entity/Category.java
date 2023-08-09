@@ -1,9 +1,11 @@
 package com.codecool.eventPlanner.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonRawValue;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.Remove;
 
 import java.util.Set;
 
@@ -18,7 +20,14 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @ManyToMany()
-    @JsonManagedReference
+    @ManyToMany(mappedBy = "categories")
+    @JsonBackReference
     Set<Event> events;
+
+    @PreRemove
+    private void removeAssociations(){
+        for (Event event : this.events) {
+            event.getCategories().remove(this);
+        }
+    }
 }

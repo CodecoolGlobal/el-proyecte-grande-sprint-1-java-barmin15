@@ -38,8 +38,6 @@ public class User {
         password = newUserDTO.password();
         lastOnline = newUserDTO.registrationDate();
         registrationDate = newUserDTO.registrationDate();
-        createdEvents = new HashSet<>();
-        interestedEvents = new HashSet<>();
     }
 
     public void update(UpdateUserDTO updateUserDTO) {
