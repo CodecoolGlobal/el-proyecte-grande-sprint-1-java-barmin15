@@ -7,7 +7,7 @@ function EventPage() {
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:0420/event/${id}`)
+    fetch(`/event/${id}`)
       .then((response) => response.json())
       .then((data) => setEvent(data));
   }, []);
@@ -20,7 +20,7 @@ function EventPage() {
 
   async function postJSON(userID, data) {
     try {
-      const response = await fetch("http://127.0.0.1:0420/", {
+      const response = await fetch("/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -35,14 +35,12 @@ function EventPage() {
     }
   }
 
-  //event && console.log(event);
-
   return (
     <div>
       {event && (
         <div>
-          <h1>{event.name}</h1>
-          <h2>{event.date}</h2>
+          <h1>{event.title}</h1>
+          <h2>{event.dateTime}</h2>
           <h2>{event.location}</h2>
           <p>{event.description}</p>
           

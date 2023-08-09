@@ -5,10 +5,11 @@ function AllEvent() {
   const [events, setEvents] = useState(null);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:0420/event/all")
+    fetch("/event")
       .then((response) => response.json())
-      .then((data) => setEvents(data));
+      .then((data) => setEvents(data))
   }, []);
+
 
   return (
     <div className="events">
@@ -16,8 +17,8 @@ function AllEvent() {
         events.map((e, index) => (
           <div className={(index % 2 === 0) ? 'event even' : 'event odd'} key={index}>
             <div className="details">
-              <h1>{e.name}</h1>
-              <h2>{e.date}</h2>
+              <h1>{e.title}</h1>
+              <h2>{e.dateTime}</h2>
               <h2>{e.location}</h2>
             </div>
             <div>

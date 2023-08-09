@@ -45,8 +45,11 @@ function EventForm(event) {
       acc[k] = v;
       return acc;
     }, {});
-    event.time += ":00";
 
+
+    event.dateTime = event.date + " - " + event.time + ":00";
+    delete(event.time);
+    delete(event.date);
     PostNewEvent(event);
     navigate("/event/all");
   };
@@ -66,7 +69,7 @@ function EventForm(event) {
         <label htmlFor="name">Name your event:</label>
         <input
           type="text"
-          defaultValue={event ? event.name : null}
+          defaultValue={event ? event.title : null}
           name="name"
           id="name"
         />
