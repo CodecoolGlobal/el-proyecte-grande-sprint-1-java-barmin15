@@ -1,5 +1,5 @@
 function updateEvent(event) {
-    return fetch("http://localhost:0420/event", {
+    return fetch("/event", {
     
       method: "PUT",
       headers: {

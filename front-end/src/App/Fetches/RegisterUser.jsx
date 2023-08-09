@@ -5,7 +5,7 @@ async function RegisterUser(username, password) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username, password })
 };
- return fetch('http://localhost:0420/user', requestOptions)
+ return fetch('/user', requestOptions)
     .then(response => response.json())
     .then((responseData) => {
       if (responseData === true) {

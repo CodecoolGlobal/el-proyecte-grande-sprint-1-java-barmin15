@@ -5,7 +5,7 @@ async function LogInUser(username, password) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, password }),
   };
-  return fetch("http://localhost:420/user/login", requestOptions)
+  return fetch("/user/login", requestOptions)
     .then((response) => response.json())
     .then((responseData) => {
       if (responseData === true) {

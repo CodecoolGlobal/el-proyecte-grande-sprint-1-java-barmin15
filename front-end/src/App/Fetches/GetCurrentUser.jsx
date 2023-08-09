@@ -6,7 +6,7 @@ function useCurrentUser() {
         const dataFetch = async () => {
             const data = await (
                 await fetch(
-                    "http://localhost:0420/user/current"
+                    "/user/current"
                 )
             ).json();
             setUser(data);
