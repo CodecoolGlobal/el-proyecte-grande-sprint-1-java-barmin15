@@ -11,6 +11,6 @@ insert into events (date_time, location, creator_id, description, title)
 values ('2024-01-01', 'Budapest', 1, 'Lorem Ipsum', 'Annas wedding party'),
        ('2026-34-87', 'London', 1, '', 'Annas divorce party');
 
-insert into categories_events (categories_id, events_id) values (1,1);
-insert into categories_events (categories_id, events_id) values (1,2);
+insert into events_categories (categories_id, events_id) values (1,1);
+insert into events_categories (categories_id, events_id) values (1,2);
 
