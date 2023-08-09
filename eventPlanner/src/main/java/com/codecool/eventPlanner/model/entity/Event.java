@@ -8,9 +8,10 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Optional;
 import java.util.Set;
 
-@Entity(name="events")
+@Entity(name = "events")
 @Builder
 @Setter
 @Getter
@@ -22,18 +23,22 @@ public class Event {
     private Long id;
     private String dateTime;
     private String location;
-    @ManyToOne
+    @ManyToOne()
     @JsonBackReference
     private User creator;
     private String description;
     @ManyToMany()
+    @JsonBackReference
     private Set<User> interestedUsers;
-    @ManyToMany()
+    @ManyToMany(mappedBy = "events")
+    @JsonBackReference
     private Set<Category> categories;
     private String title;
 
-    public Event(NewEventDTO eventDTO){
+    public Event(NewEventDTO eventDTO) {
+
         this.categories = eventDTO.categories();
+        //categories.add(new Category());
         this.dateTime = eventDTO.dateTime();
         this.location = eventDTO.location();
         this.creator = eventDTO.creator();
@@ -42,13 +47,15 @@ public class Event {
         this.title = eventDTO.title();
     }
 
-    public void update(EventDTO eventDTO){
-        this.categories = eventDTO.getCategories();
-        this.dateTime = eventDTO.getDateTime();
-        this.location = eventDTO.getLocation();
-        this.creator = eventDTO.getCreator();
-        this.description = eventDTO.getDescription();
-        this.interestedUsers = eventDTO.getInterestedUsers();
-        this.title = eventDTO.getTitle();
+    public void update(EventDTO eventDTO) {
+
+        this.categories = Optional.ofNullable(eventDTO.getCategories()).orElse(this.categories);
+        this.dateTime = Optional.ofNullable(eventDTO.getDateTime()).orElse(this.dateTime);
+        this.location = Optional.ofNullable(eventDTO.getLocation()).orElse(this.location);
+        this.creator = Optional.ofNullable(eventDTO.getCreator()).orElse(this.creator);
+        this.description = Optional.ofNullable(eventDTO.getDescription()).orElse(this.description);
+        this.interestedUsers = Optional.ofNullable(eventDTO.getInterestedUsers()).orElse(this.interestedUsers);
+        this.title = Optional.ofNullable(eventDTO.getTitle()).orElse(this.title);
+       // categories.add(new Category());
     }
 }
