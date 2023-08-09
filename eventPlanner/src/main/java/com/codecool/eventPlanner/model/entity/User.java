@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -36,6 +37,8 @@ public class User {
         password = newUserDTO.password();
         lastOnline = newUserDTO.registrationDate();
         registrationDate = newUserDTO.registrationDate();
+        createdEvents = new HashSet<>();
+        interestedEvents = new HashSet<>();
     }
 
     public void update(UpdateUserDTO updateUserDTO) {
