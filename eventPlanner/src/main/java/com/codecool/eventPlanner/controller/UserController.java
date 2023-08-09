@@ -1,12 +1,12 @@
 package com.codecool.eventPlanner.controller;
 
+import com.codecool.eventPlanner.model.dto.LoginUserDTO;
+import com.codecool.eventPlanner.model.dto.NewUserDTO;
+import com.codecool.eventPlanner.model.dto.UpdateUserDTO;
 import com.codecool.eventPlanner.model.entity.User;
 import com.codecool.eventPlanner.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,6 +28,40 @@ public class UserController {
 
     @GetMapping("/{id}")
     public User getUserById(@PathVariable Long id) {
-        System.out.println("minden okes eddig haver");
-        return userService.getUserById(id);}
+        return userService.getUserById(id);
+    }
+
+    @GetMapping("/event/{eventId}")
+    public List<User> getUsersByEvent(@PathVariable Long eventId){
+        return userService.getUsersByEvent(eventId);
+    }
+
+    @GetMapping("/current")
+    public User getCurrentUser(){
+        return userService.getCurrentUser();
+    }
+
+    @PostMapping
+    public boolean addUser(@RequestBody NewUserDTO newUserDTO){
+        return userService.addUser(newUserDTO);
+    }
+
+    @PutMapping
+    public boolean updateUser(@RequestBody UpdateUserDTO updateUserDTO){
+        return userService.updateUser(updateUserDTO);
+    }
+    @PostMapping("/login")
+    public boolean loginUser(@RequestBody LoginUserDTO loginUserDTO){
+        return userService.loginUser(loginUserDTO);
+    }
 }
+
+
+
+
+
+
+
+
+
+

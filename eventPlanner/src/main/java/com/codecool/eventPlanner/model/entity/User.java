@@ -1,11 +1,14 @@
 package com.codecool.eventPlanner.model.entity;
 
+import com.codecool.eventPlanner.model.dto.NewUserDTO;
+import com.codecool.eventPlanner.model.dto.UpdateUserDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Entity(name = "users")
@@ -29,4 +32,18 @@ public class User {
     @ManyToMany(mappedBy = "interestedUsers")
     @JsonManagedReference
     private Set<Event> interestedEvents;
+
+    public User(NewUserDTO newUserDTO) {
+        name = newUserDTO.username();
+        password = newUserDTO.password();
+        lastOnline = newUserDTO.registrationDate();
+        registrationDate = newUserDTO.registrationDate();
+        createdEvents = new HashSet<>();
+        interestedEvents = new HashSet<>();
+    }
+
+    public void update(UpdateUserDTO updateUserDTO) {
+        this.name = Optional.ofNullable( updateUserDTO.name()).orElse(this.name);
+        this.password = Optional.ofNullable(updateUserDTO.password()).orElse(this.password);
+    }
 }
