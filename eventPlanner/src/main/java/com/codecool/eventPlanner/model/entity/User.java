@@ -29,7 +29,8 @@ public class User {
     @OneToMany(mappedBy = "creator")
     @JsonManagedReference
     private Set<Event> createdEvents;
-    @ManyToMany()
+    @ManyToMany(mappedBy = "interestedUsers")
+    @JsonManagedReference
     private Set<Event> interestedEvents;
 
     public User(NewUserDTO newUserDTO) {
