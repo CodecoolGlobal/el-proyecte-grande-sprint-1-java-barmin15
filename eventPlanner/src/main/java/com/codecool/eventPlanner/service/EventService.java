@@ -9,6 +9,7 @@ import com.codecool.eventPlanner.model.entity.Event;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public interface EventService {
@@ -17,21 +18,19 @@ public interface EventService {
 
     void addUserForEvent(Long userId, Long eventId);
 
-
     void deleteEvent(Long id);
 
-   // List<Event> getEventsByCategories(CategoryIdsDTO categoryIdsDTO);
+    Set<Event> getEventsByCategories(CategoryIdsDTO categoryIdsDTO);
 
-      Event getEventById(Long id);
+    Event getEventById(Long id);
 
-        Event updateEvent(Long id, EventDTO eventDTO);
+    Event updateEvent(Long id, EventDTO eventDTO);
 
-        Event createEvent(NewEventDTO newEventDTO);
+    Event createEvent(NewEventDTO newEventDTO);
 
-        List<Event> getEventsByUser(Long id);
+    Set<Event> getEventsByUser(Long id);
 
-
-    List<Event> getCreatedEventsByUser(Long id);
+    Set<Event> getCreatedEventsByUser(Long id);
 
 
 }
