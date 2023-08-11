@@ -26,7 +26,6 @@ public class UserServiceImpl implements UserService {
         this.eventRepository = eventRepository;
     }
 
-
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -82,8 +81,9 @@ public class UserServiceImpl implements UserService {
     private boolean isValidUser(User user, String username, String password) {
         return user.getName().equals(username) && user.getPassword().equals(password);
     }
+
     private User findUser(String username, String password) {
-      return getAllUsers().stream().filter(user -> isValidUser(user, username, password)).findFirst().orElse(null);
+        return getAllUsers().stream().filter(user -> isValidUser(user, username, password)).findFirst().orElse(null);
     }
 }
 
