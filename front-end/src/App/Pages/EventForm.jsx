@@ -1,11 +1,44 @@
-import { PostNewEvent } from "../Fetches/postNewEvent";
+import { postNewEvent } from "../Fetches/postNewEvent";
 import { updateEvent } from "../Fetches/updateEvent";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import "../style/eventForm.css";
+import AllCategoiresSelectInput from "./AllCategoriesSelectInput";
 
 function EventForm(event) {
   const navigate = useNavigate();
-  const user = { id: 9 };
+  const user = { id: 1 };
+
+  const [categories, setCategories] = useState(null);
+  const [actualCategory, setActualCategory] = useState([1]);
+  const [newCategory, setNewCategory] = useState(0);
+
+  useEffect(() => {
+fetch("/category")
+      .then((response) => response.json())
+      .then((data) => setCategories(data));
+  }, []);
+
+useEffect(() => {
+    console.log("szerzek neked uj adatokat");
+    fetch("/category")
+    .then((response) => response.json())
+    .then((data) => setCategories(data));
+  }, [newCategory]);
+
+  function handleChange(e) {
+    setActualCategory([Number(e.target.value)]);
+  }
+
+  function vmi() {
+    console.log("1.lepes");
+    setNewCategory(newCategory + 1);
+    console.log("uj adataim vannak");
+
+  }
+
+  actualCategory && console.log(actualCategory);
+
   //   event =  {
   //     id: 0,
   //     creatorId: 9,
@@ -32,25 +65,24 @@ function EventForm(event) {
   //     updateEvent(event);
   //     console.log(":-)")
   //     console.log(event)
-
   // }
 
-  const onCreate = (e) => {
+  const onCreate = async (e) => {
     e.preventDefault();
+
     const formData = new FormData(e.target);
-    const entries = [...formData.entries()];
-
-    const event = entries.reduce((acc, entry) => {
-      const [k, v] = entry;
-      acc[k] = v;
-      return acc;
-    }, {});
-
+    const event = Object.fromEntries(formData.entries());
 
     event.dateTime = event.date + " - " + event.time + ":00";
-    delete(event.time);
-    delete(event.date);
-    PostNewEvent(event);
+    delete event.time;
+    delete event.date;
+    delete event.categories;
+    delete event.id;
+    delete event.isPrivate;
+    event.userId = 1;
+    event.categoryIds = actualCategory;
+
+    await postNewEvent(event);
     navigate("/event/all");
   };
 
@@ -58,8 +90,17 @@ function EventForm(event) {
     <form className="eventForm" onSubmit={onCreate}>
       <h2>Create a new Event!</h2>
 
+      <div className="category">
+        <AllCategoiresSelectInput
+          handleChange={handleChange}
+          chosenValue={categories && actualCategory}
+          categories={categories && categories}
+          vmi={vmi}
+        />
+      </div>
+
       <div className="creatorId">
-        <input type="hidden" name="creatorId" defaultValue={user.id} />
+        <input type="hidden" name="userId" defaultValue={user.id} />
       </div>
       <div className="id">
         <input type="hidden" name="id" defaultValue={event ? event.id : null} />
@@ -70,7 +111,7 @@ function EventForm(event) {
         <input
           type="text"
           defaultValue={event ? event.title : null}
-          name="name"
+          name="title"
           id="name"
         />
       </div>
@@ -120,6 +161,7 @@ function EventForm(event) {
           id="isPrivate"
         />
       </div> */}
+
       <div className="isPrivate">
         <input
           type="hidden"
@@ -128,7 +170,12 @@ function EventForm(event) {
         />
       </div>
       <div className="link">
-        <button style={{height: "60px", fontSize: "larger"}} classname="formButton" type="submit">
+        <button
+          style={{ height: "60px", fontSize: "larger" }}
+          classname="formButton"
+          // onClick={onCreate}
+          //   type="submit"
+        >
           Save
         </button>
       </div>
