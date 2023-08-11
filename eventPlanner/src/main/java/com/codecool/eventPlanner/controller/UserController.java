@@ -33,31 +33,32 @@ public class UserController {
     }
 
     @GetMapping("/event/{eventId}")
-    public List<User> getUsersByEvent(@PathVariable Long eventId){
+    public List<User> getUsersByEvent(@PathVariable Long eventId) {
         return userService.getUsersByEvent(eventId);
     }
 
     @GetMapping("/current")
-    public User getCurrentUser(){
+    public User getCurrentUser() {
         return userService.getCurrentUser();
     }
 
     @PostMapping
-    public boolean addUser(@RequestBody NewUserDTO newUserDTO){
+    public boolean addUser(@RequestBody NewUserDTO newUserDTO) {
         return userService.addUser(newUserDTO);
     }
 
     @PutMapping
-    public boolean updateUser(@RequestBody UpdateUserDTO updateUserDTO){
+    public boolean updateUser(@RequestBody UpdateUserDTO updateUserDTO) {
         return userService.updateUser(updateUserDTO);
     }
+
     @PostMapping("/login")
-    public boolean loginUser(@RequestBody LoginUserDTO loginUserDTO){
+    public boolean loginUser(@RequestBody LoginUserDTO loginUserDTO) {
         return userService.loginUser(loginUserDTO);
     }
 
     @GetMapping("/interested/{eventId}")
-    public Set<User> getInterestedUsersByEventId(@PathVariable Long eventId){
+    public Set<User> getInterestedUsersByEventId(@PathVariable Long eventId) {
         return userService.getInterestedUsersByEventId(eventId);
     }
 }
