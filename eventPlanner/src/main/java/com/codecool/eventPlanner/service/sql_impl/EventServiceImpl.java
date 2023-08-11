@@ -43,7 +43,6 @@ public class EventServiceImpl implements EventService {
         eventRepository.save(modifiedEvent);
     }
 
-
     @Override
     public void deleteEvent(Long id) {
         eventRepository.deleteById(id);
