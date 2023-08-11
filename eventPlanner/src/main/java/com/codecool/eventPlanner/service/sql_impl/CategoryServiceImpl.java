@@ -5,6 +5,7 @@ import com.codecool.eventPlanner.model.entity.Category;
 import com.codecool.eventPlanner.service.CategoryService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,15 +22,15 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<Category> getAllCategories() {
-        return categoryRepository.findAll();
+        return categoryRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
 
     @Override
     public Long addNewCategory(String categoryName) {
         boolean isExists = categoryRepository.existsByName(categoryName);
         if (!isExists) {
-           Category category =  Category.builder().name(categoryName).build();
-            categoryRepository.save( category);
+            Category category = Category.builder().name(categoryName).build();
+            categoryRepository.save(category);
             return category.getId();
         }
         Category category1 = categoryRepository.findByName(categoryName);
