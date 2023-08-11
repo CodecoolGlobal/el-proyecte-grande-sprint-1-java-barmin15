@@ -1,6 +1,5 @@
 package com.codecool.eventPlanner.model.entity;
 
-
 import com.codecool.eventPlanner.model.dto.EventDTO;
 import com.codecool.eventPlanner.model.dto.NewEventDTO;
 
@@ -22,19 +21,25 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String dateTime;
     private String location;
+
+    @Column(columnDefinition = "TEXT")
+    private String description;
+    private String title;
+
     @ManyToOne()
     @JsonBackReference
     private User creator;
-    private String description;
+
     @ManyToMany()
     @JsonBackReference
     private Set<User> interestedUsers;
+
     @ManyToMany()
     @JsonManagedReference
     private Set<Category> categories;
-    private String title;
 
     public void update(EventDTO eventDTO, User creator, Set<User> interestedUsers, Set<Category> categories) {
         this.categories.addAll(Optional.ofNullable(categories).orElse(this.categories));
