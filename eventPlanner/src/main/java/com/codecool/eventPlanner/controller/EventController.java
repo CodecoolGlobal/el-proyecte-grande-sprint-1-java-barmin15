@@ -69,5 +69,5 @@ public class EventController {
     public Event createEvent(@RequestBody NewEventDTO newEventDTO) {
         return eventService.createEvent(newEventDTO);
     }
-
+    
 }
