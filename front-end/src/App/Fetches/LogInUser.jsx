@@ -1,6 +1,6 @@
 async function LogInUser(username, password) {
 
-  const requestOptions = {
+    const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, password }),

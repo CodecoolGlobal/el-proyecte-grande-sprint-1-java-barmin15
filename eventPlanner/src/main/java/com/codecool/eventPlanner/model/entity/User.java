@@ -3,6 +3,7 @@ package com.codecool.eventPlanner.model.entity;
 import com.codecool.eventPlanner.model.dto.NewUserDTO;
 import com.codecool.eventPlanner.model.dto.UpdateUserDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -22,13 +23,16 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private String password;
     private String lastOnline;
     private String registrationDate;
+
     @OneToMany(mappedBy = "creator")
     @JsonManagedReference
     private Set<Event> createdEvents;
+
     @ManyToMany(mappedBy = "interestedUsers")
     @JsonManagedReference
     private Set<Event> interestedEvents;
@@ -41,7 +45,7 @@ public class User {
     }
 
     public void update(UpdateUserDTO updateUserDTO) {
-        this.name = Optional.ofNullable( updateUserDTO.name()).orElse(this.name);
+        this.name = Optional.ofNullable(updateUserDTO.name()).orElse(this.name);
         this.password = Optional.ofNullable(updateUserDTO.password()).orElse(this.password);
     }
 }

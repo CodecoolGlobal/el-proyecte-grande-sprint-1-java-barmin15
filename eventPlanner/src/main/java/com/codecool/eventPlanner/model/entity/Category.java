@@ -9,7 +9,7 @@ import org.hibernate.Remove;
 
 import java.util.Set;
 
-@Entity(name="categories")
+@Entity(name = "categories")
 @Builder
 @Setter
 @Getter
@@ -19,13 +19,15 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+
     @ManyToMany(mappedBy = "categories")
     @JsonBackReference
     Set<Event> events;
 
     @PreRemove
-    private void removeAssociations(){
+    private void removeAssociations() {
         for (Event event : this.events) {
             event.getCategories().remove(this);
         }

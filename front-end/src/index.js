@@ -11,6 +11,7 @@ import Register from "./App/Pages/RegisterPage";
 import LogIn from "./App/Pages/LogInPage";
 import UserProfile from "./App/Pages/UserProfile"
 import EventPage from "./App/Pages/EventPage"
+import AllCategoiresSelectInput from "./App/Pages/AllCategoriesSelectInput";
 
 
 const Router = createBrowserRouter([
@@ -38,7 +39,7 @@ const Router = createBrowserRouter([
       },{
         path: "/event/:id",
         element: <EventPage />,
-      },
+      }
     ],
   }
 ]);
