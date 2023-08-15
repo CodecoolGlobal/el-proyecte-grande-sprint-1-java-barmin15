@@ -1,8 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider, useParams } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import reportWebVitals from "./Vitals/reportWebVitals";
-
 
 import Layout from "./Layout/layout";
 import AllEvent from "./App/Pages/AllEvent";
@@ -11,8 +10,6 @@ import Register from "./App/Pages/RegisterPage";
 import LogIn from "./App/Pages/LogInPage";
 import UserProfile from "./App/Pages/UserProfile"
 import EventPage from "./App/Pages/EventPage"
-import AllCategoiresSelectInput from "./App/Pages/AllCategoriesSelectInput";
-
 
 const Router = createBrowserRouter([
   {
