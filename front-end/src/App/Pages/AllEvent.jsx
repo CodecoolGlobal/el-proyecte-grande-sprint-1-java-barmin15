@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./AllEvent.css";
+import "../style/AllEvent.css";
 import React from "react";
 
 function AllEvent() {

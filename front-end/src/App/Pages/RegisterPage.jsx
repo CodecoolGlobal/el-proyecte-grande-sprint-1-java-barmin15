@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./LogIn.css"
+import "../style/LogIn.css";
 import { RegisterUser } from "../Fetches/RegisterUser";
 
 export default function RegisterPage() {
