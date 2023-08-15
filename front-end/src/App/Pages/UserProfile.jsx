@@ -44,6 +44,5 @@ console.log(user);
   </div>;
 }
 
-
 }
 export default UserProfile;
