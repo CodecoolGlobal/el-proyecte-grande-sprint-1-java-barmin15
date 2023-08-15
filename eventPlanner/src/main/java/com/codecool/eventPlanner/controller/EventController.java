@@ -40,6 +40,9 @@ public class EventController {
         return eventService.getEventsByCategories(categoryIdsDTO);
     }
 
+    @GetMapping("/limit/{num}")
+    public List<Event> findAllLimit(@PathVariable int num){ return eventService.findAllLimit(num);}
+
     @DeleteMapping("{id}")
     public void deleteEventById(@PathVariable Long id) {
         eventService.deleteEvent(id);
