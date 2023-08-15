@@ -31,6 +31,5 @@ public interface EventService {
     Set<Event> getEventsByUser(Long id);
 
     Set<Event> getCreatedEventsByUser(Long id);
-
-
+    List<Event> findAllLimit(int num);
 }

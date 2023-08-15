@@ -109,4 +109,9 @@ public class EventServiceImpl implements EventService {
     public Set<Event> getCreatedEventsByUser(Long id) {
         return userRepository.findById(id).get().getCreatedEvents();
     }
+
+    @Override
+    public List<Event> findAllLimit(int num) {
+        return eventRepository.findAllLimitedTo(num);
+    }
 }
