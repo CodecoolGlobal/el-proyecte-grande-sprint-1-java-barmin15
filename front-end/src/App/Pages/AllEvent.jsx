@@ -20,22 +20,26 @@ function AllEvent() {
     <div className="events">
       {events &&
         events.map((e, index) => (
-          <div
-            className={index % 2 === 0 ? "event even" : "event odd"}
-            key={index}
-          >
+          <div className={index % 2 === 0 ? "event even" : "event odd"} key={index}>
+            <div className="picture"> <img src="https://i.pinimg.com/564x/4b/50/9a/4b509acbc36049b967d12e705a7990a1.jpg" alt="event pic" height={270} width={205}/> </div>
             <div className="details">
-              <h1>{e.title}</h1>
+
+              <div className="date category">
+              <h2>{e.dateTime.substring(0, 10)}</h2>
+              <h2> | </h2>
               <h2>{e.categories[0].name}</h2>
-              <h2>{e.dateTime}</h2>
-              <h2>{e.location}</h2>
+              </div>
+
+              <h1>{e.title}</h1>
+              <h2 className="location">{e.location}</h2>
+              <button>Details</button>
             </div>
-            <div>
+            {/* <div>
               <p>{e.description}</p>
               <a href={`http://127.0.0.1:3000/event/${e.id}`}>
-                <button>Details</button>
+                
               </a>
-            </div>
+            </div> */}
           </div>
         ))}
     </div>
