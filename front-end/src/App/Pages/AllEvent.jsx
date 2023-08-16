@@ -27,18 +27,18 @@ function AllEvent() {
               <div className="date category">
               <h2>{e.dateTime.substring(0, 10)}</h2>
               <h2> | </h2>
-              <h2>{e.categories[0].name}</h2>
+              <h2>{e.categories.length > 0 && e.categories[0].name}</h2>
               </div>
 
               <h1>{e.title}</h1>
               <h2 className="location">{e.location}</h2>
+              <a href={`http://127.0.0.1:3000/event/${e.id}`}>  
               <button>Details</button>
+              </a>
             </div>
             {/* <div>
               <p>{e.description}</p>
-              <a href={`http://127.0.0.1:3000/event/${e.id}`}>
-                
-              </a>
+              
             </div> */}
           </div>
         ))}
