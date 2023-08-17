@@ -52,11 +52,16 @@ function EventPage() {
               </ul>   
             )}
           </div>
+          
       {event && (
         <div className="eventt">
 
           <div className="details">  
+            <div className="title saveButton">
            <h1 id="title">{event.title}</h1>
+           <button onClick={handleClick}>Save</button>
+            </div>
+
            <div className="dateTime location">
            <h2 id="dateTime">{event.dateTime.substring(0,18)}</h2>
            <h2> | </h2>
@@ -64,17 +69,35 @@ function EventPage() {
            </div>
            <h2 id="category">{event.categories.length > 0 && event.categories[0].name}</h2>
            <p id="description">{event.description}</p>
-           <button onClick={handleClick}>Save</button>
+          
+     
           </div>
 
           <div>
-           <div className="picture"> <img src="https://i.pinimg.com/564x/4b/50/9a/4b509acbc36049b967d12e705a7990a1.jpg" alt="event pic" height={486} width={369}/> </div>
+           <div className="pic"> <img src="https://i.pinimg.com/564x/4b/50/9a/4b509acbc36049b967d12e705a7990a1.jpg" alt="event pic" height={486} width={369}/> </div>
           </div>
        
-          
+          <div className="participants">
+             {/*TODO:display actual creator/participants*/}
+             <div className="creator">
+             <h4>Creator:</h4>
+             <h4>Piri</h4>
+             </div>
+
+              <h4>Participants:</h4>
+             <ul>
+              <li>Vali</li>
+              <li>Teri</li>
+              <li>Pali</li>
+              <li>Feri</li>
+              <li>Cili</li>
+              <li>Saci</li>
+             </ul>
+          </div>
           
         </div>
       )}
+      
     </div>
   );
 }
