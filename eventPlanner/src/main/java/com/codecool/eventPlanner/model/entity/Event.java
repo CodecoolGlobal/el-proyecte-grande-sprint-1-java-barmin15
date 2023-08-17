@@ -1,7 +1,6 @@
 package com.codecool.eventPlanner.model.entity;
 
-import com.codecool.eventPlanner.model.dto.EventDTO;
-import com.codecool.eventPlanner.model.dto.NewEventDTO;
+import com.codecool.eventPlanner.model.dto.event.EventDTO;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -40,6 +39,10 @@ public class Event {
     @ManyToMany()
     @JsonManagedReference
     private Set<Category> categories;
+
+    @ManyToMany
+    @JsonBackReference
+    private Set<Item> items;
 
     public void update(EventDTO eventDTO, User creator, Set<User> interestedUsers, Set<Category> categories) {
         this.categories.addAll(Optional.ofNullable(categories).orElse(this.categories));
