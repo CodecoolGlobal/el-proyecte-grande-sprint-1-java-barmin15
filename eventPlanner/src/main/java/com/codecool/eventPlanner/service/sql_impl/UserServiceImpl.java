@@ -1,8 +1,8 @@
 package com.codecool.eventPlanner.service.sql_impl;
 
-import com.codecool.eventPlanner.model.dto.LoginUserDTO;
-import com.codecool.eventPlanner.model.dto.NewUserDTO;
-import com.codecool.eventPlanner.model.dto.UpdateUserDTO;
+import com.codecool.eventPlanner.model.dto.user.LoginUserDTO;
+import com.codecool.eventPlanner.model.dto.user.NewUserDTO;
+import com.codecool.eventPlanner.model.dto.user.UpdateUserDTO;
 import com.codecool.eventPlanner.model.entity.User;
 import com.codecool.eventPlanner.repository.EventRepository;
 import com.codecool.eventPlanner.repository.UserRepository;

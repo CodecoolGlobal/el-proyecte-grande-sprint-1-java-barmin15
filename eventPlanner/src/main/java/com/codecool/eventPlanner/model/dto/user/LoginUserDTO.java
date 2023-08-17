@@ -1,4 +1,4 @@
-package com.codecool.eventPlanner.model.dto;
+package com.codecool.eventPlanner.model.dto.user;
 
 public record LoginUserDTO(
 
