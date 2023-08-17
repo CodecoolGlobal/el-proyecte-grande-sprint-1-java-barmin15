@@ -9,18 +9,32 @@
 }
 .items {
   background-color: white;
-  /* background: repeating-linear-gradient(
-  180deg,
-  white,
-  white 18px,
-  #efefef 18px,
-  #efefef 36px 
-);*/
   padding-right: 2%;
   padding-bottom: 3%;
   height: fit-content;
   margin-top: 2%;
 }
+.participants {
+  text-align: center;
+  background-color: rgb(227, 227, 227);
+  padding-bottom: 3%;
+  padding-left:1%;
+  padding-right: 1%;
+  margin-top: -2.6%;
+  margin-bottom: -2.6%;
+  margin-right: -3%;
+}
+.participants ul{
+  list-style-type:circle;
+}
+
+.creator h4{
+  margin: 3px;
+}
+.creator{
+  margin-top: 40%;
+}
+
 .items h4{
   margin-left: 6%;
 }
@@ -50,27 +64,42 @@
   margin-left: auto;
   margin-right: auto;
   padding: 2%;
-  width: 80%;
+  width:  80%;
 }
 
 .details {
-  margin-right: 5%;
-}
+  width: 51%;
+} 
+
+  .pic{
+    margin-right: 5%;
+    margin-left: 5%;
+  }
 
 .eventt button {
   background-color: #0c7728;
   color: white;
-  padding: 1%;
-  font-size: xx-large;
+  padding: 1.5%;
+  font-size: x-large;
   font-weight: 200;
-  margin-top: 10px;
-  border-radius: 10%;
+  border-radius: 10px;
   border: none;
-  box-shadow: 3px 3px 4px rgb(66, 66, 66);
+  height: min-content;
+  align-self: center;
 }
 .eventt button:hover {
   background-color: #04aa6d;
   cursor: pointer;
+}
+
+.title{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.title h1{
+  font-weight: bolder;
 }
 
 h2 {
@@ -84,5 +113,5 @@ h2 {
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
-  width: 50%;
+  width: 80%;
 }
