@@ -1,4 +1,4 @@
-package com.codecool.eventPlanner.model.dto;
+package com.codecool.eventPlanner.model.dto.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

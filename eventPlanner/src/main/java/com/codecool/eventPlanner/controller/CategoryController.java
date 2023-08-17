@@ -1,6 +1,6 @@
 package com.codecool.eventPlanner.controller;
 
-import com.codecool.eventPlanner.model.dto.CategoryDTO;
+import com.codecool.eventPlanner.model.dto.category.CategoryDTO;
 import com.codecool.eventPlanner.model.entity.Category;
 import com.codecool.eventPlanner.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;

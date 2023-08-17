@@ -1,4 +1,4 @@
-package com.codecool.eventPlanner.model.dto;
+package com.codecool.eventPlanner.model.dto.event;
 
 
 import com.codecool.eventPlanner.model.entity.Category;
