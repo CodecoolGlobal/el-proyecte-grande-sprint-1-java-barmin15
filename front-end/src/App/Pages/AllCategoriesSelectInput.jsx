@@ -47,13 +47,14 @@ function AllCategoiresSelectInput(props) {
           id="date"
           onChange={(e) => setInputCategory(e.target.value)}
         />
-        <button
+     { inputCategory &&  <button
           onClick={(e) => {
+            
             inputCategory && handleSaveCategory(e);
           }}
         >
           +
-        </button>
+        </button>}
           </div>
       </div>
     </div>
