@@ -77,18 +77,19 @@
   }
 
 .eventt button {
-  background-color: #0c7728;
-  color: white;
+  background-color: #E79571;
+  color: #333333;
   padding: 1.5%;
   font-size: x-large;
-  font-weight: 200;
+  font-weight: 500;
   border-radius: 10px;
   border: none;
   height: min-content;
   align-self: center;
 }
 .eventt button:hover {
-  background-color: #04aa6d;
+  background-color: #eca88b;
+  box-shadow: inset 0 0 6px 4px #E79571;
   cursor: pointer;
 }
 
