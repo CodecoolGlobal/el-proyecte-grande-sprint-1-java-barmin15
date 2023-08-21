@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
-import "./LogIn.css"
+import "../style/LogIn.css";
 import { LogInUser } from "../Fetches/LogInUser";
 
 

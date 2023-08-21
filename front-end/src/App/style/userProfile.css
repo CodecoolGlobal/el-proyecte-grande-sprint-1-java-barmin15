@@ -9,7 +9,6 @@
   flex-direction: row;
   margin-left: auto;
   margin-right: auto;
-  display: flex;
   flex-direction: column;
   background: #04aa6d;
   border-radius: 8px;
@@ -23,6 +22,30 @@
   border-radius: 15%;
 }
 
+.eventBtn{
+  margin-left: 3px;
+}
+
 .userProfile div {
   flex-direction: column;
+}
+
+.userProfile .userEvents{
+  display: flex;
+  justify-content:space-between;
+  flex-direction: row;
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+}
+.eventTitle{
+  border-radius: 5px;
+  background-color: #04aa6d;
+  padding: 4px;
+  margin: 2px;
+  display: flex;
+  justify-content:space-between;
+  flex-direction: row;
+  text-decoration: none;
+  color: black;
 }

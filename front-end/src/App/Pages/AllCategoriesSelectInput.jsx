@@ -15,7 +15,7 @@ function AllCategoiresSelectInput(props) {
 
   return (
     <div className="categories">
-      <label htmlFor="categories">Choose an event category:</label>
+      <label htmlFor="categories">Choose a category:</label>
       <select
         onChange={handleChange}
         value={chosenValue}
@@ -31,21 +31,24 @@ function AllCategoiresSelectInput(props) {
       </select>
 
       <div className="date">
-        <label htmlFor="date">Or add a new category:</label>
+        <label htmlFor="date">Or add a new one:</label>
+        <div className="addCategory">
         <input
           type="text"
-          placeholder={"new category..."}
+          /*placeholder={"new category..."}*/
           name="date"
           id="date"
           onChange={(e) => setInputCategory(e.target.value)}
         />
-        <button
+     { inputCategory &&  <button
           onClick={(e) => {
+            
             inputCategory && handleSaveCategory(e);
           }}
         >
-          add
-        </button>
+          +
+        </button>}
+          </div>
       </div>
     </div>
   );

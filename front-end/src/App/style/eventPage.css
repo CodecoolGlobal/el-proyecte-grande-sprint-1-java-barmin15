@@ -1,24 +1,118 @@
+.Event {
+  padding-top: 3%;
+  width: 90%;
+  margin-left: 5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.items {
+  background-color: white;
+  padding-right: 2%;
+  padding-bottom: 3%;
+  height: fit-content;
+  margin-top: 2%;
+}
+.participants {
+  text-align: center;
+  background-color: rgb(227, 227, 227);
+  padding-bottom: 3%;
+  padding-left:1%;
+  padding-right: 1%;
+  margin-top: -2.5%;
+  margin-bottom: -2.5%;
+  margin-right: -3%;
+}
+.participants ul{
+  list-style-type:circle;
+}
+
+.creator h4{
+  margin: 3px;
+}
+.creator{
+  margin-top: 40%;
+}
+
+.items h4{
+  margin-left: 6%;
+}
+
 .eventt {
-  border: 2px solid #04aa6d;
-  /* display: flex; */
+  /*  border: 2px solid #04aa6d;
   border-radius: 5px 5px 5px 5px;
   margin-bottom: 2%;
   padding-top: 3%;
   min-width: 86%;
-
   display: flex;
   justify-content: center;
-  /* border: 3px;
-  border-style: solid; */
   width: min-content;
   margin: 15px;
   padding: 10px;
   flex-direction: column;
   margin-left: auto;
+  margin-right: auto; */
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+  display: flex;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  margin-left: auto;
   margin-right: auto;
+  padding: 2%;
+  width:  80%;
 }
 
 .details {
-  border: 1px solid black;
-  min-width: 22%;
+  width: 51%;
+} 
+
+  .pic{
+    margin-right: 5%;
+    margin-left: 5%;
+  }
+
+.eventt button {
+  background-color: #E79571;
+  color: #333333;
+  padding: 1.5%;
+  font-size: x-large;
+  font-weight: 500;
+  border-radius: 10px;
+  border: none;
+  height: min-content;
+  align-self: center;
+}
+.eventt button:hover {
+  background-color: #eca88b;
+  box-shadow: inset 0 0 6px 4px #E79571;
+  cursor: pointer;
+}
+
+.title{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.title h1{
+  font-weight: bolder;
+}
+
+h2 {
+  margin-bottom: 1%;
+  margin-top: 1%;
+}
+
+.dateTime {
+  color: gray;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 80%;
 }

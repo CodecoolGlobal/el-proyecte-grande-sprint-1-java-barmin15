@@ -75,17 +75,11 @@ useEffect(() => {
   };
 
   return (
+    <div>
     <form className="eventForm" onSubmit={onCreate}>
+      <div className="form">
       <h2>Create a new Event!</h2>
 
-      <div className="category">
-        <AllCategoiresSelectInput
-          handleChange={handleChange}
-          chosenValue={categories && actualCategory}
-          categories={categories && categories}
-          onCreateCategory={onCreateCategory}
-        />
-      </div>
 
       <div className="creatorId">
         <input type="hidden" name="userId" defaultValue={user.id} />
@@ -149,6 +143,14 @@ useEffect(() => {
           id="isPrivate"
         />
       </div> */}
+         <div className="category">
+        <AllCategoiresSelectInput
+          handleChange={handleChange}
+          chosenValue={categories && actualCategory}
+          categories={categories && categories}
+          onCreateCategory={onCreateCategory}
+        />
+      </div>
 
       <div className="isPrivate">
         <input
@@ -167,7 +169,10 @@ useEffect(() => {
           Save
         </button>
       </div>
+          </div>
     </form>
+   
+          </div>
   );
 }
 
