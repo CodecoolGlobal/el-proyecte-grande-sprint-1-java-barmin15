@@ -9,9 +9,9 @@ values ('wedding'),
        ('birthday'),
        ('animal');
 
-insert into users (name, password, last_online, registration_date)
-values ('Armin', 'titok', '2024-08-07', '2023-11-10'),
-       ('Laci', 'titok', '2022-04-12', '2020-03-19');
+insert into users (name, password, last_online, registration_date, description)
+values ('Armin', 'titok', '2024-08-07', '2023-11-10', 'Armin vagyok'),
+       ('Laci', 'titok', '2022-04-12', '2020-03-19', 'Laci vgayok');
 
 insert into events (date, time, location, creator_id, description, title)
 values ('2024-01-01', '21:00:00', 'Budapest', 1, 'It is a long eed bys oppoontent hereblisor ''lorem ipsu eed bys oppoontent hereblisor ''lorem ipsum'' will uncover eed bys oppoontent hereblisor ''lorem ipsum'' will uncover eed bys oppoontent hereblisor ''lorem ipsum'' will uncover eed bys oppoontent hereblisor ''lorem ipsum'' will uncover eed bys oppoontent hereblisor ''lorem ipsum'' will uncover eed bys oppoontent hereblisor ''lorem ipsum'' will uncover eed bys oppoontent hereblisor ''lorem ipsum'' will uncover eed bys oppoontent hereblisor ''lorem ipsum'' will uncover eed bys oppoontent hereblisor ''lorem ipsum'' will uncover eed bys oppoontent hereblisor ''lorem ipsum'' will uncoverm'' will uncover many web sites still in their infancy. Various versions have evolved over the years, shumour andthe like).', 'Annas wedding party'),

@@ -27,6 +27,9 @@ public class User {
     private String lastOnline;
     private String registrationDate;
 
+    @Column(columnDefinition = "TEXT")
+    private String description;
+
     @OneToMany(mappedBy = "creator")
     @JsonManagedReference
     private Set<Event> createdEvents;
@@ -45,5 +48,6 @@ public class User {
     public void update(UpdateUserDTO updateUserDTO) {
         this.name = Optional.ofNullable(updateUserDTO.name()).orElse(this.name);
         this.password = Optional.ofNullable(updateUserDTO.password()).orElse(this.password);
+        this.description = Optional.ofNullable(updateUserDTO.description()).orElse(this.description);
     }
 }
