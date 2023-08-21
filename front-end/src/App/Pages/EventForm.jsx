@@ -1,5 +1,4 @@
 import { postNewEvent } from "../Fetches/postNewEvent";
-import { updateEvent } from "../Fetches/updateEvent";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "../style/eventForm.css";
@@ -12,7 +11,7 @@ function EventForm(event) {
   const [categories, setCategories] = useState(null);
   const [actualCategory, setActualCategory] = useState([1]);
   const [newCategory, setNewCategory] = useState(0);
-
+  const [date, setDate] = useState("");
 useEffect(() => {
     fetch("/category")
     .then((response) => response.json())
@@ -27,49 +26,18 @@ useEffect(() => {
     setNewCategory(newCategory + 1);
   }
 
-  //   event =  {
-  //     id: 0,
-  //     creatorId: 9,
-  //     name: "lekvar fozes",
-  //     description: "szilva alma barack cserko",
-  //     date: "2026-03-21",
-  //     location: "konyhaba",
-  //     isPrivate: false
-  // }
-
-  // const onUpdate = (e) => {
-  //     e.preventDefault();
-  //     const formData = new FormData(e.target);
-  //     const entries = [...formData.entries()];
-
-  //     const event = entries.reduce((acc, entry) => {
-  //       const [k, v] = entry;
-  //       acc[k] = v;
-  //       return acc;
-  //     }, {});
-
-  //     delete(event.isPrivate);
-  //     delete(event.location);
-  //     updateEvent(event);
-  //     console.log(":-)")
-  //     console.log(event)
-  // }
-
   const onCreate = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
     const event = Object.fromEntries(formData.entries());
-
-    event.dateTime = event.date + " - " + event.time + ":00";
-    delete event.time;
-    delete event.date;
     delete event.categories;
     delete event.id;
     delete event.isPrivate;
     event.userId = 1;
     event.categoryIds = actualCategory;
-
+    event.time = event.time + ":00"
+    event.date = date;
     await postNewEvent(event);
     navigate("/event/all");
   };
@@ -107,11 +75,11 @@ useEffect(() => {
           id="description"
         />
       </div>
-
       <div className="date">
         <label htmlFor="date">When is it?</label>
         <input
           type="date"
+          onChange={(e) => setDate(e.target.value)}
           defaultValue={event ? event.date : null}
           name="date"
           id="date"
