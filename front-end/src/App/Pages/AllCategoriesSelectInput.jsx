@@ -2,23 +2,16 @@ import { useState } from "react";
 import { postNewCategory } from "../Fetches/postNewCategory";
 
 function AllCategoiresSelectInput(props) {
-  const { categories, handleChange, chosenValue, vmi } = props;
+  const { categories, handleChange, chosenValue, onCreateCategory } = props;
 
   const [inputCategory, setInputCategory] = useState(null);
-  const [newCategoryk, setNewCategoryk] = useState(0);
 
   async function handleSaveCategory(e) {
     e.preventDefault();
     await postNewCategory(inputCategory);
 
-    setTimeout(() => {
-      vmi();
-    }, "500");
-
-    setNewCategoryk(newCategoryk + 1);
+    onCreateCategory();
   }
-
-  console.log(categories);
 
   return (
     <div className="categories">

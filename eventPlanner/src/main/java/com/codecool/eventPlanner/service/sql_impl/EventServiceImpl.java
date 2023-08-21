@@ -1,8 +1,8 @@
 package com.codecool.eventPlanner.service.sql_impl;
 
-import com.codecool.eventPlanner.model.dto.CategoryIdsDTO;
-import com.codecool.eventPlanner.model.dto.EventDTO;
-import com.codecool.eventPlanner.model.dto.NewEventDTO;
+import com.codecool.eventPlanner.model.dto.category.CategoryIdsDTO;
+import com.codecool.eventPlanner.model.dto.event.EventDTO;
+import com.codecool.eventPlanner.model.dto.event.NewEventDTO;
 import com.codecool.eventPlanner.model.entity.Category;
 import com.codecool.eventPlanner.model.entity.Event;
 import com.codecool.eventPlanner.model.entity.User;
@@ -108,5 +108,10 @@ public class EventServiceImpl implements EventService {
     @Override
     public Set<Event> getCreatedEventsByUser(Long id) {
         return userRepository.findById(id).get().getCreatedEvents();
+    }
+
+    @Override
+    public List<Event> findAllLimit(int num) {
+        return eventRepository.findAllLimitedTo(num);
     }
 }

@@ -1,11 +1,11 @@
 package com.codecool.eventPlanner.controller;
 
-import com.codecool.eventPlanner.model.dto.CategoryIdsDTO;
-import com.codecool.eventPlanner.model.dto.EventDTO;
-import com.codecool.eventPlanner.model.dto.NewEventDTO;
+import com.codecool.eventPlanner.model.dto.category.CategoryIdsDTO;
+import com.codecool.eventPlanner.model.dto.event.EventDTO;
+import com.codecool.eventPlanner.model.dto.event.NewEventDTO;
 
 
-import com.codecool.eventPlanner.model.dto.UserToEventDTO;
+import com.codecool.eventPlanner.model.dto.event.UserToEventDTO;
 import com.codecool.eventPlanner.model.entity.Event;
 import com.codecool.eventPlanner.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +39,9 @@ public class EventController {
     public Set<Event> getEventsByCategories(@RequestBody CategoryIdsDTO categoryIdsDTO) {
         return eventService.getEventsByCategories(categoryIdsDTO);
     }
+
+    @GetMapping("/limit/{num}")
+    public List<Event> findAllLimit(@PathVariable int num){ return eventService.findAllLimit(num);}
 
     @DeleteMapping("{id}")
     public void deleteEventById(@PathVariable Long id) {
