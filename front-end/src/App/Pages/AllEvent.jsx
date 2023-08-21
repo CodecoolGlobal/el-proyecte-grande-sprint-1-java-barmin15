@@ -11,7 +11,7 @@ function AllEvent() {
   const [maxLength, setMaxLength] = useState(0)
   
   useEffect(() => {
-    const limit = 4;
+    const limit = 6;
     fetch(`/event/limit/${limit * counter}`)
       .then((response) => response.json())
       .then((data) => {

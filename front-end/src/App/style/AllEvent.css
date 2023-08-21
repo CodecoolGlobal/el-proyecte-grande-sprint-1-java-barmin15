@@ -4,7 +4,7 @@ body {
   font-family: "Noto Sans", sans-serif;
 }
 
-.events {
+.infinite-scroll-component{
   padding-top: 3%;
   width: 90%;
   margin-left: 5%;
@@ -12,6 +12,17 @@ body {
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
+}
+
+
+.events {
+  /* padding-top: 3%;
+  width: 90%;
+  margin-left: 5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap; */
 }
 h2 {
   margin-bottom: 5%;
