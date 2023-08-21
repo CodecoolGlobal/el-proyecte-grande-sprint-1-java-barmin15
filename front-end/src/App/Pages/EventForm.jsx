@@ -13,14 +13,7 @@ function EventForm(event) {
   const [actualCategory, setActualCategory] = useState([1]);
   const [newCategory, setNewCategory] = useState(0);
 
-  useEffect(() => {
-fetch("/category")
-      .then((response) => response.json())
-      .then((data) => setCategories(data));
-  }, []);
-
 useEffect(() => {
-    console.log("szerzek neked uj adatokat");
     fetch("/category")
     .then((response) => response.json())
     .then((data) => setCategories(data));
@@ -30,14 +23,9 @@ useEffect(() => {
     setActualCategory([Number(e.target.value)]);
   }
 
-  function vmi() {
-    console.log("1.lepes");
+  function onCreateCategory() {
     setNewCategory(newCategory + 1);
-    console.log("uj adataim vannak");
-
   }
-
-  actualCategory && console.log(actualCategory);
 
   //   event =  {
   //     id: 0,
@@ -95,7 +83,7 @@ useEffect(() => {
           handleChange={handleChange}
           chosenValue={categories && actualCategory}
           categories={categories && categories}
-          vmi={vmi}
+          onCreateCategory={onCreateCategory}
         />
       </div>
 
