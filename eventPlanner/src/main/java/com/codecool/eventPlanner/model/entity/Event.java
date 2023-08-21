@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Optional;
 import java.util.Set;
 
@@ -21,8 +23,17 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String dateTime;
+    @Basic
+    @Temporal(TemporalType.DATE)
+    private java.util.Date date;
+
+    @Basic
+    @Temporal(TemporalType.TIME)
+    private java.util.Date time;
+    //private String dateTime;
+
     private String location;
+
 
     @Column(columnDefinition = "TEXT")
     private String description;
@@ -44,9 +55,14 @@ public class Event {
     @JsonBackReference
     private Set<Item> items;
 
-    public void update(EventDTO eventDTO, User creator, Set<User> interestedUsers, Set<Category> categories) {
+    public void update(EventDTO eventDTO, User creator, Set<User> interestedUsers, Set<Category> categories){
         this.categories.addAll(Optional.ofNullable(categories).orElse(this.categories));
-        this.dateTime = Optional.ofNullable(eventDTO.getDateTime()).orElse(this.dateTime);
+        try {
+            this.date = Optional.ofNullable(new SimpleDateFormat("yyyy-MM-dd").parse(eventDTO.getDate())).orElse(this.date);
+            this.time = Optional.ofNullable(new SimpleDateFormat("HH:mm:ss").parse(eventDTO.getTime())).orElse(this.time);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
         this.location = Optional.ofNullable(eventDTO.getLocation()).orElse(this.location);
         this.creator = Optional.ofNullable(creator).orElse(this.creator);
         this.description = Optional.ofNullable(eventDTO.getDescription()).orElse(this.description);

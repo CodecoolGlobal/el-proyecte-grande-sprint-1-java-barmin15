@@ -63,7 +63,7 @@ function EventPage() {
             </div>
 
            <div className="dateTime location">
-           <h2 id="dateTime">{event.dateTime.substring(0,18)}</h2>
+           <h2 id="dateTime">{event.date + " - " + event.time}</h2>
            <h2> | </h2>
            <h2 id="location">{event.location}</h2>
            </div>
