@@ -13,14 +13,7 @@ function EventForm(event) {
   const [actualCategory, setActualCategory] = useState([1]);
   const [newCategory, setNewCategory] = useState(0);
 
-  useEffect(() => {
-fetch("/category")
-      .then((response) => response.json())
-      .then((data) => setCategories(data));
-  }, []);
-
 useEffect(() => {
-    console.log("szerzek neked uj adatokat");
     fetch("/category")
     .then((response) => response.json())
     .then((data) => setCategories(data));
@@ -32,11 +25,7 @@ useEffect(() => {
 
   function onCreateCategory() {
     setNewCategory(newCategory + 1);
-    console.log("uj adataim vannak");
-
   }
-
-  actualCategory && console.log(actualCategory);
 
   //   event =  {
   //     id: 0,
