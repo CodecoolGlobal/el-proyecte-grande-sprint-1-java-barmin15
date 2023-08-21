@@ -32,7 +32,7 @@ function AllEvent() {
     } else {
       setTimeout(() => {
         setCounter(counter + 1)
-      }, 600)
+      }, 500)
     }
   }
 

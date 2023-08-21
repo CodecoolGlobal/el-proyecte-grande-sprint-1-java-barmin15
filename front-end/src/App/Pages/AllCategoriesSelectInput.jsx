@@ -9,7 +9,7 @@ function AllCategoiresSelectInput(props) {
   async function handleSaveCategory(e) {
     e.preventDefault();
     await postNewCategory(inputCategory);
-
+    setInputCategory("");
     onCreateCategory();
   }
 
@@ -35,14 +35,14 @@ function AllCategoiresSelectInput(props) {
         <div className="addCategory">
         <input
           type="text"
-          /*placeholder={"new category..."}*/
+          placeholder={"new category..."}
           name="date"
           id="date"
           onChange={(e) => setInputCategory(e.target.value)}
+          value={inputCategory}
         />
      { inputCategory &&  <button
           onClick={(e) => {
-            
             inputCategory && handleSaveCategory(e);
           }}
         >
