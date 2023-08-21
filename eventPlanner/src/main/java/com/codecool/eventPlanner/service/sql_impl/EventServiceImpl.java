@@ -13,6 +13,8 @@ import com.codecool.eventPlanner.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -85,15 +87,20 @@ public class EventServiceImpl implements EventService {
         });
 
         User creator = userRepository.findById(newEventDTO.userId()).get();
-
-        Event event = Event.builder()
-                .creator(creator)
-                .title(newEventDTO.title())
-                .description(newEventDTO.description())
-                .dateTime(newEventDTO.dateTime())
-                .location(newEventDTO.location())
-                .categories(categories)
-                .build();
+        Event event = null;
+        try {
+            event = Event.builder()
+                    .creator(creator)
+                    .title(newEventDTO.title())
+                    .description(newEventDTO.description())
+                    .date(new SimpleDateFormat("yyyy-MM-dd").parse(newEventDTO.date()))
+                    .time(new SimpleDateFormat("HH:mm:ss").parse(newEventDTO.time()))
+                    .location(newEventDTO.location())
+                    .categories(categories)
+                    .build();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
 
         eventRepository.save(event);
 
