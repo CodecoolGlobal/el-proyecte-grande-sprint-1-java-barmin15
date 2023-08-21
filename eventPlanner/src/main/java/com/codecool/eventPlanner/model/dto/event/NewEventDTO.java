@@ -10,7 +10,8 @@ import java.util.Date;
 import java.util.Set;
 
 public record NewEventDTO(
-        String dateTime,
+        String date,
+        String time,
         String location,
         Long userId,
         String description,
