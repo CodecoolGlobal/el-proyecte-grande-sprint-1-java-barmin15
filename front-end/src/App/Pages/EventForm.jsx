@@ -30,8 +30,7 @@ useEffect(() => {
     setActualCategory([Number(e.target.value)]);
   }
 
-  function vmi() {
-    console.log("1.lepes");
+  function onCreateCategory() {
     setNewCategory(newCategory + 1);
     console.log("uj adataim vannak");
 
@@ -95,7 +94,7 @@ useEffect(() => {
           handleChange={handleChange}
           chosenValue={categories && actualCategory}
           categories={categories && categories}
-          vmi={vmi}
+          onCreateCategory={onCreateCategory}
         />
       </div>
 
