@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom"
 import "./layout.css"
 
 function Layout(){
-    return <div >
+    return <div>
     <div className="topnav">
     <a className="active" href="/event/ownprofile">Profile</a>
     <div href="" id="logo">EVENET</div>
