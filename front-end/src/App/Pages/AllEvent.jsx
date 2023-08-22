@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "../style/AllEvent.css";
+import useAllCategories from "../Fetches/getAllCategories";
 import InfiniteScroll from "react-infinite-scroll-component";
 import React from "react";
 
@@ -9,6 +10,14 @@ function AllEvent() {
   const [hasMore, setHasMore] = useState(true)
   const [dataLength, setDataLength] = useState(0);
   const [maxLength, setMaxLength] = useState(0)
+  const [selectedCategory, setSelectedCategory] = useState("none");
+  const [searchInput, setSearchInput] = useState("")
+
+  const fetchedCategories = useAllCategories();
+  
+  function handleSearch(){
+  }
+
 
   useEffect(() => {
     const limit = 6;
@@ -32,14 +41,12 @@ function AllEvent() {
     } else {
       setTimeout(() => {
         setCounter(counter + 1)
-      }, 600)
+      }, 500)
     }
   }
 
-
   return (
     <div className="events">
-
       <InfiniteScroll
         dataLength={events.length}
         next={fetchMoreEvents}
@@ -47,6 +54,19 @@ function AllEvent() {
         loader={<p>LOADING MORE EVENTS...</p>}
         endMessage={<p>NO MORE EVENTS TO LOAD</p>}
       >
+
+        <div>
+          <div role="search">
+            <input id="search" type="search" placeholder="Search..."onChange={(e)=> setSearchInput(e.target.value)}/>
+            <button onClick={handleSearch}>search</button>
+          </div>
+          <label htmlFor="categories">select a category:</label>
+          <select name="categories" id="categories" onChange={(e) => setSelectedCategory(e.target.value)}>
+          <option value="none">none</option>
+            {fetchedCategories !== undefined && fetchedCategories.map(category => (
+              <option value={category.name} key={category.id}>{category.name}</option>))}
+          </select>
+        </div>
 
         {events &&
           events.map((e, index) => (
@@ -74,6 +94,7 @@ function AllEvent() {
 
     </div>
   );
+
 }
 
 export default AllEvent;
