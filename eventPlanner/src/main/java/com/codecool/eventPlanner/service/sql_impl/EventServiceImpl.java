@@ -2,6 +2,7 @@ package com.codecool.eventPlanner.service.sql_impl;
 
 import com.codecool.eventPlanner.model.dto.category.CategoryIdsDTO;
 import com.codecool.eventPlanner.model.dto.event.EventDTO;
+import com.codecool.eventPlanner.model.dto.event.FilteredEventsDTO;
 import com.codecool.eventPlanner.model.dto.event.NewEventDTO;
 import com.codecool.eventPlanner.model.entity.Category;
 import com.codecool.eventPlanner.model.entity.Event;
@@ -20,16 +21,13 @@ import java.util.*;
 @Service
 public class EventServiceImpl implements EventService {
 
-    private final CategoryRepository categoryRepository;
-    private final EventRepository eventRepository;
-    private final UserRepository userRepository;
-
     @Autowired
-    public EventServiceImpl(CategoryRepository categoryRepository, EventRepository eventRepository, UserRepository userRepository) {
-        this.categoryRepository = categoryRepository;
-        this.eventRepository = eventRepository;
-        this.userRepository = userRepository;
-    }
+    private  CategoryRepository categoryRepository;
+    @Autowired
+    private  EventRepository eventRepository;
+    @Autowired
+    private  UserRepository userRepository;
+
 
     @Override
     public List<Event> getAllEvents() {
@@ -123,8 +121,22 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<Event> getEventsByParamaters(String nameContains, String categoryId) {
-        Long categoryIdLong = Long.parseLong(categoryId);
-        return eventRepository.findByCategoriesIdAndTitleContainingIgnoreCase(categoryIdLong, nameContains);
+    public FilteredEventsDTO getEventsByParamaters(String nameContains, String category, String length) {
+        List<Event> events = new ArrayList<>();
+        int maxLength = 0;
+        if (nameContains.equals("all") && category.equals("all")) {
+            maxLength = eventRepository.findAll().size();
+            events.addAll(eventRepository.findAll().stream().limit(Integer.parseInt(length)).toList());
+        } else if (nameContains.equals("all")) {
+            maxLength = eventRepository.findAllByCategoriesName(category).size();
+            events.addAll(eventRepository.findAllByCategoriesName(category).stream().limit(Integer.parseInt(length)).toList());
+        } else if (category.equals("all")) {
+            maxLength = eventRepository.findAllByTitleContainingIgnoreCase(nameContains).size();
+            events.addAll(eventRepository.findAllByTitleContainingIgnoreCase(nameContains).stream().limit(Integer.parseInt(length)).toList());
+        } else {
+            maxLength = eventRepository.findAllByCategoriesNameAndTitleContainingIgnoreCase(category, nameContains).size();
+            events.addAll(eventRepository.findAllByCategoriesNameAndTitleContainingIgnoreCase(category, nameContains).stream().limit(Integer.parseInt(length)).toList());
+        }
+        return new FilteredEventsDTO(maxLength, events);
     }
 }
