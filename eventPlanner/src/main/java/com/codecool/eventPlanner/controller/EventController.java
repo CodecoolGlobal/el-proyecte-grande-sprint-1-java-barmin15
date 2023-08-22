@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -30,6 +32,17 @@ public class EventController {
         return eventService.getAllEvents();
     }
 
+    @GetMapping("{byCategories}/{byName}")
+    public List<Event> getChosenEvents(@PathVariable Map<Optional<String>, Optional<String>> pathVarsMap) {
+        String categoryId = String.valueOf(pathVarsMap.get("byCategories"));
+        String nameContains = String.valueOf(pathVarsMap.get("byName"));
+
+        System.out.println(categoryId);
+        System.out.println(nameContains);
+        //return null;
+        return eventService.getEventsByParamaters(nameContains, categoryId);
+    }
+
     @PutMapping
     public void addUserForEvent(@RequestBody UserToEventDTO userToEventDTO) {
         eventService.addUserForEvent(userToEventDTO.userId(), userToEventDTO.eventId());
@@ -41,7 +54,9 @@ public class EventController {
     }
 
     @GetMapping("/limit/{num}")
-    public List<Event> findAllLimit(@PathVariable int num){ return eventService.findAllLimit(num);}
+    public List<Event> findAllLimit(@PathVariable int num) {
+        return eventService.findAllLimit(num);
+    }
 
     @DeleteMapping("{id}")
     public void deleteEventById(@PathVariable Long id) {
