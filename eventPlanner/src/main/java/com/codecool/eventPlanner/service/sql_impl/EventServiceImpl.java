@@ -114,4 +114,10 @@ public class EventServiceImpl implements EventService {
     public List<Event> findAllLimit(int num) {
         return eventRepository.findAllLimitedTo(num);
     }
+
+    @Override
+    public List<Event> getEventsByParamaters(String nameContains, String categoryId) {
+        Long categoryIdLong = Long.parseLong(categoryId);
+        return eventRepository.findByCategoriesIdAndTitleContainingIgnoreCase(categoryIdLong, nameContains);
+    }
 }
