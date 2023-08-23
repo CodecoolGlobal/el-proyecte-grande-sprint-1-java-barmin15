@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import "../style/LogIn.css";
 import { LogInUser } from "../Fetches/LogInUser";
+import { request, setAuthToken } from "../../axios_helper";
 
 
 export default function LogInPage() {
@@ -9,10 +10,21 @@ export default function LogInPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-   async function logIn() {
-        if (await LogInUser(username, password)) {
-            navigate("/event/all")
-        }
+    function logIn() {
+        request("POST",
+            "/api/auth/login",
+            { login: username, password: password }
+        ).then((response) => {
+            setAuthToken(response.data.token)
+            navigate("/event/all");
+        }).catch((error) => {
+            console.log(error)
+        })
+
+
+        /* if (await LogInUser(username, password)) {
+             navigate("/event/all")
+         }*/
     }
 
 
