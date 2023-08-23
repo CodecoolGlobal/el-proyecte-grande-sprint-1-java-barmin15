@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.web.bind.annotation.CookieValue;
 
 import java.util.Optional;
 import java.util.Set;
@@ -21,11 +22,10 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String name;
+    private String firstName;
+    private String lastName;
+    private String login;
     private String password;
-    private String lastOnline;
-    private String registrationDate;
 
     @Column(columnDefinition = "TEXT")
     private String description;
@@ -38,7 +38,7 @@ public class User {
     @JsonManagedReference
     private Set<Event> interestedEvents;
 
-    public User(NewUserDTO newUserDTO) {
+   /* public User(NewUserDTO newUserDTO) {
         name = newUserDTO.username();
         password = newUserDTO.password();
         lastOnline = newUserDTO.registrationDate();
@@ -49,5 +49,5 @@ public class User {
         this.name = Optional.ofNullable(updateUserDTO.name()).orElse(this.name);
         this.password = Optional.ofNullable(updateUserDTO.password()).orElse(this.password);
         this.description = Optional.ofNullable(updateUserDTO.description()).orElse(this.description);
-    }
+    }*/
 }

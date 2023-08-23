@@ -3,7 +3,7 @@ import "../style/AllEvent.css";
 import useAllCategories from "../Fetches/getAllCategories";
 import InfiniteScroll from "react-infinite-scroll-component";
 import React from "react";
-
+import { request, setAuthToken, getAuthToken } from "../../axios_helper";
 function AllEvent() {
   const [events, setEvents] = useState([]);
   const [counter, setCounter] = useState(1)
@@ -13,6 +13,8 @@ function AllEvent() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [searchInput, setSearchInput] = useState("")
   const [fetchData, setFetchData] = useState(1)
+
+
   const fetchedCategories = useAllCategories();
 
 
@@ -22,12 +24,12 @@ function AllEvent() {
     let byCategories = selectedCategory;
     if (selectedCategory.length < 1) byCategories = "all";
     if (searchInput.length < 1) byName = "all";
-    fetch(`/event/${byCategories}/${byName}/${limit * counter}`)
+    fetch(`/event/${byCategories}/${byName}/${limit * counter}`, {"headers": {"Authorization": `Bearer ${getAuthToken()}`}
+   })
       .then((response) => response.json())
       .then((data) => {
         setEvents(data.events)
         setMaxLength(data.maxLength)
-        console.log(data.events.length)
         setDataLength(data.events.length)
       });
   }, [counter, fetchData])
