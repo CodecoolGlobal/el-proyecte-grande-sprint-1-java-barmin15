@@ -10,30 +10,31 @@ function AllEvent() {
   const [hasMore, setHasMore] = useState(true)
   const [dataLength, setDataLength] = useState(0);
   const [maxLength, setMaxLength] = useState(0)
-  const [selectedCategory, setSelectedCategory] = useState("none");
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [searchInput, setSearchInput] = useState("")
-
+  const [fetchData, setFetchData] = useState(1)
   const fetchedCategories = useAllCategories();
-  
-  function handleSearch(){
-  }
 
 
   useEffect(() => {
     const limit = 6;
-    fetch(`/event/limit/${limit * counter}`)
+    let byName = searchInput;
+    let byCategories = selectedCategory;
+    if (selectedCategory.length < 1) byCategories = "all";
+    if (searchInput.length < 1) byName = "all";
+    fetch(`/event/${byCategories}/${byName}/${limit * counter}`)
       .then((response) => response.json())
       .then((data) => {
-        setEvents(data);
-        setDataLength(data.length)
+        setEvents(data.events)
+        setMaxLength(data.maxLength)
+        console.log(data.events.length)
+        setDataLength(data.events.length)
       });
+  }, [counter, fetchData])
+  function handleSearch() {
+    setFetchData(fetchData + 1)
+  }
 
-    fetch(`/event`)
-      .then((response) => response.json())
-      .then((data) => {
-        setMaxLength(data.length)
-      });
-  }, [counter]);
 
   function fetchMoreEvents() {
     if (maxLength === dataLength) {
@@ -56,9 +57,9 @@ function AllEvent() {
 
           <label htmlFor="categories">select a category:</label>
           <select name="categories" id="categories" onChange={(e) => setSelectedCategory(e.target.value)}>
-          <option value="none">none</option>
+            <option value="">none</option>
             {fetchedCategories !== undefined && fetchedCategories.map(category => (
-              <option value={category.name} key={category.id}>{category.name}</option>))}
+              <option value={category.name} id={category.id} key={category.id}>{category.name}</option>))}
           </select>
         </div>
 

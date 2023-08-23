@@ -3,8 +3,8 @@ package com.codecool.eventPlanner.service;
 
 import com.codecool.eventPlanner.model.dto.category.CategoryIdsDTO;
 import com.codecool.eventPlanner.model.dto.event.EventDTO;
+import com.codecool.eventPlanner.model.dto.event.FilteredEventsDTO;
 import com.codecool.eventPlanner.model.dto.event.NewEventDTO;
-
 import com.codecool.eventPlanner.model.entity.Event;
 import org.springframework.stereotype.Service;
 
@@ -32,4 +32,6 @@ public interface EventService {
 
     Set<Event> getCreatedEventsByUser(Long id);
     List<Event> findAllLimit(int num);
+
+    FilteredEventsDTO getEventsByParamaters(String nameContains, String category, String length);
 }
