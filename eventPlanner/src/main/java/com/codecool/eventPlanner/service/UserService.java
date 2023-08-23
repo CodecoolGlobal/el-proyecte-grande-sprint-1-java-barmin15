@@ -1,5 +1,8 @@
 package com.codecool.eventPlanner.service;
 
+import com.codecool.eventPlanner.model.dto.CredentialsDTO;
+import com.codecool.eventPlanner.model.dto.SignUpDTO;
+import com.codecool.eventPlanner.model.dto.UserDTO;
 import com.codecool.eventPlanner.model.dto.user.LoginUserDTO;
 import com.codecool.eventPlanner.model.dto.user.NewUserDTO;
 import com.codecool.eventPlanner.model.dto.user.UpdateUserDTO;
@@ -27,4 +30,9 @@ public interface UserService {
     boolean loginUser(LoginUserDTO loginUserDTO);
 
     Set<User> getInterestedUsersByEventId(Long eventId);
+
+    UserDTO findByLogin(String issuer);
+
+    UserDTO register(SignUpDTO userDTO);
+    UserDTO login(CredentialsDTO credentialDTO);
 }
