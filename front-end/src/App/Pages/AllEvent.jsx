@@ -47,6 +47,21 @@ function AllEvent() {
 
   return (
     <div className="events">
+
+<div className="search">
+          <div role="search" >
+            <input id="search" type="search" placeholder="Search..."onChange={(e)=> setSearchInput(e.target.value)}/>
+            <button onClick={handleSearch}>search</button>
+          </div>
+
+          <label htmlFor="categories">select a category:</label>
+          <select name="categories" id="categories" onChange={(e) => setSelectedCategory(e.target.value)}>
+          <option value="none">none</option>
+            {fetchedCategories !== undefined && fetchedCategories.map(category => (
+              <option value={category.name} key={category.id}>{category.name}</option>))}
+          </select>
+        </div>
+
       <InfiniteScroll
         dataLength={events.length}
         next={fetchMoreEvents}
@@ -55,18 +70,7 @@ function AllEvent() {
         endMessage={<p>NO MORE EVENTS TO LOAD</p>}
       >
 
-        <div>
-          <div role="search">
-            <input id="search" type="search" placeholder="Search..."onChange={(e)=> setSearchInput(e.target.value)}/>
-            <button onClick={handleSearch}>search</button>
-          </div>
-          <label htmlFor="categories">select a category:</label>
-          <select name="categories" id="categories" onChange={(e) => setSelectedCategory(e.target.value)}>
-          <option value="none">none</option>
-            {fetchedCategories !== undefined && fetchedCategories.map(category => (
-              <option value={category.name} key={category.id}>{category.name}</option>))}
-          </select>
-        </div>
+      
 
         {events &&
           events.map((e, index) => (
