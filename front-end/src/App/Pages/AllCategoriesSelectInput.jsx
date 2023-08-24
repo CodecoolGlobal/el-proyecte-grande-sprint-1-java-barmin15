@@ -12,16 +12,13 @@ function AllCategoiresSelectInput(props) {
 
   async function handleSaveCategory(e) {
     e.preventDefault();
-    //await postNewCategory(inputCategory);
-    await request("POST", "/category", inputCategory)
+    await request("POST", "/category", {name: inputCategory})
     .then((response) => {
-      navigate("/event/all");
     })
     .catch((error) => {
-      console.log(error);
+      navigate("/error")
     });
 
-    navigate("/event/all");
 
     setInputCategory("");
     onCreateCategory();
