@@ -20,19 +20,11 @@ export default function RegisterPage() {
       password: password,
     })
       .then((response) => {
-        console.log(response.data);
-         navigate("/login")
+         navigate("/event/all")
       })
       .catch((error) => {
-        console.log(error);
+        navigate("/error")
       });
-    /*
-        if (username.length > 5 && password.length > 5) {
-            if (await RegisterUser(username, password)) {
-
-                navigate("/event/all")
-            }
-        }*/
   }
 
   return (
