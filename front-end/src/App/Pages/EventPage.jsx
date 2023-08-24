@@ -36,7 +36,7 @@ function EventPage() {
       console.error("Error:", error);
     }
   }
-  event && console.log(event);
+  
   if (event) {
     event.items = [
       { name: "food" },
