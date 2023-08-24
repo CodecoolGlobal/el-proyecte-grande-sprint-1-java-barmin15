@@ -1,11 +1,11 @@
 package com.codecool.eventPlanner.controller;
 
-import com.codecool.eventPlanner.model.dto.user.LoginUserDTO;
-import com.codecool.eventPlanner.model.dto.user.NewUserDTO;
-import com.codecool.eventPlanner.model.dto.user.UpdateUserDTO;
 import com.codecool.eventPlanner.model.entity.User;
 import com.codecool.eventPlanner.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.Set;
 @RequestMapping("/user")
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public UserController(UserService userService) {
@@ -39,22 +39,15 @@ public class UserController {
 
     @GetMapping("/current")
     public User getCurrentUser() {
-        return userService.getCurrentUser();
-    }
-
-    @PostMapping
-    public boolean addUser(@RequestBody NewUserDTO newUserDTO) {
-        return userService.addUser(newUserDTO);
-    }
-
-    @PutMapping
-    public boolean updateUser(@RequestBody UpdateUserDTO updateUserDTO) {
-        return userService.updateUser(updateUserDTO);
-    }
-
-    @PostMapping("/login")
-    public boolean loginUser(@RequestBody LoginUserDTO loginUserDTO) {
-        return userService.loginUser(loginUserDTO);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            String auth = authentication.getName();
+            auth = auth.substring(auth.indexOf("=") + 1);
+            auth = auth.substring(0, auth.indexOf(","));
+            return userService.getUserById(Long.parseLong(auth));
+        } else {
+            throw new RuntimeException("No User");
+        }
     }
 
     @GetMapping("/interested/{eventId}")
