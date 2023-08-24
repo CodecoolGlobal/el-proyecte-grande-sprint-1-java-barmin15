@@ -4,38 +4,33 @@ import useAllCategories from "../Fetches/getAllCategories";
 import InfiniteScroll from "react-infinite-scroll-component";
 import React from "react";
 import { request, setAuthToken, getAuthToken } from "../../axios_helper";
+
 function AllEvent() {
   const [events, setEvents] = useState([]);
   const [counter, setCounter] = useState(1)
   const [hasMore, setHasMore] = useState(true)
   const [dataLength, setDataLength] = useState(0);
   const [maxLength, setMaxLength] = useState(0)
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [searchInput, setSearchInput] = useState("")
-  const [fetchData, setFetchData] = useState(1)
-
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [searchInput, setSearchInput] = useState("all")
 
   const fetchedCategories = useAllCategories();
-
 
   useEffect(() => {
     const limit = 6;
     let byName = searchInput;
     let byCategories = selectedCategory;
-    if (selectedCategory.length < 1) byCategories = "all";
     if (searchInput.length < 1) byName = "all";
-    fetch(`/event/${byCategories}/${byName}/${limit * counter}`, {"headers": {"Authorization": `Bearer ${getAuthToken()}`}
-   })
+    fetch(`/event/${byCategories}/${byName}/${limit * counter}`, {
+      "headers": { "Authorization": `Bearer ${getAuthToken()}` }
+    })
       .then((response) => response.json())
       .then((data) => {
         setEvents(data.events)
         setMaxLength(data.maxLength)
         setDataLength(data.events.length)
       });
-  }, [counter, fetchData])
-  function handleSearch() {
-    setFetchData(fetchData + 1)
-  }
+  }, [counter, selectedCategory, searchInput])
 
 
   function fetchMoreEvents() {
@@ -51,19 +46,18 @@ function AllEvent() {
   return (
     <div className="events">
 
-<div className="search">
-          <div role="search" >
-            <input id="search" type="search" placeholder="Search..."onChange={(e)=> setSearchInput(e.target.value)}/>
-            <button onClick={handleSearch}>search</button>
-          </div>
-
-          <label htmlFor="categories">select a category:</label>
-          <select name="categories" id="categories" onChange={(e) => setSelectedCategory(e.target.value)}>
-            <option value="">none</option>
-            {fetchedCategories !== undefined && fetchedCategories.map(category => (
-              <option value={category.name} id={category.id} key={category.id}>{category.name}</option>))}
-          </select>
+      <div className="search">
+        <div role="search" >
+          <input id="search" type="search" placeholder="Search..." onChange={(e) => setSearchInput(e.target.value)} />
         </div>
+
+        <label htmlFor="categories">select a category:</label>
+        <select name="categories" id="categories" onChange={(e) => setSelectedCategory(e.target.value)}>
+          <option value="all">all</option>
+          {fetchedCategories !== undefined && fetchedCategories.map(category => (
+            <option value={category.name} id={category.id} key={category.id}>{category.name}</option>))}
+        </select>
+      </div>
 
       <InfiniteScroll
         dataLength={events.length}
@@ -73,7 +67,7 @@ function AllEvent() {
         endMessage={<p>NO MORE EVENTS TO LOAD</p>}
       >
 
-      
+
 
         {events &&
           events.map((e, index) => (
