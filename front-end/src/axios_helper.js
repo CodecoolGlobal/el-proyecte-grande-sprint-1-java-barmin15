@@ -4,11 +4,12 @@ axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
 export const getAuthToken = () => {
-  return window.localStorage.getItem("auth_token");
+  return window.sessionStorage.getItem("auth_token");
 };
 
+
 export const setAuthToken = (token) => {
-  window.localStorage.setItem("auth_token", token);
+  window.sessionStorage.setItem("auth_token", token);
 };
 
 export const request = (method, url, data) => {
