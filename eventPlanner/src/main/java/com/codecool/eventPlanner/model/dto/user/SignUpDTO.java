@@ -1,4 +1,4 @@
-package com.codecool.eventPlanner.model.dto;
+package com.codecool.eventPlanner.model.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,12 +7,11 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Data
-public class UserDTO {
-    private Long id;
+@Builder
+public class SignUpDTO {
     private String firstName;
     private String lastName;
     private String login;
-    private String token;
+    private char[] password;
 }
