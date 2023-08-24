@@ -1,9 +1,8 @@
 package com.codecool.eventPlanner.config;
 
 import com.codecool.eventPlanner.controller.AuthController;
-import com.codecool.eventPlanner.model.dto.SignUpDTO;
+import com.codecool.eventPlanner.model.dto.user.SignUpDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

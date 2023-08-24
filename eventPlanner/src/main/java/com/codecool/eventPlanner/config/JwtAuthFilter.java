@@ -19,14 +19,13 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String header = request.getHeader(HttpHeaders.AUTHORIZATION);
-        System.out.println("itt csekkolom, hogy van e token (JwtAuthFilter)");
+
         if (header != null) {
             String[] elements = header.split(" ");
 
             if (elements.length == 2 && "Bearer".equals(elements[0])) {
                 try {
-                    System.out.println(elements[1].toString());
-                    System.out.println("itt oke ha van tokened (JwtAuthFilter)");
+
                     SecurityContextHolder.getContext().setAuthentication(
                             userAuthProvider.validateToken(elements[1]));
                 } catch (RuntimeException e) {

@@ -1,6 +1,6 @@
 package com.codecool.eventPlanner.config;
 
-import com.codecool.eventPlanner.model.dto.ErrorDto;
+import com.codecool.eventPlanner.model.dto.auth.ErrorDto;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
