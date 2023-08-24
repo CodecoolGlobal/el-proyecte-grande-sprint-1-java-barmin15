@@ -22,7 +22,7 @@ public interface EventService {
 
     Set<Event> getEventsByCategories(CategoryIdsDTO categoryIdsDTO);
 
-    Event getEventById(Long id);
+    EventDTO getEventById(Long id);
 
     Event updateEvent(Long id, EventDTO eventDTO);
 

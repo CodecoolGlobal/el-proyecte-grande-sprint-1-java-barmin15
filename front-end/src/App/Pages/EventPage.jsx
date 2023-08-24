@@ -1,42 +1,51 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "../style/eventPage.css";
-import { getRequest } from "../../axios_helper";
+import { getRequest, request } from "../../axios_helper";
+import { useNavigate } from "react-router-dom";
 
 function EventPage() {
+  const navigate = useNavigate();
   const [event, setEvent] = useState(null);
-
+  const [user, setUser] = useState(null);
   const { id } = useParams();
-  const url = `/event/${id}`;
 
   useEffect(() => {
+    const eventUrl = `/event/${id}`;
+    const userUrl = "/user/current/id"
 
-    getRequest(url)
-      .then((response) => setEvent(response.data))
-  }, []);
-
-  function handleClick() {
-    const data = 0;
-    postJSON(id);
-  }
-
-  async function postJSON(userID, data) {
-    try {
-      const response = await fetch("/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
+    getRequest(eventUrl)
+      .then((response) => {
+        console.log(response.data)
+        setEvent(response.data)
+      })
+      .catch((error) => {
+        navigate("/error");
       });
 
-      const result = await response.json();
-      console.log("Success:", result);
-    } catch (error) {
-      console.error("Error:", error);
-    }
+    getRequest(userUrl)
+      .then((response) => {
+        setUser(response.data)
+      }).catch((error) => {
+        navigate("/error")
+      })
+  }, [])
+
+  function handleClick() {
+    const interestedUrl = "/event";
+    const method = "PUT";
+    const body = { userId: user, eventId: id }
+    console.log(body)
+    request(method, interestedUrl, body)
+      .then((response) => {
+        navigate("/event/all");
+      })
+      .catch((error) => {
+        navigate("/error");
+      })
   }
-  
+
+  ////TODO ITEMS////
   if (event) {
     event.items = [
       { name: "food" },
@@ -46,72 +55,72 @@ function EventPage() {
       { name: "backpack" },
     ];
   }
+  ////////////////
 
-  return (
-    <div className="Event">
-      <div className="items">
-        <h4>Necessary items:</h4>
+
+  if (event !== null) {
+    console.log(event)
+    return (
+      <div className="Event">
+        <div className="items">
+          <h4>Necessary items:</h4>
+          {event.items.length > 0 && (
+            <ul>
+              {event.items.map((item, index) => (
+                <li id={index}>{item.name}</li>
+              ))}
+            </ul>
+          )}
+        </div>
+
         {event && (
-          <ul>
-            {event.items.map((item, index) => (
-              <li id={index}>{item.name}</li>
-            ))}
-          </ul>
+          <div className="eventt">
+            <div className="details">
+              <div className="title saveButton">
+                <h1 id="title">{event.title}</h1>
+                <button onClick={handleClick}>Save</button>
+              </div>
+
+              <div className="dateTime location">
+                <h2 id="dateTime">{event.date + " - " + event.time}</h2>
+                <h2> | </h2>
+                <h2 id="location">{event.location}</h2>
+              </div>
+              <h2 id="category">
+                {event.categories.length > 0 && event.categories[0].name}
+              </h2>
+              <p id="description">{event.description}</p>
+            </div>
+
+            <div>
+              <div className="pic">
+                {" "}
+                <img
+                  src="https://i.pinimg.com/564x/4b/50/9a/4b509acbc36049b967d12e705a7990a1.jpg"
+                  alt="event pic"
+                  height={486}
+                  width={369}
+                />{" "}
+              </div>
+            </div>
+
+            <div className="participants">
+              <div className="creator">
+                <h4>Creator:</h4>
+                <h4>{event.creatorName}</h4>
+              </div>
+
+              <h4>Participants:</h4>
+              <ul>
+              {event.interestedUsers.map((username) =>(
+                <li>{username}</li>))}
+              </ul>
+            </div>
+          </div>
         )}
       </div>
-
-      {event && (
-        <div className="eventt">
-          <div className="details">
-            <div className="title saveButton">
-              <h1 id="title">{event.title}</h1>
-              <button onClick={handleClick}>Save</button>
-            </div>
-
-            <div className="dateTime location">
-              <h2 id="dateTime">{event.date + " - " + event.time}</h2>
-              <h2> | </h2>
-              <h2 id="location">{event.location}</h2>
-            </div>
-            <h2 id="category">
-              {event.categories.length > 0 && event.categories[0].name}
-            </h2>
-            <p id="description">{event.description}</p>
-          </div>
-
-          <div>
-            <div className="pic">
-              {" "}
-              <img
-                src="https://i.pinimg.com/564x/4b/50/9a/4b509acbc36049b967d12e705a7990a1.jpg"
-                alt="event pic"
-                height={486}
-                width={369}
-              />{" "}
-            </div>
-          </div>
-
-          <div className="participants">
-            {/*TODO:display actual creator/participants*/}
-            <div className="creator">
-              <h4>Creator:</h4>
-              <h4>Piri</h4>
-            </div>
-
-            <h4>Participants:</h4>
-            <ul>
-              <li>Vali</li>
-              <li>Teri</li>
-              <li>Pali</li>
-              <li>Feri</li>
-              <li>Cili</li>
-              <li>Saci</li>
-            </ul>
-          </div>
-        </div>
-      )}
-    </div>
-  );
+    );
+  }
 }
 
 export default EventPage;

@@ -49,6 +49,20 @@ public class UserController {
             throw new RuntimeException("No User");
         }
     }
+    @GetMapping("/current/id")
+    public Long getCurrentUserId() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            String auth = authentication.getName();
+            auth = auth.substring(auth.indexOf("=") + 1);
+            auth = auth.substring(0, auth.indexOf(","));
+            return Long.parseLong(auth);
+        } else {
+            throw new RuntimeException("No User");
+        }
+    }
+
+
 
     @GetMapping("/interested/{eventId}")
     public Set<User> getInterestedUsersByEventId(@PathVariable Long eventId) {
