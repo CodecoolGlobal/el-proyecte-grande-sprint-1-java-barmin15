@@ -7,6 +7,9 @@ import com.codecool.eventPlanner.model.dto.user.UserDTO;
 import com.codecool.eventPlanner.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,8 +28,8 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<UserDTO> login(@RequestBody CredentialsDTO credentialsDTO) {
-        UserDTO user = userService.login(credentialsDTO);
 
+        UserDTO user = userService.login(credentialsDTO);
         user.setToken(userAuthProvider.createToken(user.getLogin()));
 
         return ResponseEntity.ok(user);
