@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "../style/eventForm.css";
 import AllCategoiresSelectInput from "./AllCategoriesSelectInput";
+import { getRequest, request } from "../../axios_helper";
 
 function EventForm(event) {
   const navigate = useNavigate();
@@ -12,11 +13,12 @@ function EventForm(event) {
   const [actualCategory, setActualCategory] = useState([1]);
   const [newCategory, setNewCategory] = useState(0);
   const [date, setDate] = useState("");
-useEffect(() => {
-    fetch("/category")
-    .then((response) => response.json())
-    .then((data) => setCategories(data));
+  useEffect(() => {
+    getRequest("/category")
+      .then((response) => setCategories(response.data))
   }, [newCategory]);
+
+  categories && console.log(categories);
 
   function handleChange(e) {
     setActualCategory([Number(e.target.value)]);
@@ -36,73 +38,85 @@ useEffect(() => {
     delete event.isPrivate;
     event.userId = 1;
     event.categoryIds = actualCategory;
-    event.time = event.time + ":00"
+    event.time = event.time + ":00";
     event.date = date;
-    await postNewEvent(event);
+    //await postNewEvent(event);
+
+    await request("POST", "", event)
+    .then((response) => {
+      navigate("/event/all");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
     navigate("/event/all");
   };
 
   return (
     <div>
-    <form className="eventForm" onSubmit={onCreate}>
-      <div className="form">
-      <h2>Create a new Event!</h2>
+      <form className="eventForm" onSubmit={onCreate}>
+        <div className="form">
+          <h2>Create a new Event!</h2>
 
+          <div className="creatorId">
+            <input type="hidden" name="userId" defaultValue={user.id} />
+          </div>
+          <div className="id">
+            <input
+              type="hidden"
+              name="id"
+              defaultValue={event ? event.id : null}
+            />
+          </div>
 
-      <div className="creatorId">
-        <input type="hidden" name="userId" defaultValue={user.id} />
-      </div>
-      <div className="id">
-        <input type="hidden" name="id" defaultValue={event ? event.id : null} />
-      </div>
+          <div className="name">
+            <label htmlFor="name">Name your event:</label>
+            <input
+              type="text"
+              defaultValue={event ? event.title : null}
+              name="title"
+              id="name"
+            />
+          </div>
 
-      <div className="name">
-        <label htmlFor="name">Name your event:</label>
-        <input
-          type="text"
-          defaultValue={event ? event.title : null}
-          name="title"
-          id="name"
-        />
-      </div>
+          <div className="description">
+            <label htmlFor="description">Describe your event:</label>
+            <input
+              type="text"
+              defaultValue={event ? event.description : null}
+              name="description"
+              id="description"
+            />
+          </div>
+          <div className="date">
+            <label htmlFor="date">When is it?</label>
+            <input
+              type="date"
+              onChange={(e) => setDate(e.target.value)}
+              defaultValue={event ? event.date : null}
+              name="date"
+              id="date"
+            />
+            <input
+              type="time"
+              defaultValue={event ? event.time : null}
+              name="time"
+              id="time"
+            />
+          </div>
 
-      <div className="description">
-        <label htmlFor="description">Describe your event:</label>
-        <input
-          type="text"
-          defaultValue={event ? event.description : null}
-          name="description"
-          id="description"
-        />
-      </div>
-      <div className="date">
-        <label htmlFor="date">When is it?</label>
-        <input
-          type="date"
-          onChange={(e) => setDate(e.target.value)}
-          defaultValue={event ? event.date : null}
-          name="date"
-          id="date"
-        />
-        <input
-          type="time"
-          defaultValue={event ? event.time : null}
-          name="time"
-          id="time"
-        />
-      </div>
+          <div className="location">
+            <label htmlFor="location">Where is it?</label>
+            <input
+              type="text"
+              defaultValue={event ? event.location : null}
+              name="location"
+              id="location"
+            />
+          </div>
 
-      <div className="location">
-        <label htmlFor="location">Where is it?</label>
-        <input
-          type="text"
-          defaultValue={event ? event.location : null}
-          name="location"
-          id="location"
-        />
-      </div>
-
-      {/* <div className="isPrivate">
+          {/* <div className="isPrivate">
         <label htmlFor="isPrivate">Is the event private? </label>
         <input
           type="checkbox"
@@ -111,36 +125,35 @@ useEffect(() => {
           id="isPrivate"
         />
       </div> */}
-         <div className="category">
-        <AllCategoiresSelectInput
-          handleChange={handleChange}
-          chosenValue={categories && actualCategory}
-          categories={categories && categories}
-          onCreateCategory={onCreateCategory}
-        />
-      </div>
+          <div className="category">
+            <AllCategoiresSelectInput
+              handleChange={handleChange}
+              chosenValue={categories && actualCategory}
+              categories={categories && categories}
+              onCreateCategory={onCreateCategory}
+            />
+          </div>
 
-      <div className="isPrivate">
-        <input
-          type="hidden"
-          name="isPrivate"
-          defaultValue={event ? event.isPrivate : false}
-        />
-      </div>
-      <div className="link">
-        <button
-          style={{ height: "60px", fontSize: "larger" }}
-          classname="formButton"
-          // onClick={onCreate}
-          //   type="submit"
-        >
-          Save
-        </button>
-      </div>
+          <div className="isPrivate">
+            <input
+              type="hidden"
+              name="isPrivate"
+              defaultValue={event ? event.isPrivate : false}
+            />
           </div>
-    </form>
-   
+          <div className="link">
+            <button
+              style={{ height: "60px", fontSize: "larger" }}
+              classname="formButton"
+              // onClick={onCreate}
+              //   type="submit"
+            >
+              Save
+            </button>
           </div>
+        </div>
+      </form>
+    </div>
   );
 }
 

@@ -1,9 +1,12 @@
-import { updateUser } from "../Fetches/updateUser";
 import useCurrentUser from "../Fetches/GetCurrentUser";
+import { request } from "../../axios_helper";
+import { useNavigate } from "react-router-dom";
 
 function UserUpdateForm() {
   let user = useCurrentUser();
- //   let user = {name: "valaki", id: 1, password: "titok", description: "nemtdomcnjnvcwoa"}
+  const navigate = useNavigate();
+
+  //   let user = {name: "valaki", id: 1, password: "titok", description: "nemtdomcnjnvcwoa"}
 
   function update(e) {
     e.preventDefault();
@@ -15,8 +18,14 @@ function UserUpdateForm() {
       acc[k] = v;
       return acc;
     }, {});
-    updateUser(user);
-    console.log(user);
+    //updateUser(user);
+    request("PUT", "/user", user)
+      .then((response) => {
+        navigate("/event/all");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   return (
@@ -41,7 +50,7 @@ function UserUpdateForm() {
 
           <div className="password">
             <label htmlFor="password">Old Password</label>
-            <input type="password"  />
+            <input type="password" />
             <label htmlFor="password">New Password</label>
             <input
               type="password"
@@ -61,11 +70,13 @@ function UserUpdateForm() {
             />
           </div>
 
-         
-            <button className="submitButton" type="submit" style={{width: 100, alignSelf: "center"}}>
-              Save
-            </button>
-
+          <button
+            className="submitButton"
+            type="submit"
+            style={{ width: 100, alignSelf: "center" }}
+          >
+            Save
+          </button>
         </div>
       </form>
     </div>
