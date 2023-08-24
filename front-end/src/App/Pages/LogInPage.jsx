@@ -17,7 +17,6 @@ export default function LogInPage() {
   function logIn() {
     request("POST", url, { login: username, password: password })
       .then((response) => {
-        console.log(response.data);
         saveToken(response.data.token);
         setAuthToken(response.data.token);
         navigate("/event/all");
