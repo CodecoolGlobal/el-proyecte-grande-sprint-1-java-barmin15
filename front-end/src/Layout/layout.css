@@ -36,7 +36,7 @@
   font-weight: bold;
 }
 
-#mySidenav a {
+#mySidenav h1 {
   position: absolute;
   left: -90px;
   transition: 0.3s;
@@ -52,7 +52,7 @@
 }
 
 
-#mySidenav a:hover {
+#mySidenav h1:hover {
   left: 0;
 }
 

@@ -18,8 +18,6 @@ function EventForm(event) {
       .then((response) => setCategories(response.data))
   }, [newCategory]);
 
-  categories && console.log(categories);
-
   function handleChange(e) {
     setActualCategory([Number(e.target.value)]);
   }
@@ -30,7 +28,6 @@ function EventForm(event) {
 
   const onCreate = async (e) => {
     e.preventDefault();
-
     const formData = new FormData(e.target);
     const event = Object.fromEntries(formData.entries());
     delete event.categories;
@@ -40,17 +37,15 @@ function EventForm(event) {
     event.categoryIds = actualCategory;
     event.time = event.time + ":00";
     event.date = date;
-    //await postNewEvent(event);
-
-    await request("POST", "", event)
+  
+    await request("POST", "/event", event)
     .then((response) => {
       navigate("/event/all");
     })
     .catch((error) => {
-      console.log(error);
+     navigate("/error");
     });
-
-    navigate("/event/all");
+  
   };
 
   return (
@@ -146,7 +141,7 @@ function EventForm(event) {
               style={{ height: "60px", fontSize: "larger" }}
               classname="formButton"
               // onClick={onCreate}
-              //   type="submit"
+                // type="submit"
             >
               Save
             </button>

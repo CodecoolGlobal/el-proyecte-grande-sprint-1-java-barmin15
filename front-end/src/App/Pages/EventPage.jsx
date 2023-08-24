@@ -12,8 +12,6 @@ function EventPage() {
   useEffect(() => {
 
     getRequest(url)
-
-    .then(response => console.log(response.data))
       .then((response) => setEvent(response.data))
   }, []);
 

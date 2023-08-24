@@ -11,7 +11,7 @@ import LogIn from "./App/Pages/LogInPage";
 import UserProfile from "./App/Pages/UserProfile";
 import EventPage from "./App/Pages/EventPage";
 import UserUpdateForm from "./App/Pages/UserUpdateForm";
-
+import Loading from "./App/Pages/Loading";
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -20,6 +20,9 @@ const Router = createBrowserRouter([
   {
     path: "/login",
     element: <LogIn />
+  },{
+    path: "/error",
+    element: <Loading/>
   },
   {
     path: "/event",
