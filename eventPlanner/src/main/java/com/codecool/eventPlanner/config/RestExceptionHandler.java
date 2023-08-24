@@ -1,7 +1,7 @@
 package com.codecool.eventPlanner.config;
 
 import com.codecool.eventPlanner.exceptions.AppException;
-import com.codecool.eventPlanner.model.dto.ErrorDto;
+import com.codecool.eventPlanner.model.dto.auth.ErrorDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

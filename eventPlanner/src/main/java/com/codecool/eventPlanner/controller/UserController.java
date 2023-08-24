@@ -1,8 +1,5 @@
 package com.codecool.eventPlanner.controller;
 
-import com.codecool.eventPlanner.model.dto.user.LoginUserDTO;
-import com.codecool.eventPlanner.model.dto.user.NewUserDTO;
-import com.codecool.eventPlanner.model.dto.user.UpdateUserDTO;
 import com.codecool.eventPlanner.model.entity.User;
 import com.codecool.eventPlanner.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +12,7 @@ import java.util.Set;
 @RequestMapping("/user")
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public UserController(UserService userService) {
@@ -40,21 +37,6 @@ public class UserController {
     @GetMapping("/current")
     public User getCurrentUser() {
         return userService.getCurrentUser();
-    }
-
-    @PostMapping
-    public boolean addUser(@RequestBody NewUserDTO newUserDTO) {
-        return userService.addUser(newUserDTO);
-    }
-
-    @PutMapping
-    public boolean updateUser(@RequestBody UpdateUserDTO updateUserDTO) {
-        return userService.updateUser(updateUserDTO);
-    }
-
-    @PostMapping("/login")
-    public boolean loginUser(@RequestBody LoginUserDTO loginUserDTO) {
-        return userService.loginUser(loginUserDTO);
     }
 
     @GetMapping("/interested/{eventId}")
