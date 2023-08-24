@@ -26,6 +26,7 @@ public class CategoryController {
 
     @PostMapping
     public Long addNewCategory(@RequestBody CategoryDTO category) {
+        System.out.println(category.name());
          return categoryService.addNewCategory(category.name());
     }
 

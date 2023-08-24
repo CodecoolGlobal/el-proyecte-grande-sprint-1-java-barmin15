@@ -10,6 +10,10 @@ import com.codecool.eventPlanner.model.dto.event.UserToEventDTO;
 import com.codecool.eventPlanner.model.entity.Event;
 import com.codecool.eventPlanner.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,6 +39,7 @@ public class EventController {
 
     @GetMapping("{byCategories}/{byName}/{length}")
     public FilteredEventsDTO getChosenEvents(@PathVariable Map<Optional<String>, Optional<String>> pathVarsMap) {
+
         String category = String.valueOf(pathVarsMap.get("byCategories"));
         String nameContains = String.valueOf(pathVarsMap.get("byName"));
         String length = String.valueOf(pathVarsMap.get("length"));
@@ -83,6 +88,7 @@ public class EventController {
 
     @PostMapping()
     public Event createEvent(@RequestBody NewEventDTO newEventDTO) {
+        System.out.println(newEventDTO.title());
         return eventService.createEvent(newEventDTO);
     }
 
