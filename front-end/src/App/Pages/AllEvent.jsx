@@ -4,8 +4,10 @@ import useAllCategories from "../Fetches/getAllCategories";
 import InfiniteScroll from "react-infinite-scroll-component";
 import React from "react";
 import { getRequest, getAuthToken } from "../../axios_helper";
+import { useNavigate } from "react-router-dom";
 
 function AllEvent() {
+  const navigate = useNavigate();
   const [events, setEvents] = useState([]);
   const [counter, setCounter] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -16,7 +18,6 @@ function AllEvent() {
   const [fetchData, setFetchData] = useState(1);
 
   const fetchedCategories = useAllCategories();
-
 
   useEffect(() => {
     const limit = 6;
@@ -35,10 +36,6 @@ function AllEvent() {
     });
   }, [counter, selectedCategory, searchInput ]);
 
-  function handleSearch() {
-    setFetchData(fetchData + 1);
-  }
-
   function fetchMoreEvents() {
     if (maxLength === dataLength) {
       setHasMore(false)
@@ -47,6 +44,10 @@ function AllEvent() {
         setCounter(counter + 1)
       }, 500)
     }
+  }
+
+  function onDetail(id){
+    navigate("/event/" + id)
   }
 
   return (
@@ -89,9 +90,9 @@ function AllEvent() {
 
                 <h1>{e.title}</h1>
                 <h2 className="location">{e.location}</h2>
-                <a href={`http://127.0.0.1:3000/event/${e.id}`}>
-                  <button>Details</button>
-                </a>
+                <div >
+                  <button onClick={() => onDetail(e.id)}>Details</button>
+                </div>
               </div>
 
             </div>
