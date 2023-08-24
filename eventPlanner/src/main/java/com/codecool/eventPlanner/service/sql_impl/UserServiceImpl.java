@@ -42,8 +42,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserById(Long id) {
-
-        return userRepository.findById(id).get();
+        User user = userRepository.findById(id).get();
+        user.setPassword("hidden");
+        return user;
     }
 
     @Override
