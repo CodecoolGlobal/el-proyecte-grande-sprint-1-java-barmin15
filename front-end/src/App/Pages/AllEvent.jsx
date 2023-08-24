@@ -33,8 +33,10 @@ function AllEvent() {
       setEvents(response.data.events);
       setMaxLength(response.data.maxLength);
       setDataLength(response.data.events.length);
-    });
-  }, [counter, selectedCategory, searchInput ]);
+    }).catch((error) => {
+      navigate("/error");
+    })
+  }, [counter, selectedCategory, searchInput]);
 
   function fetchMoreEvents() {
     if (maxLength === dataLength) {
@@ -46,7 +48,7 @@ function AllEvent() {
     }
   }
 
-  function onDetail(id){
+  function onDetail(id) {
     navigate("/event/" + id)
   }
 
