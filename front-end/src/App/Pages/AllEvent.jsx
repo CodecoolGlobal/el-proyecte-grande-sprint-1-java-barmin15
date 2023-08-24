@@ -15,7 +15,6 @@ function AllEvent() {
   const [maxLength, setMaxLength] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [searchInput, setSearchInput] = useState("");
-  const [fetchData, setFetchData] = useState(1);
 
   const fetchedCategories = useAllCategories();
 
