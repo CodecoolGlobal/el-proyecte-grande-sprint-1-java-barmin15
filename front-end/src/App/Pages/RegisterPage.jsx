@@ -20,7 +20,7 @@ export default function RegisterPage() {
       password: password,
     })
       .then((response) => {
-         navigate("/event/all")
+         navigate("/login")
       })
       .catch((error) => {
         navigate("/error")
