@@ -1,12 +1,9 @@
 package com.codecool.eventPlanner.service.sql_impl;
 
 import com.codecool.eventPlanner.exceptions.AppException;
-import com.codecool.eventPlanner.model.dto.CredentialsDTO;
-import com.codecool.eventPlanner.model.dto.SignUpDTO;
-import com.codecool.eventPlanner.model.dto.UserDTO;
-import com.codecool.eventPlanner.model.dto.user.LoginUserDTO;
-import com.codecool.eventPlanner.model.dto.user.NewUserDTO;
-import com.codecool.eventPlanner.model.dto.user.UpdateUserDTO;
+import com.codecool.eventPlanner.model.dto.auth.CredentialsDTO;
+import com.codecool.eventPlanner.model.dto.user.SignUpDTO;
+import com.codecool.eventPlanner.model.dto.user.UserDTO;
 import com.codecool.eventPlanner.model.entity.User;
 import com.codecool.eventPlanner.repository.EventRepository;
 import com.codecool.eventPlanner.repository.UserRepository;
@@ -61,56 +58,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean addUser(NewUserDTO newUserDTO) {
-        return false;
-    }
-
-    @Override
-    public boolean updateUser(UpdateUserDTO updateUserDTO) {
-        return false;
-    }
-
-    @Override
-    public boolean loginUser(LoginUserDTO loginUserDTO) {
-        return false;
-    }
-
-  /*  @Override
-    public boolean addUser(NewUserDTO newUserDTO) {
-        User newUser = new User(newUserDTO);
-        userRepository.save(newUser);
-        currentUser = newUser;
-        return true;
-    }*/
-
-    /*@Override
-    public boolean updateUser(UpdateUserDTO updateUserDTO) {
-        User user = userRepository.findById(updateUserDTO.id()).get();
-        user.update(updateUserDTO);
-        userRepository.save(user);
-        return true;
-    }*/
-
-  /*  @Override
-    public boolean loginUser(LoginUserDTO loginUserDTO) {
-        String username = loginUserDTO.username();
-        String password = loginUserDTO.password();
-        currentUser = findUser(username, password);
-        return getAllUsers().stream().anyMatch(user1 -> isValidUser(user1, username, password));
-    }*/
-
-    @Override
     public Set<User> getInterestedUsersByEventId(Long eventId) {
         return eventRepository.findById(eventId).get().getInterestedUsers();
     }
-
-/*    private boolean isValidUser(User user, String username, String password) {
-        return user.getName().equals(username) && user.getPassword().equals(password);
-    }*/
-
-    /*private User findUser(String username, String password) {
-        return getAllUsers().stream().filter(user -> isValidUser(user, username, password)).findFirst().orElse(null);
-    }*/
 
     @Override
     public UserDTO findByLogin(String login) {
@@ -122,13 +72,10 @@ public class UserServiceImpl implements UserService {
         userDTO.setLastName(user.getLastName());
         userDTO.setId(user.getId());
         return userDTO;
-       /* return new UserDTO().setFirstName(user.getFirstName());
-        return userMapper.toUserDTO(user);*/
     }
 
     @Override
     public UserDTO login(CredentialsDTO credentialDTO) {
-        System.out.println("ide kerülok loginnál (userServiceImpl)");
         User user = userRepository.findByLogin(credentialDTO.getLogin())
                 .orElseThrow(() -> new AppException("Unknown User", HttpStatus.NOT_FOUND));
 
@@ -140,28 +87,21 @@ public class UserServiceImpl implements UserService {
             userDTO.setLastName(user.getLastName());
             userDTO.setId(user.getId());
             return userDTO;
-           // return userMapper.toUserDTO(user);
         }
 
         throw new AppException("Invalid password", HttpStatus.BAD_REQUEST);
     }
 
     @Override
-    public UserDTO register(SignUpDTO userDTO) {
-        System.out.println("itt keresem, hogy van e ilyen user (userServiceImpl)");
-        Optional<User> optionalUser = userRepository.findByLogin(userDTO.getLogin());
+    public UserDTO register(SignUpDTO userDTO) {        Optional<User> optionalUser = userRepository.findByLogin(userDTO.getLogin());
 
         if (optionalUser.isPresent()) {
-            System.out.println("itt dobom ki, ha van ilyen user");
             throw new AppException("Already a user", HttpStatus.BAD_REQUEST);
         }
         User user = User.builder().lastName(userDTO.getLastName()).firstName(userDTO.getFirstName()).login(userDTO.getLogin()).build();
 
-        System.out.println(user + "ez a user jelentkezett/regisztrált most be (userServiceImpl)");
-
         user.setPassword(passwordEncoder.encode(CharBuffer.wrap(userDTO.getPassword())));
         User savedUser = userRepository.save(user);
-
 
         UserDTO userDto = new UserDTO();
         userDto.setFirstName(user.getFirstName());
@@ -169,7 +109,6 @@ public class UserServiceImpl implements UserService {
         userDto.setLastName(user.getLastName());
         userDto.setId(user.getId());
         return userDto;
-
     }
 }
 
