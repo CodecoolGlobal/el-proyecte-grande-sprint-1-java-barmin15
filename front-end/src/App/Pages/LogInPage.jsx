@@ -23,7 +23,7 @@ export default function LogInPage() {
         navigate("/event/all");
       })
       .catch((error) => {
-        console.log(error);
+        navigate("/error")
       });
 
     /* if (await LogInUser(username, password)) {
