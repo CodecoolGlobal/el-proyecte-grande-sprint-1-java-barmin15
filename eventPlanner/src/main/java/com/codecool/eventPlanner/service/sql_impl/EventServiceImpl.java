@@ -22,11 +22,11 @@ import java.util.*;
 public class EventServiceImpl implements EventService {
 
     @Autowired
-    private  CategoryRepository categoryRepository;
+    private CategoryRepository categoryRepository;
     @Autowired
-    private  EventRepository eventRepository;
+    private EventRepository eventRepository;
     @Autowired
-    private  UserRepository userRepository;
+    private UserRepository userRepository;
 
 
     @Override
@@ -58,8 +58,22 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event getEventById(Long id) {
-        return eventRepository.findById(id).get();
+    public EventDTO getEventById(Long id) {
+        Event event = eventRepository.findById(id).get();
+        List<String> interestedUsers = new ArrayList<>();
+        event.getInterestedUsers().forEach(user -> interestedUsers.add(user.getLogin()));
+        List<String> categories = new ArrayList<>();
+        event.getCategories().forEach(category -> categories.add(category.getName()));
+        String[] usersString = interestedUsers.toArray(new String[0]);
+        String[] categoryString = categories.toArray(new String[0]);
+        return EventDTO.builder()
+                .creatorName(event.getCreator().getLogin())
+                .interestedUsers(usersString)
+                .description(event.getDescription())
+                .date(event.getDate().toString())
+                .time(String.valueOf(event.getTime()))
+                .categories(categoryString)
+                .build();
     }
 
     @Override

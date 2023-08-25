@@ -1,23 +1,25 @@
-import useCurrentUser from "../Fetches/GetCurrentUser";
+import { useEffect, useState } from "react";
 import "../style/userProfile.css";
 import { useNavigate } from "react-router-dom";
-
+import { getRequest, getAuthToken } from "../../axios_helper";
 function UserProfile() {
-  const user = useCurrentUser();
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const update = false;
 
-  if (user !== null) {
-    console.log(user);
-    // //test objects
-    // user.createdEvents = [];
-    // user.createdEvents.push({title: "eskuvo", id: 1});
-    // user.createdEvents.push({title: "disznovagas", id: 2});
-    // user.interestedEvents = [];
-    // user.interestedEvents.push({title: "parti", id: 1});
-    // user.interestedEvents.push({title: "karacsonyi unnepseg", id: 2});
-    // user.interestedEvents.push({title: "csonakazas", id: 2});
+  useEffect(()=>{
+    const url = "/user/current"
+    getRequest(url)
+    .then((response)=> {
+      console.log(response.data)
+      setUser(response.data)
+    }).catch((error)=>{
+      navigate("/error")
+    })
+  },[])
 
+
+  if (user !== null) {
     return (
       <div className="userProfile">
         <div id="profPic">
@@ -31,7 +33,7 @@ function UserProfile() {
         <div id="userData">
           <button onClick={() => navigate("/event/user/update")}>Update</button>
 
-          <h1>{user.name}</h1>
+          <h1>{user.firstName + " " + user.lastName}</h1>
 
           <div className="userEvents">
             <ul className="created">

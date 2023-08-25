@@ -18,6 +18,7 @@ export default function RegisterPage() {
   const [lastName, setLastName] = useState("");
 
   function register(e) {
+
     if (
       isContainsSpecialCharacter(password) &&
       isContainsCapitalLetter(password) &&
@@ -29,8 +30,9 @@ export default function RegisterPage() {
         lastName: lastName,
         login: username,
         password: password,
-      })
-        .then((response) => {
+
+    })
+   .then((response) => {
           navigate("/login");
         })
         .catch((error) => {

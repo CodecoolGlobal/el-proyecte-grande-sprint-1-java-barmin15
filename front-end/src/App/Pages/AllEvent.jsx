@@ -15,7 +15,6 @@ function AllEvent() {
   const [maxLength, setMaxLength] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [searchInput, setSearchInput] = useState("");
-  const [fetchData, setFetchData] = useState(1);
 
   const fetchedCategories = useAllCategories();
 
@@ -29,15 +28,16 @@ function AllEvent() {
     const url = `/event/${byCategories}/${byName}/${limit * counter}`;
     const header = { headers: { Authorization: `Bearer ${getAuthToken()}` } };
 
-    getRequest(url)
-      .then((response) => {
+
+    getRequest(url).then((response) => {
         setEvents(response.data.events);
         setMaxLength(response.data.maxLength);
         setDataLength(response.data.events.length);
-      })
-      .catch((error) => {
+      }).catch((error) => {
         navigate("/error");
       });
+
+
   }, [counter, selectedCategory, searchInput]);
 
   function fetchMoreEvents() {
@@ -52,6 +52,7 @@ function AllEvent() {
 
   function onDetail(id) {
     navigate("/event/" + id);
+
   }
 
   return (
