@@ -2,6 +2,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../style/LogIn.css";
 import { request } from "../../axios_helper";
+import PasswordChecker from "./PasswordChecker";
+import {
+  isContainsSpecialCharacter,
+  isContainsNumber,
+  isContainsCapitalLetter,
+  isPasswordLongEnough,
+} from "../../password_checker";
 
 export default function RegisterPage() {
   const navigate = useNavigate();
@@ -11,20 +18,25 @@ export default function RegisterPage() {
   const [lastName, setLastName] = useState("");
 
   function register(e) {
-    e.preventDefault();
-
-    request("POST", "/api/auth/register", {
-      firstName: firstName,
-      lastName: lastName,
-      login: username,
-      password: password,
-    })
-      .then((response) => {
-         navigate("/event/all")
+    if (
+      isContainsSpecialCharacter(password) &&
+      isContainsCapitalLetter(password) &&
+      isPasswordLongEnough(password) &&
+      isContainsNumber(password)
+    ) {
+      request("POST", "/api/auth/register", {
+        firstName: firstName,
+        lastName: lastName,
+        login: username,
+        password: password,
       })
-      .catch((error) => {
-        navigate("/error")
-      });
+        .then((response) => {
+          navigate("/login");
+        })
+        .catch((error) => {
+          navigate("/error");
+        });
+    }
   }
 
   return (
@@ -53,7 +65,9 @@ export default function RegisterPage() {
           placeholder="Password"
           required
           onChange={(e) => setPassword(e.target.value)}
+          defaultValue={""}
         ></input>
+        <PasswordChecker password={password} />
         <div className="link">
           <button className="login" onClick={(e) => register(e)}>
             Register
